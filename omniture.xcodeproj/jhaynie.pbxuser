@@ -1,0 +1,309 @@
+// !$*UTF8*$!
+{
+	0867D690FE84028FC02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeTarget = D2AAC07D0554694100DB518D /* omniture */;
+		addToTargets = (
+			D2AAC07D0554694100DB518D /* omniture */,
+		);
+		breakpoints = (
+		);
+		codeSenseManager = 2420AE8B11EC2FA400CC3D73 /* Code sense */;
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					924,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 300996384;
+			PBXWorkspaceStateSaveDate = 300996384;
+		};
+		perUserProjectItems = {
+			2420AEF011EC384000CC3D73 /* PBXTextBookmark */ = 2420AEF011EC384000CC3D73 /* PBXTextBookmark */;
+			2420AF0A11EC394C00CC3D73 /* PBXTextBookmark */ = 2420AF0A11EC394C00CC3D73 /* PBXTextBookmark */;
+			2420AF0B11EC394C00CC3D73 /* PBXTextBookmark */ = 2420AF0B11EC394C00CC3D73 /* PBXTextBookmark */;
+			2471542511F0BDD8008BB878 /* PBXTextBookmark */ = 2471542511F0BDD8008BB878 /* PBXTextBookmark */;
+			2471544211F0BFF1008BB878 /* PBXTextBookmark */ = 2471544211F0BFF1008BB878 /* PBXTextBookmark */;
+			2471544D11F0C23B008BB878 /* PBXTextBookmark */ = 2471544D11F0C23B008BB878 /* PBXTextBookmark */;
+			2471547211F0C5BA008BB878 /* PBXTextBookmark */ = 2471547211F0C5BA008BB878 /* PBXTextBookmark */;
+			2471548D11F0C7C4008BB878 /* PBXTextBookmark */ = 2471548D11F0C7C4008BB878 /* PBXTextBookmark */;
+			247154A611F0CC14008BB878 /* PBXTextBookmark */ = 247154A611F0CC14008BB878 /* PBXTextBookmark */;
+			2478F3AB11F0D8DB001E36D3 /* PBXTextBookmark */ = 2478F3AB11F0D8DB001E36D3 /* PBXTextBookmark */;
+			2478F3AC11F0D8DB001E36D3 /* PBXTextBookmark */ = 2478F3AC11F0D8DB001E36D3 /* PBXTextBookmark */;
+			2478F3B011F0DA71001E36D3 /* PBXTextBookmark */ = 2478F3B011F0DA71001E36D3 /* PBXTextBookmark */;
+			2478F3C411F0DF43001E36D3 /* PBXTextBookmark */ = 2478F3C411F0DF43001E36D3 /* PBXTextBookmark */;
+			2478F46411F0F142001E36D3 /* PBXTextBookmark */ = 2478F46411F0F142001E36D3 /* PBXTextBookmark */;
+		};
+		sourceControlManager = 2420AE8A11EC2FA400CC3D73 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	2420AE8A11EC2FA400CC3D73 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	2420AE8B11EC2FA400CC3D73 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	2420AE9C11EC318700CC3D73 /* TiOmnitureSession.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1102, 509}}";
+			sepNavSelRange = "{426, 0}";
+			sepNavVisRange = "{0, 432}";
+		};
+	};
+	2420AE9D11EC318700CC3D73 /* TiOmnitureSession.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1102, 2877}}";
+			sepNavSelRange = "{1509, 0}";
+			sepNavVisRange = "{1491, 560}";
+		};
+	};
+	2420AEA011EC31C200CC3D73 /* OMAppMeasurement.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1615.86, 6594}}";
+			sepNavSelRange = "{7861, 27}";
+			sepNavVisRange = "{7560, 703}";
+		};
+	};
+	2420AEF011EC384000CC3D73 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2420AEF111EC384000CC3D73 /* TiBase.h */;
+		name = "TiBase.h: 284";
+		rLen = 36;
+		rLoc = 8633;
+		rType = 0;
+		vrLen = 407;
+		vrLoc = 8368;
+	};
+	2420AEF111EC384000CC3D73 /* TiBase.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = TiBase.h;
+		path = "/Library/Application Support/Titanium/mobilesdk/osx/1.3.3/iphone/include/TiBase.h";
+		sourceTree = "<absolute>";
+	};
+	2420AF0A11EC394C00CC3D73 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DE9E0F11C5FE74003F90F6 /* TiOmnitureModuleAssets.h */;
+		name = "TiOmnitureModuleAssets.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 158;
+		vrLoc = 0;
+	};
+	2420AF0B11EC394C00CC3D73 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6CF71134B3F500162E58 /* TiOmnitureModule.h */;
+		name = "TiOmnitureModule.h: 5";
+		rLen = 0;
+		rLoc = 105;
+		rType = 0;
+		vrLen = 178;
+		vrLoc = 0;
+	};
+	24416B8111C4CA220047AFDD /* Build & Test */ = {
+		activeExec = 0;
+	};
+	247153E411F0B799008BB878 /* TiOmnitureMediaTracker.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1102, 550}}";
+			sepNavSelRange = "{229, 0}";
+			sepNavVisRange = "{0, 358}";
+		};
+	};
+	247153E511F0B799008BB878 /* TiOmnitureMediaTracker.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1204.06, 3297}}";
+			sepNavSelRange = "{1193, 0}";
+			sepNavVisRange = "{558, 682}";
+		};
+	};
+	2471541A11F0BCE8008BB878 /* MPMoviePlayerController.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = MPMoviePlayerController.h;
+		path = /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk/System/Library/Frameworks/MediaPlayer.framework/Headers/MPMoviePlayerController.h;
+		sourceTree = "<absolute>";
+	};
+	2471542511F0BDD8008BB878 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2420AE9C11EC318700CC3D73 /* TiOmnitureSession.h */;
+		name = "TiOmnitureSession.h: 19";
+		rLen = 0;
+		rLoc = 426;
+		rType = 0;
+		vrLen = 432;
+		vrLoc = 0;
+	};
+	2471544211F0BFF1008BB878 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2471544311F0BFF1008BB878 /* NSDate.h */;
+		name = "NSDate.h: 11";
+		rLen = 31;
+		rLoc = 221;
+		rType = 0;
+		vrLen = 800;
+		vrLoc = 507;
+	};
+	2471544311F0BFF1008BB878 /* NSDate.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = NSDate.h;
+		path = /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSDate.h;
+		sourceTree = "<absolute>";
+	};
+	2471544D11F0C23B008BB878 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2471544E11F0C23B008BB878 /* NSTimer.h */;
+		name = "NSTimer.h: 8";
+		rLen = 30;
+		rLoc = 138;
+		rType = 0;
+		vrLen = 1065;
+		vrLoc = 169;
+	};
+	2471544E11F0C23B008BB878 /* NSTimer.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = NSTimer.h;
+		path = /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSTimer.h;
+		sourceTree = "<absolute>";
+	};
+	2471547211F0C5BA008BB878 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2471547311F0C5BA008BB878 /* TiMediaVideoPlayerProxy.h */;
+		name = "TiMediaVideoPlayerProxy.h: 14";
+		rLen = 23;
+		rLoc = 370;
+		rType = 0;
+		vrLen = 1045;
+		vrLoc = 0;
+	};
+	2471547311F0C5BA008BB878 /* TiMediaVideoPlayerProxy.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = TiMediaVideoPlayerProxy.h;
+		path = "/Library/Application Support/Titanium/mobilesdk/osx/1.3.3/iphone/include/TiMediaVideoPlayerProxy.h";
+		sourceTree = "<absolute>";
+	};
+	2471548D11F0C7C4008BB878 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2471541A11F0BCE8008BB878 /* MPMoviePlayerController.h */;
+		name = "MPMoviePlayerController.h: 224";
+		rLen = 89;
+		rLoc = 8877;
+		rType = 0;
+		vrLen = 1236;
+		vrLoc = 8146;
+	};
+	247154A611F0CC14008BB878 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2420AEA011EC31C200CC3D73 /* OMAppMeasurement.h */;
+		name = "OMAppMeasurement.h: 188";
+		rLen = 27;
+		rLoc = 7861;
+		rType = 0;
+		vrLen = 703;
+		vrLoc = 7560;
+	};
+	2478F3AB11F0D8DB001E36D3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6CF81134B3F500162E58 /* TiOmnitureModule.m */;
+		name = "TiOmnitureModule.m: 37";
+		rLen = 0;
+		rLoc = 828;
+		rType = 0;
+		vrLen = 764;
+		vrLoc = 154;
+	};
+	2478F3AC11F0D8DB001E36D3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2420AE9D11EC318700CC3D73 /* TiOmnitureSession.m */;
+		name = "TiOmnitureSession.m: 67";
+		rLen = 0;
+		rLoc = 1509;
+		rType = 0;
+		vrLen = 560;
+		vrLoc = 1491;
+	};
+	2478F3B011F0DA71001E36D3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 247153E411F0B799008BB878 /* TiOmnitureMediaTracker.h */;
+		name = "TiOmnitureMediaTracker.h: 17";
+		rLen = 0;
+		rLoc = 349;
+		rType = 0;
+		vrLen = 358;
+		vrLoc = 0;
+	};
+	2478F3C411F0DF43001E36D3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 247153E511F0B799008BB878 /* TiOmnitureMediaTracker.m */;
+		name = "TiOmnitureMediaTracker.m: 55";
+		rLen = 0;
+		rLoc = 1193;
+		rType = 0;
+		vrLen = 682;
+		vrLoc = 558;
+	};
+	2478F46411F0F142001E36D3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 247153E411F0B799008BB878 /* TiOmnitureMediaTracker.h */;
+		name = "TiOmnitureMediaTracker.h: 12";
+		rLen = 0;
+		rLoc = 229;
+		rType = 0;
+		vrLen = 358;
+		vrLoc = 0;
+	};
+	24DD6CF71134B3F500162E58 /* TiOmnitureModule.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1025, 509}}";
+			sepNavSelRange = "{105, 0}";
+			sepNavVisRange = "{0, 178}";
+		};
+	};
+	24DD6CF81134B3F500162E58 /* TiOmnitureModule.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1474.98, 882}}";
+			sepNavSelRange = "{828, 0}";
+			sepNavVisRange = "{154, 764}";
+		};
+	};
+	24DE9E0F11C5FE74003F90F6 /* TiOmnitureModuleAssets.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1025, 509}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 158}";
+		};
+	};
+	D2AAC07D0554694100DB518D /* omniture */ = {
+		activeExec = 0;
+	};
+}
