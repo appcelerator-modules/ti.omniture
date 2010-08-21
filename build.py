@@ -172,6 +172,7 @@ def package_module(manifest,mf,config):
 		  zip_dir(zf,dn,'%s/%s' % (modulepath,dn),['README'])
 	zf.write('LICENSE','%s/LICENSE' % modulepath)
 	zf.write('module.xcconfig','%s/module.xcconfig' % modulepath)
+	zf.write('libOmniture.a','%s/libOmniture.a' % modulepath)
 	zf.close()
 	
 

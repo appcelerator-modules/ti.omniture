@@ -20,6 +20,7 @@
 	ENSURE_UI_THREAD_0_ARGS
 	NSLog(@"[DEBUG] sending media close event: %@",playerName);
 	[measurement.Media close:playerName];
+	[measurement.Media track:playerName];
 	openSent = NO;
 	closeSent = YES;
 }
@@ -56,7 +57,7 @@
 	}
 	[measurement.Media open:name length:duration playerName:playerName cuePoints:cuePoints playerID:playerId];
 	openSent = YES;
-	NSLog(@"[DEBUG] sending media open event: %@",playerName);
+	NSLog(@"[DEBUG] sending media open event: %@ (%@)",playerName,measurement.Media);
 }
 
 -(void)setPlayerName:(id)args
@@ -136,6 +137,11 @@
 			[timer invalidate];
 			RELEASE_TO_NIL(timer);
 			[measurement.Media stop:playerName offset:offset];
+			
+			if (state == MPMoviePlaybackStateStopped)
+			{
+				[self sendCloseEvent];
+			}
 			break;
 		}
 		default:
@@ -144,4 +150,5 @@
 
 }
 
+	
 @end
