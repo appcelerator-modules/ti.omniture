@@ -2,7 +2,7 @@
 
 ## Description
 
-TODO: Enter your module description here
+Provides access to the omniture tracking and analytics service.
 
 ## Accessing the omniture Module
 
@@ -14,26 +14,27 @@ The omniture variable is a reference to the Module object.
 
 ## Reference
 
-TODO: If your module has an API, you should document
-the reference here.
+## Functions
 
-### ___PROJECTNAMEASIDENTIFIER__.function
+### ti.omniture.createSession({...})
 
-TODO: This is an example of a module function.
+Creates and returns a [ti.omniture.Session][] object.
 
-### ___PROJECTNAMEASIDENTIFIER__.property
+### ti.omniture.createMediaTracker({...})
 
-TODO: This is an example of a module property.
+Creates and returns a [ti.omniture.MediaTracker][] object.
 
 ## Usage
 
-TODO: Enter your usage example here
+See example
 
 ## Author
 
-TODO: Enter your author name, email and other contact
-details you want to share here. 
+Jeff Haynie <jhaynie@appcelerator.com>, Appcelerator Inc.
 
 ## License
 
 TODO: Enter your license/legal information here.
+
+[ti.omniture.Session]: session.html
+[ti.omniture.MediaTracker]: mediaTracker.html
