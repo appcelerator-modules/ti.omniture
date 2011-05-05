@@ -34,6 +34,8 @@
 
 -(id)createMediaTracker:(id)args
 {
+	NSLog(@"CreateMediaTracker");
+	
 	TiOmnitureMediaTracker *session = [[[TiOmnitureMediaTracker alloc] _initWithPageContext:[self pageContext] args:args] autorelease];
 	return session;
 }

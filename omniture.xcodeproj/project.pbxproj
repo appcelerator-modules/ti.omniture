@@ -31,6 +31,7 @@
 		24DD6CFA1134B3F500162E58 /* TiOmnitureModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* TiOmnitureModule.m */; };
 		24DE9E1111C5FE74003F90F6 /* TiOmnitureModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* TiOmnitureModuleAssets.h */; };
 		24DE9E1211C5FE74003F90F6 /* TiOmnitureModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* TiOmnitureModuleAssets.m */; };
+		A2D6B6EB136F49DF00309F91 /* libOmniture.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2D6B6EA136F49DF00309F91 /* libOmniture.a */; };
 		AA747D9F0F9514B9006C5449 /* TiOmniture_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiOmniture_Prefix.pch */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
 		24DE9E0F11C5FE74003F90F6 /* TiOmnitureModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiOmnitureModuleAssets.h; path = Classes/TiOmnitureModuleAssets.h; sourceTree = "<group>"; };
 		24DE9E1011C5FE74003F90F6 /* TiOmnitureModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiOmnitureModuleAssets.m; path = Classes/TiOmnitureModuleAssets.m; sourceTree = "<group>"; };
+		A2D6B6EA136F49DF00309F91 /* libOmniture.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOmniture.a; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* TiOmniture_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiOmniture_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		D2AAC07E0554694100DB518D /* libTiOmniture.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTiOmniture.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -64,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2D6B6EB136F49DF00309F91 /* libOmniture.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +95,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A2D6B6EA136F49DF00309F91 /* libOmniture.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -164,7 +168,14 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "omniture" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* omniture */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";
@@ -267,7 +278,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -280,7 +291,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};

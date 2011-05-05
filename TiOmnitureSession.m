@@ -35,12 +35,11 @@ MAKE_SYSTEM_STR(EXIT_LINK,@"e");
 	s.account = [properties objectForKey:@"account"];
 	s.currencyCode = [TiUtils stringValue:@"currencyCode" properties:properties def:@"USD"];
 	s.trackingServer = [properties objectForKey:@"trackingServer"];
+	//s.trackingServerSecure = [properties objectForKey:@"trackingServerSecure"];
 	s.userAgent = [[TiApp app] userAgent];
 	s.pageURL = @"";
 	s.pageName = @"";
 	s.ssl = YES;
-	
-	NSLog(@"[INFO] session user agent = %@",s.userAgent);
 	
 	NSMutableArray *keys = [NSMutableArray arrayWithObjects:@"dc",
 							@"linkTrackEvents",
@@ -119,7 +118,7 @@ MAKE_SYSTEM_STR(EXIT_LINK,@"e");
 -(void)trackLink:(id)args
 {
 	ENSURE_SINGLE_ARG(args,NSDictionary);
-	ENSURE_UI_THREAD_1_ARG(args);
+	ENSURE_UI_THREAD_1_ARG(args);	
 	
 	NSString *linkURL = [args objectForKey:@"url"];
 	NSString *linkType = [args objectForKey:@"type"];
