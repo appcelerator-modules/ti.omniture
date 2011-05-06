@@ -68,7 +68,6 @@
 	playerName = [args retain];
 }
 
-//-(void)_configurationSet
 -(void)_initWithProperties:(NSDictionary*)properties
 {
 	[super _initWithProperties:properties];

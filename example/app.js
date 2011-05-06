@@ -12,8 +12,8 @@ window.open();
 
 Ti.Omniture = require('ti.Omniture');
 var session = Ti.Omniture.createSession({
-	account:'genclone34-24',
-    trackingServer:'appceleratorsbx.sbx1.2o7.net'
+	account:'your_account_here',
+    trackingServer:'your_tracking_server_here'
 });
 
 var button = Ti.UI.createButton({
@@ -26,14 +26,15 @@ window.add(button);
 
 button.addEventListener('click',function()
 {
-    //session.trackLink({
-    //    url:'www.appcelerator.com',
-    //    type:'unknown',
-    //    name:'test'
-    //});
-    session.track({pageName:"iphone_test"});
+    // Track an event
+    session.track({pageName:"iphone_test",events:"event5"});
+    // Track a link
+    session.trackLink({url:"your_url_here",type:session.CUSTOM_LINK,name:"Test"});
+    // Track a link with overrides using a dictionary
+    session.trackLink({url:"your_url_here",type:session.CUSTOM_LINK,name:"Test",overrides:{events:"event6",pageName:"Texas"}});
+    // Track a link with overrides as arguments
+    session.trackLink({url:"your_url_here",type:session.CUSTOM_LINK,name:"Test",events:"event7,event8",pageName:"California"});
 });
-
 
 var mediaPlayer = Ti.Media.createVideoPlayer({
     height: 320,
@@ -48,4 +49,4 @@ var mediaTracker = Ti.Omniture.createMediaTracker({
     player:mediaPlayer
 });
 
-mediaTracker.PlayerName = "Test";
+mediaTracker.PlayerName = 'your_player_name_here';

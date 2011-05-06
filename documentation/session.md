@@ -18,7 +18,22 @@ Tracks the specified link.  Takes one argument, a dictionary with the properties
 
 url[string]: The link URL  
 type[string]: The link type  
-name[string]: A user-defined name for the link  
+name[string]: A user-defined name for the link
+
+You can optionally override tracking properties for this function call by specifying additional
+arguments in one of two ways:
+
+overrides[dictionary]: A dictionary with the override properties
+
+Example:
+
+session.trackLink({url:_URL_,type:session.CUSTOM_LINK,name:_NAME_,overrides:{ prop1:_VALUE_ }});
+
+or by appending the properties to the trackLink properties
+
+Example:
+
+session.trackLink({url:_URL_,type:session.CUSTOM_LINK,name:_NAME_,prop1:_VALUE_,prop2:_VALUE_ });
 
 ### ti.omniture.Session.clearVars()
 
@@ -33,3 +48,14 @@ and not modified afterwards.
 
 A property variable set on the session.
 
+### session.CUSTOM_LINK
+
+A type constant for a custom link
+
+### session.FILE_DOWNLOAD
+
+A type constant for a file download
+
+### session.EXIT_LINK
+
+A type constant for an exit link

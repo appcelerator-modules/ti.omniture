@@ -20,9 +20,16 @@ The omniture variable is a reference to the Module object.
 
 Creates and returns a [ti.omniture.Session][] object.
 
+Takes one argument, a dictionary which specifies the Omniture session properties.
+
 ### ti.omniture.createMediaTracker({...})
 
 Creates and returns a [ti.omniture.MediaTracker][] object.
+
+Takes one argument, a dictionary with the properties:
+
+session[ti.omniture.Session]: Your session object  
+player[Ti.Media.VideoPlayer]: Your video player control
 
 ## Usage
 
