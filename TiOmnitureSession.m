@@ -36,6 +36,8 @@ MAKE_SYSTEM_STR(EXIT_LINK,@"e");
 	s.currencyCode = [TiUtils stringValue:@"currencyCode" properties:properties def:@"USD"];
 	s.trackingServer = [properties objectForKey:@"trackingServer"];
 	
+	NSLog(@"[INFO] session user agent = %@",s.userAgent);
+	
 	// Add support for the trackingServerSecure parameter. Omniture documentation says that
 	// this parameter is required if you specify trackingServer, but so far it seems to
 	// work even if it is not provided.

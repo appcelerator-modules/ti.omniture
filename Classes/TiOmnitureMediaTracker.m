@@ -72,16 +72,12 @@
 {
 	[super _initWithProperties:properties];
 	
-	NSLog(@"initWithProperties");
-
 	// we need to wait and make sure the player is initialized
 	ENSURE_UI_THREAD_0_ARGS
 	
-	TiOmnitureSession *session = (TiOmnitureSession*)[self valueForUndefinedKey:@"session"];
-	TiMediaVideoPlayerProxy *player = [self valueForUndefinedKey:@"player"];
+	TiOmnitureSession *session = (TiOmnitureSession*)[properties objectForKey:@"session"];
+	TiMediaVideoPlayerProxy *player = [properties objectForKey:@"player"];
 	MPMoviePlayerController *controller = [player player];
-	if (controller == nil)
-		NSLog(@"Controller is nil");
 	duration = controller.duration;
 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDuration:) name:MPMovieDurationAvailableNotification object:controller];
