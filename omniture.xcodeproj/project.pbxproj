@@ -33,6 +33,7 @@
 		24DE9E1211C5FE74003F90F6 /* TiOmnitureModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* TiOmnitureModuleAssets.m */; };
 		A2D6B6EB136F49DF00309F91 /* libOmniture.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2D6B6EA136F49DF00309F91 /* libOmniture.a */; };
 		AA747D9F0F9514B9006C5449 /* TiOmniture_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiOmniture_Prefix.pch */; };
+		DAFE4207127108F400B54A9A /* libOmniture.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAFE4206127108F400B54A9A /* libOmniture.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		A2D6B6EA136F49DF00309F91 /* libOmniture.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOmniture.a; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* TiOmniture_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiOmniture_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		D2AAC07E0554694100DB518D /* libTiOmniture.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTiOmniture.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAFE4206127108F400B54A9A /* libOmniture.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOmniture.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +248,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = TiOmniture;
+				SDKROOT = iphoneos4.2;
 			};
 			name = Debug;
 		};
@@ -265,6 +268,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = TiOmniture;
+				SDKROOT = iphoneos4.2;
 			};
 			name = Release;
 		};
