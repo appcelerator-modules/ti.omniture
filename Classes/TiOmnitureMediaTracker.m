@@ -18,9 +18,9 @@
 -(void)sendCloseEvent
 {
 	ENSURE_UI_THREAD_0_ARGS
-	NSLog(@"[DEBUG] sending media close event: %@",playerName);
-	[measurement.Media close:playerName];
-	[measurement.Media track:playerName];
+	NSLog(@"[DEBUG] sending media close event: %@",mediaName);
+	[measurement.Media close:mediaName];
+	[measurement.Media track:mediaName];
 	openSent = NO;
 	closeSent = YES;
 }
@@ -38,7 +38,7 @@
 		[timer invalidate];
 	}
 	RELEASE_TO_NIL(timer);
-	RELEASE_TO_NIL(playerName);
+	RELEASE_TO_NIL(mediaName);
 	[super _destroy];
 }
 
@@ -47,33 +47,34 @@
 	ENSURE_UI_THREAD_0_ARGS
 	
 	if (openSent) return;
-	
-	NSString *name = [self valueForUndefinedKey:@"name"];
-	NSString *cuePoints = [self valueForUndefinedKey:@"cuePoints"];
+
+	NSString *playerName = [self valueForUndefinedKey:@"playerName"];
 	NSString *playerId = [self valueForUndefinedKey:@"playerID"];
-	if (cuePoints!=nil)
-	{
+	NSString *cuePoints = [self valueForUndefinedKey:@"cuePoints"];
+	if (cuePoints!=nil) {
 		[measurement.Media setTrackAtCuePoints:YES];
 	}
-	[measurement.Media open:name length:duration playerName:playerName cuePoints:cuePoints playerID:playerId];
+	
+	NSLog(@"[DEBUG] sending media open event: %@ (%@)",playerName,mediaName);
+	[measurement.Media open:mediaName length:duration playerName:playerName cuePoints:cuePoints playerID:playerId];
 	openSent = YES;
-	NSLog(@"[DEBUG] sending media open event: %@ (%@)",playerName,measurement.Media);
+	closeSent = NO;
 }
 
--(void)setPlayerName:(id)args
+-(void)setMediaName:(id)args
 {
 	ENSURE_SINGLE_ARG(args,NSString);
-	NSLog(@"[DEBUG] set player name called: %@",args);
-	RELEASE_TO_NIL(playerName);
-	playerName = [args retain];
+	RELEASE_TO_NIL(mediaName);
+	mediaName = [args retain];
+	NSLog(@"[DEBUG] media name set to: %@", mediaName);
 }
 
 -(void)_initWithProperties:(NSDictionary*)properties
 {
-	[super _initWithProperties:properties];
-	
 	// we need to wait and make sure the player is initialized
-	ENSURE_UI_THREAD_0_ARGS
+	ENSURE_UI_THREAD_1_ARG(properties)   
+							   
+	[super _initWithProperties:properties];
 	
 	TiOmnitureSession *session = (TiOmnitureSession*)[properties objectForKey:@"session"];
 	TiMediaVideoPlayerProxy *player = [properties objectForKey:@"player"];
@@ -85,6 +86,7 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePlayerFinished:) name:MPMoviePlayerPlaybackDidFinishNotification object:controller];
 	
 	measurement = [[session session] retain];
+	
 	if (duration > 0)
 	{
 		[self sendOpenEvent];
@@ -130,7 +132,7 @@
 				duration = [controller duration];
 				[self sendOpenEvent];
 			}
-			[measurement.Media play:playerName offset:offset];
+			[measurement.Media play:mediaName offset:offset];
 			break;
 		}
 		case MPMoviePlaybackStatePaused:
@@ -138,7 +140,7 @@
 		{
 			[timer invalidate];
 			RELEASE_TO_NIL(timer);
-			[measurement.Media stop:playerName offset:offset];
+			[measurement.Media stop:mediaName offset:offset];
 			
 			if (state == MPMoviePlaybackStateStopped)
 			{

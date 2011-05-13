@@ -46,7 +46,11 @@ window.add(mediaPlayer);
 
 var mediaTracker = Ti.Omniture.createMediaTracker({
     session:session,
-    player:mediaPlayer
+    player:mediaPlayer,
+    playerName:'your_player_name_here',
+    mediaName:'name_of_video_here'
 });
 
-mediaTracker.PlayerName = 'your_player_name_here';
+// Change media name as you change media in the player
+//mediaTracker.mediaName = 'name_of_video_here';
+

@@ -12,7 +12,7 @@
 	OMAppMeasurement *measurement;
 	NSTimer *timer;
 	double offset;
-	NSString *playerName;
+	NSString *mediaName;
 	BOOL openSent;
 	BOOL closeSent;
 }
