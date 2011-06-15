@@ -14,4 +14,4 @@ name: omniture
 moduleid: ti.omniture
 guid: 6e31b0ff-955a-4ed3-a51b-bca80ef4ed7d
 platform: android
-minsdk: 1.5.1
+minsdk: 1.6.0
