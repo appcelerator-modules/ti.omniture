@@ -50,4 +50,4 @@ Fred Spencer <fspencer@appcelerator.com>, Appcelerator Inc.
 
 ## License
 
-&copy; 2011 Appcelerator Inc.
+Copyright(c) 2010-2011 by Appcelerator, Inc. All Rights Reserved. Please see the LICENSE file included in the distribution for further details.
