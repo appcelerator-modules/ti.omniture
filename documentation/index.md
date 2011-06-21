@@ -1,37 +1,36 @@
-# omniture Module
+# Ti.Omniture Module
 
 ## Description
 
-Provides access to the omniture tracking and analytics service.
+Provides access to the Omniture tracking and analytics service.
 
-## Accessing the omniture Module
+## Accessing the Ti.Omniture Module
 
 To access this module from JavaScript, you would do the following:
 
-	var omniture = require("ti.omniture");
-
-The omniture variable is a reference to the Module object.	
-
-## Reference
+	Titanium.Omniture = Ti.Omniture = require("ti.omniture");
 
 ## Functions
 
-### ti.omniture.createSession({...})
+### Ti.Omniture.createSession({...})
 
-Creates and returns a [ti.omniture.Session][] object.
+Creates and returns a [Ti.Omniture.Session][] object.
 
 Takes one argument, a dictionary which specifies the Omniture session properties.
 
-### ti.omniture.createMediaTracker({...})
+* account[string]: Your account identifier
+* trackingServer[string]: Your tracking server
 
-Creates and returns a [ti.omniture.MediaTracker][] object.
+### Ti.Omniture.createMediaTracker({...})
+
+Creates and returns a [Ti.Omniture.MediaTracker][] object.
 
 Takes one argument, a dictionary with the properties:
 
-session[ti.omniture.Session]: Your session object  
-player[Ti.Media.VideoPlayer]: Your video player control  
-playerName[string]: The name of the media player used to view the video  
-mediaName[string]: The name of the video
+* session[ti.omniture.Session]: Your session object
+* player[Ti.Media.VideoPlayer]: Your video player control
+* playerName[string]: The name of the media player used to view the video
+* mediaName[string]: The name of the video
 
 ## Usage
 
@@ -45,5 +44,5 @@ Jeff Haynie <jhaynie@appcelerator.com>, Appcelerator Inc.
 
 Copyright(c) 2010-2011 by Appcelerator, Inc. All Rights Reserved. Please see the LICENSE file included in the distribution for further details.
 
-[ti.omniture.Session]: session.html
-[ti.omniture.MediaTracker]: mediaTracker.html
+[Ti.Omniture.Session]: session.html
+[Ti.Omniture.MediaTracker]: mediaTracker.html
