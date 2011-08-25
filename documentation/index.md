@@ -28,7 +28,11 @@ Sends JavaScript object literal (key-value), containing props, evars, etc. Value
 
 ## Author
 
-Fred Spencer <fspencer@appcelerator.com>, Appcelerator Inc.
+Fred Spencer
+
+## Feedback and Support
+
+Please direct all questions, feedback, and concerns to [info@appcelerator.com](mailto:info@appcelerator.com?subject=Android%20Omniture%20Module).
 
 ## License
 
