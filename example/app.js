@@ -3,8 +3,8 @@ var window = Ti.UI.createWindow({
 });
 window.open();
 
-Titanium.Omniture = Ti.Omniture = require('ti.omniture');
-var session = Ti.Omniture.createSession({
+var Omniture = require('ti.omniture');
+var session = Omniture.createSession({
     account: 'your_account_here',
     trackingServer: 'your_tracking_server_here'
 });
@@ -33,7 +33,7 @@ var mediaPlayer = Ti.Media.createVideoPlayer({
 });
 window.add(mediaPlayer);
 
-var mediaTracker = Ti.Omniture.createMediaTracker({
+var mediaTracker = Omniture.createMediaTracker({
     session: session,
     player: mediaPlayer,
     playerName: 'your_player_name_here',
