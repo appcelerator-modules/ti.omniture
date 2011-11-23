@@ -8,7 +8,7 @@ Provides access to the Omniture tracking and analytics service.
 
 To access this module from JavaScript, you would do the following:
 
-	Titanium.Omniture = Ti.Omniture = require("ti.omniture");
+	var Omniture = require('ti.omniture');
 
 ## Functions
 
