@@ -14,17 +14,27 @@ To access this module from JavaScript, you would do the following:
 
 ### Ti.Omniture.createSession({...})
 
-Starts a new Omniture session.
+Creates and returns a [Ti.Omniture.Session][] object.
 
 Takes one argument, a dictionary which specifies the Omniture session properties.
 
 * account[string]: Your account identifier
 * trackingServer[string]: Your tracking server
-* debug[boolean,optional]: Whether or not extra debug messages should be outputted
 
-### Ti.Omniture.track({...})
+### Ti.Omniture.createMediaTracker({...})
 
-Sends JavaScript object literal (key-value), containing props, evars, etc. Values will be converted to *[string]* and an Omniture session track call will be made.
+Creates and returns a [Ti.Omniture.MediaTracker][] object.
+
+Takes one argument, a dictionary with the properties:
+
+* session[ti.omniture.Session]: Your session object
+* player[Ti.Media.VideoPlayer]: Your video player control
+* playerName[string]: The name of the media player used to view the video
+* mediaName[string]: The name of the video
+
+## Usage
+
+See example
 
 ## Author
 
@@ -41,3 +51,6 @@ Please direct all questions, feedback, and concerns to [info@appcelerator.com](m
 ## License
 
 Copyright(c) 2010-2011 by Appcelerator, Inc. All Rights Reserved. Please see the LICENSE file included in the distribution for further details.
+
+[Ti.Omniture.Session]: session.html
+[Ti.Omniture.MediaTracker]: mediaTracker.html
