@@ -7,9 +7,9 @@ import java.util.Map;
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.annotations.Kroll;
-import org.appcelerator.titanium.TiContext;
 import org.appcelerator.titanium.util.Log;
 import org.appcelerator.titanium.util.TiConfig;
+import org.appcelerator.titanium.TiApplication;
 
 import com.omniture.android.*;
 
@@ -43,7 +43,7 @@ public class OmnitureModule extends KrollModule {
 		Log.d(LCAT, "Creating an Omniture session...");
 
 		try {
-			session = new AppMeasurement(getTiContext().getTiApp());
+			session = new AppMeasurement(TiApplication.getInstance());
 			session.account = params.get("account").toString();
 			session.trackingServer = params.get("trackingServer").toString();
 			session.debugTracking = (Boolean) params.get("debug");
@@ -54,7 +54,7 @@ public class OmnitureModule extends KrollModule {
 		}
 	}
 	
-	public OmnitureModule(TiContext tiContext) {
-		super(tiContext);
+	public OmnitureModule() {
+		super();
 	}	
 }
