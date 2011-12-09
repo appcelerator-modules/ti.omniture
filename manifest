@@ -3,7 +3,8 @@
 # during compilation, packaging, distribution, etc.
 #
 version: 2.0
-description: Omniture Site Catalyst Reporting Module 
+module.apiversion: 2
+description: Omniture Site Catalyst Reporting Module
 author: Fred Spencer
 license: Appcelerator Commercial License
 copyright: Copyright (c) 2010-2011 by Appcelerator, Inc.
