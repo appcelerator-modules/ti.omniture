@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.appcelerator.kroll.KrollModule;
-import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.titanium.util.Log;
 import org.appcelerator.titanium.util.TiConfig;
@@ -20,7 +19,7 @@ public class OmnitureModule extends KrollModule {
 	private AppMeasurement session;
 		
 	@Kroll.method
-	public void track(KrollDict params) {
+	public void track(HashMap params) {
 		if (session != null) {
 			Iterator i = params.entrySet().iterator();
 			HashMap<String, String> trackData = new HashMap<String, String>();
@@ -39,7 +38,7 @@ public class OmnitureModule extends KrollModule {
 	}
 	
 	@Kroll.method
-	public void createSession(KrollDict params) {
+	public void createSession(HashMap params) {
 		Log.d(LCAT, "Creating an Omniture session...");
 
 		try {
