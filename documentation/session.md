@@ -33,19 +33,6 @@ Example:
 
 <pre>session.trackLink({url:_URL_,type:session.CUSTOM_LINK,name:_NAME_,prop1:_VALUE_,prop2:_VALUE_ });</pre>
 
-### Ti.Omniture.Session.clearVars()
-
-Clears the session's variables.
-
-## Properties
-
-Note that these properties can only be set at the time of session creation,
-and cannot be modified afterwards.
-
-### Ti.Omniture.Session.prop[1-50]
-
-A property variable set on the session.
-
 ### Ti.Omniture.Session.CUSTOM_LINK
 
 A type constant for a custom link

@@ -20,17 +20,7 @@ Takes one argument, a dictionary which specifies the Omniture session properties
 
 * account[string]: Your account identifier
 * trackingServer[string]: Your tracking server
-
-### Ti.Omniture.createMediaTracker({...})
-
-Creates and returns a [Ti.Omniture.MediaTracker][] object.
-
-Takes one argument, a dictionary with the properties:
-
-* session[ti.omniture.Session]: Your session object
-* player[Ti.Media.VideoPlayer]: Your video player control
-* playerName[string]: The name of the media player used to view the video
-* mediaName[string]: The name of the video
+* trackingServerSecure[string]: Your secure tracking server
 
 ## Usage
 
