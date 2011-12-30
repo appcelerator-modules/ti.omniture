@@ -42,12 +42,12 @@ public class SessionProxy extends KrollProxy {
 
 		try {
 			session = new AppMeasurement(TiApplication.getInstance());
-			session.account = params.get("account").toString();
-			session.trackingServer = params.get("trackingServer").toString();
+			session.account = params.getString("account");
+			session.trackingServer = params.getString("trackingServer");
 			if (params.containsKey("trackingServerSecure")) {
-				session.trackingServerSecure = params.get("trackingServerSecure").toString();
+				session.trackingServerSecure = params.getString("trackingServerSecure");
 			}
-			session.debugTracking = (Boolean) params.get("debug");
+			session.debugTracking = params.optBoolean("debug", false);
 		} catch (Exception e) {
 			session = null;
 			e.printStackTrace();
@@ -57,46 +57,66 @@ public class SessionProxy extends KrollProxy {
 	}
 
 	@Kroll.method
-	public void track(HashMap params) {
-		if (session != null) {
-			Iterator i = params.entrySet().iterator();
-			HashMap<String, String> trackData = new HashMap<String, String>();
+	public void track(HashMap raw) {
+		try {
+			if (session != null) {
+				KrollDict params = new KrollDict(raw);
+				Iterator i = params.entrySet().iterator();
+				HashMap<String, String> trackData = new HashMap<String, String>();
 
-			while (i.hasNext()) {
-				Map.Entry pairs = (Map.Entry) i.next();
-				trackData.put(pairs.getKey().toString(), pairs.getValue().toString());
+				while (i.hasNext()) {
+					Map.Entry pairs = (Map.Entry) i.next();
+					Object key = pairs.getKey();
+					Object value = pairs.getValue();
+					if (key != null && value != null) {
+						trackData.put(key.toString(), value.toString());
+					}
+				}
+
+				Log.d(LCAT, "Calling track on current session...");
+				session.track(trackData);
+			} else {
+				Log.d(LCAT, "Call of track was unsucessful...");
+				Log.d(LCAT, "You do not have a current Omniture session...");
 			}
-
-			Log.d(LCAT, "Calling track on current session...");
-			session.track(trackData);
-		} else {
-			Log.d(LCAT, "Call of track was unsucessful...");
-			Log.d(LCAT, "You do not have a current Omniture session...");
+		} catch (Exception e) {
+			Log.d(LCAT, "track failed...");
+			e.printStackTrace();
 		}
 	}
 
 	@Kroll.method
-	public void trackLink(HashMap params) {
-		if (session != null) {
-			String linkURL = params.get("url").toString();
-			String linkType = params.get("type").toString();
-			String linkName = params.get("name").toString();
+	public void trackLink(HashMap raw) {
+		try {
+			if (session != null) {
+				KrollDict params = new KrollDict(raw);
+				String linkURL = params.getString("url");
+				String linkType = params.getString("type");
+				String linkName = params.getString("name");
 
-			HashMap overrides = params.containsKey("overrides") ? (HashMap) params.get("overrides") : params;
+				KrollDict overrides = params.containsKey("overrides") ? params.getKrollDict("overrides") : params;
 
-			Iterator i = overrides.entrySet().iterator();
-			HashMap<String, String> trackData = new HashMap<String, String>();
+				Iterator i = overrides.entrySet().iterator();
+				HashMap<String, String> trackData = new HashMap<String, String>();
 
-			while (i.hasNext()) {
-				Map.Entry pairs = (Map.Entry) i.next();
-				trackData.put(pairs.getKey().toString(), pairs.getValue().toString());
+				while (i.hasNext()) {
+					Map.Entry pairs = (Map.Entry) i.next();
+					Object key = pairs.getKey();
+					Object value = pairs.getValue();
+					if (key != null && value != null) {
+						trackData.put(key.toString(), value.toString());
+					}
+				}
+
+				Log.d(LCAT, "Calling trackLink on current session...");
+				session.trackLink(linkURL, linkType, linkName, trackData);
+			} else {
+				Log.d(LCAT, "Call of trackLink was unsucessful...");
+				Log.d(LCAT, "You do not have a current Omniture session...");
 			}
-
-			Log.d(LCAT, "Calling trackLink on current session...");
-			session.trackLink(linkURL, linkType, linkName, trackData);
-		} else {
-			Log.d(LCAT, "Call of trackLink was unsucessful...");
-			Log.d(LCAT, "You do not have a current Omniture session...");
+		} catch (Exception e) {
+			Log.d(LCAT, "trackLink failed...");
+			e.printStackTrace();
 		}
 	}
 
