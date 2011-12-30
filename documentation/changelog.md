@@ -1,5 +1,7 @@
 # Change Log
 <pre>
+v2.1	Better error handling within track and trackLink, and more graceful data input.
+
 v2.0	Upgraded to module api version 2 for 1.8.0.1
     	Exposed "trackLink" and "trackingServerSecure" [MOD-319]
 		BREAKING CHANGE: Android now returns a [Ti.Omniture.Session][] object from createSession, which has track and trackLink methods (for iOS parity)
