@@ -1,0 +1,10 @@
+{
+	"name": "ti.omniture",
+	"description": "Omniture Ti+ module",
+	"version": "1.0",
+	"directories": {
+		"lib": "."
+	},
+	"main": "ti.omniture"
+}
+
