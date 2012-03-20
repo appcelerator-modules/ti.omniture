@@ -15,11 +15,11 @@
 	[super _destroy];
 }
 
--(OMAppMeasurement*)session
+-(AppMeasurement*)session
 {
 	if (session == nil)
 	{
-		session = [[OMAppMeasurement alloc] init];
+		session = [[AppMeasurement alloc] init];
 	}
 	return session;
 }
@@ -30,7 +30,7 @@ MAKE_SYSTEM_STR(EXIT_LINK,@"e");
 
 -(void)configureFromDictionary:(NSDictionary*)properties
 {
-	OMAppMeasurement *s = [self session];
+	AppMeasurement *s = [self session];
 	s.debugTracking = YES;
 	s.account = [properties objectForKey:@"account"];
 	s.currencyCode = [TiUtils stringValue:@"currencyCode" properties:properties def:@"USD"];
@@ -47,7 +47,9 @@ MAKE_SYSTEM_STR(EXIT_LINK,@"e");
 	if (trackingServerSecure != nil)
 		s.trackingServerSecure = trackingServerSecure;
 	
-	s.userAgent = [[TiApp app] userAgent];
+	// Adobe recommends this is set automatically.
+    // Consider passing this in as a property, via JS, instead.
+    // s.userAgent = [[TiApp app] userAgent];
 	s.pageURL = @"";
 	s.pageName = @"";
 	s.ssl = YES;

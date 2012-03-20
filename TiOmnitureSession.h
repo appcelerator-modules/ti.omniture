@@ -4,17 +4,17 @@
  */
 
 #import "TiProxy.h"
-#import "OMAppMeasurement.h"
+#import "AppMeasurement.h"
 
 @interface TiOmnitureSession : TiProxy {
 @private
-	OMAppMeasurement *session;
+	AppMeasurement *session;
 }
 
 @property(nonatomic,readonly) NSString *CUSTOM_LINK;
 @property(nonatomic,readonly) NSString *FILE_DOWNLOAD;
 @property(nonatomic,readonly) NSString *EXIT_LINK;
 
--(OMAppMeasurement*)session;
+-(AppMeasurement*)session;
 
 @end

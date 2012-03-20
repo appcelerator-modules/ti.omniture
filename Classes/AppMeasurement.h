@@ -1,49 +1,44 @@
 //
-//  OMAppMeasurement.h
-//  OMAppMeasurement
+//  AppMeasurement.h
+//  AppMeasurement
 //
-//  Copyright 1996-2010. Adobe, Inc. All Rights Reserved
+//  Copyright 1996-2011. Adobe, Inc. All Rights Reserved
 
 #import <UIKit/UIKit.h>
 
-#pragma mark OMAppMeasurement interface
+@class ChurnMeasurement;
+@class AppMeasurementModuleMedia;
+@protocol AppMeasurementDelegate;
 
-@class OMAppMeasurementModuleMedia;
-@protocol OMAppMeasurementDelegate;
+#pragma mark -
+#pragma mark AppMeasurement
 
-@interface OMAppMeasurement : NSObject {
+@interface AppMeasurement : NSObject
 
-@private
-	BOOL _ssl;
-	BOOL _linkLeaveQueryString;
-	BOOL _debugTracking;
-	BOOL _usePlugins;
-	NSString * _version;
-	NSMutableArray * _requiredVarList;
-	NSMutableArray * _accountVarList;
-	NSMutableArray * _accountConfigList;
-	NSMutableDictionary * _accountVars;
-	id<OMAppMeasurementDelegate> _delegate;
-	OMAppMeasurementModuleMedia * _Media;
-}
-
-#pragma mark OMAppMeasurement public methods
-
-+ (OMAppMeasurement *)getInstance;
+#pragma mark Public Methods
++ (AppMeasurement *)getInstance;
 - (id)init;
-- (id)initWithDelegate:(id<OMAppMeasurementDelegate>)delegate;
+- (id)initWithDelegate:(id<AppMeasurementDelegate>)delegate;
 - (void)track;
 - (void)track:(NSDictionary *)variableOverrides;
 - (void)trackLink:(NSString *)linkURL linkType:(NSString *)linkType linkName:(NSString *)linkName;
 - (void)trackLink:(NSString *)linkURL linkType:(NSString *)linkType linkName:(NSString *)linkName variableOverrides:(NSDictionary *)variableOverrides;
+- (void)trackLight:(NSString*) profileID storeForSeconds:(NSNumber*)StoreForSeconds incrementBy:(NSNumber*)incrementBy variableOverrides:(NSDictionary*)variableOverrides;
+- (void)trackLight:(NSString*) profileID storeForSeconds:(NSNumber*)StoreForSeconds incrementBy:(NSNumber*)incrementBy;
+- (void)trackLight:(NSString*) profileID storeForSeconds:(NSNumber*)StoreForSeconds;
+- (void)trackLight:(NSString*) profileID;
 - (void)clearVars;
+- (void)forceOffline;
+- (void)forceOnline;
+- (ChurnMeasurement *)getChurnInstance;
+- (ChurnMeasurement *)getChurnInstancePopulateDefaults:(BOOL)populateDefaults;
+- (NSNumber*) OfflineThrottleDelay;
+- (void) setOfflineThrottleDelay:(NSNumber *)value;
 
-// reserved for internal use only
-- (BOOL)isSet:(NSString *)var;
-- (NSString *)escape:(NSString *)unescapedString;
-
-#pragma mark OMAppMeasurement properties
-
+#pragma mark Properties
+@property(readwrite, copy) NSNumber * timestamp; 
+@property(readwrite, assign) BOOL trackOffline;
+@property(readwrite, assign) NSUInteger offlineLimit;
 @property(readwrite, copy) NSString * account;
 @property(readwrite, copy) NSString * linkURL;
 @property(readwrite, copy) NSString * linkName;
@@ -72,14 +67,17 @@
 @property(readwrite, copy) NSString * zip;
 @property(readwrite, copy) NSString * events;
 @property(readwrite, copy) NSString * products;
+#pragma mark list
 @property(readwrite, copy) NSString * list1;
 @property(readwrite, copy) NSString * list2;
 @property(readwrite, copy) NSString * list3;
+#pragma mark hierarchy
 @property(readwrite, copy) NSString * hier1;
 @property(readwrite, copy) NSString * hier2;
 @property(readwrite, copy) NSString * hier3;
 @property(readwrite, copy) NSString * hier4;
 @property(readwrite, copy) NSString * hier5;
+#pragma mark props
 @property(readwrite, copy) NSString * prop1;
 @property(readwrite, copy) NSString * prop2;
 @property(readwrite, copy) NSString * prop3;
@@ -130,6 +128,32 @@
 @property(readwrite, copy) NSString * prop48;
 @property(readwrite, copy) NSString * prop49;
 @property(readwrite, copy) NSString * prop50;
+@property(readwrite, copy) NSString * prop51;
+@property(readwrite, copy) NSString * prop52;
+@property(readwrite, copy) NSString * prop53;
+@property(readwrite, copy) NSString * prop54;
+@property(readwrite, copy) NSString * prop55;
+@property(readwrite, copy) NSString * prop56;
+@property(readwrite, copy) NSString * prop57;
+@property(readwrite, copy) NSString * prop58;
+@property(readwrite, copy) NSString * prop59;
+@property(readwrite, copy) NSString * prop60;
+@property(readwrite, copy) NSString * prop61;
+@property(readwrite, copy) NSString * prop62;
+@property(readwrite, copy) NSString * prop63;
+@property(readwrite, copy) NSString * prop64;
+@property(readwrite, copy) NSString * prop65;
+@property(readwrite, copy) NSString * prop66;
+@property(readwrite, copy) NSString * prop67;
+@property(readwrite, copy) NSString * prop68;
+@property(readwrite, copy) NSString * prop69;
+@property(readwrite, copy) NSString * prop70;
+@property(readwrite, copy) NSString * prop71;
+@property(readwrite, copy) NSString * prop72;
+@property(readwrite, copy) NSString * prop73;
+@property(readwrite, copy) NSString * prop74;
+@property(readwrite, copy) NSString * prop75;
+#pragma mark eVars
 @property(readwrite, copy) NSString * eVar1;
 @property(readwrite, copy) NSString * eVar2;
 @property(readwrite, copy) NSString * eVar3;
@@ -180,49 +204,73 @@
 @property(readwrite, copy) NSString * eVar48;
 @property(readwrite, copy) NSString * eVar49;
 @property(readwrite, copy) NSString * eVar50;
+@property(readwrite, copy) NSString * eVar51;
+@property(readwrite, copy) NSString * eVar52;
+@property(readwrite, copy) NSString * eVar53;
+@property(readwrite, copy) NSString * eVar54;
+@property(readwrite, copy) NSString * eVar55;
+@property(readwrite, copy) NSString * eVar56;
+@property(readwrite, copy) NSString * eVar57;
+@property(readwrite, copy) NSString * eVar58;
+@property(readwrite, copy) NSString * eVar59;
+@property(readwrite, copy) NSString * eVar60;
+@property(readwrite, copy) NSString * eVar61;
+@property(readwrite, copy) NSString * eVar62;
+@property(readwrite, copy) NSString * eVar63;
+@property(readwrite, copy) NSString * eVar64;
+@property(readwrite, copy) NSString * eVar65;
+@property(readwrite, copy) NSString * eVar66;
+@property(readwrite, copy) NSString * eVar67;
+@property(readwrite, copy) NSString * eVar68;
+@property(readwrite, copy) NSString * eVar69;
+@property(readwrite, copy) NSString * eVar70;
+@property(readwrite, copy) NSString * eVar71;
+@property(readwrite, copy) NSString * eVar72;
+@property(readwrite, copy) NSString * eVar73;
+@property(readwrite, copy) NSString * eVar74;
+@property(readwrite, copy) NSString * eVar75;
+#pragma mark other
 @property(readwrite) BOOL ssl;
 @property(readwrite) BOOL linkLeaveQueryString;
 @property(readwrite) BOOL debugTracking;
 @property(readwrite) BOOL usePlugins;
-@property(readwrite, assign) id<OMAppMeasurementDelegate> delegate;
-@property(readwrite, retain) OMAppMeasurementModuleMedia * Media;
-
+@property(readwrite, nonatomic) BOOL useBestPractices;
+@property(readwrite, assign) id<AppMeasurementDelegate> delegate;
+@property(readwrite, retain) AppMeasurementModuleMedia * Media;
+@property(readwrite,retain) NSMutableArray * queuedMessages;
+@property(readwrite, retain) NSMutableDictionary * contextData;
+@property(readwrite, retain) NSMutableDictionary * retrieveLightData;
+@property(readwrite, copy) NSString * lightProfileID;
+@property(readwrite, copy) NSString * lightStoreForSeconds;
+@property(readwrite, copy) NSString * lightIncrementBy;
+@property(readwrite, copy) NSString * lightTrackVars;
+@property(readwrite, copy) NSString * deleteLightProfiles;
+@property(readwrite, copy) NSString * retrieveLightProfiles;
 @end
 
-#pragma mark OMAppMeasurementDelegate protocol
+#pragma mark Delegate
 
-@protocol OMAppMeasurementDelegate<NSObject>
+@protocol AppMeasurementDelegate<NSObject>
 @optional
 
 // Called before the track data is sent to Omniture collection servers
-- (void)appMeasurementDoPlugins:(OMAppMeasurement *)s;
+- (void)appMeasurementDoPlugins:(AppMeasurement *)s;
 
 @end
 
+#pragma mark -
 #pragma mark Modules
 
-#pragma mark OMAppMeasurementModuleMedia interface
+#pragma mark -
+#pragma mark Media Module
 
-@protocol OMAppMeasurementModuleMediaDelegate;
+@protocol AppMeasurementModuleMediaDelegate;
 
-@interface OMAppMeasurementModuleMedia : NSObject {
-	
-@private
-	OMAppMeasurement * _s;
-	NSMutableDictionary * _list;
-	NSString * _playerName;
-	NSString * _trackVars;
-	NSString * _trackEvents;
-	int _trackSeconds;
-	NSString * _trackMilestones;
-	BOOL _trackAtCuePoints;
-	NSString * _cuePoints;
-	id<OMAppMeasurementModuleMediaDelegate> _delegate;
-}
+@interface AppMeasurementModuleMedia : NSObject
 
-#pragma mark OMAppMeasurementModuleMedia public methods
+#pragma mark Methods
 
-- (id)init:(OMAppMeasurement *)s;
+- (id)init:(AppMeasurement *)s;
 - (void)open:(NSString *)name length:(double)length playerName:(NSString *)playerName cuePoints:(NSString *)cuePoints playerID:(NSString *)playerID;
 - (void)open:(NSString *)name length:(double)length playerName:(NSString *)playerName cuePoints:(NSString *)cuePoints;
 - (void)open:(NSString *)name length:(double)length playerName:(NSString *)playerName;
@@ -233,7 +281,7 @@
 - (void)cuePoint:(NSString *)name offset:(double)offset cuePointName:(NSString *)cuePointName;
 - (void)cuePoint:(NSString *)name offset:(double)offset;
 
-#pragma mark OMAppMeasurementModuleMedia properties
+#pragma mark Properties
 
 @property(readwrite, copy) NSString * playerName;
 @property(readwrite, copy) NSString * trackVars;
@@ -242,30 +290,16 @@
 @property(readwrite, copy) NSString * trackMilestones;
 @property(readwrite) BOOL trackAtCuePoints;
 @property(readwrite, copy) NSString * cuePoints;
-@property(readwrite, assign) id<OMAppMeasurementModuleMediaDelegate> delegate;
+@property(readwrite, assign) id<AppMeasurementModuleMediaDelegate> delegate;
 
 @end
 
-#pragma mark OMAppMeasurementModuleMediaState (see OMAppMeasurementModuleMediaDelegate protocol)
+#pragma mark -
+#pragma mark AppMeasurementModuleMediaState
 
-@interface OMAppMeasurementModuleMediaState : NSObject {
+@interface AppMeasurementModuleMediaState : NSObject 
 
-@private
-	NSString * _name;
-	double _length;
-	NSString * _playerName;
-	NSString * _mediaEvent;
-	BOOL _eventFirstTime;
-	NSDate * _openTime;
-	double _offset;
-	NSString * _offsetName;
-	double _percent;
-	double _timePlayed;
-	double _milestone;
-}
-
-#pragma mark OMAppMeasurementModuleMediaState properties
-
+#pragma mark Properties
 @property(readwrite, copy) NSString * name;
 @property(readwrite) double length;
 @property(readwrite, copy) NSString * playerName;
@@ -280,12 +314,56 @@
 
 @end
 
-#pragma mark OMAppMeasurementModuleMediaDelegate protocol
+#pragma mark Delegate
 
-@protocol OMAppMeasurementModuleMediaDelegate<NSObject>
+@protocol AppMeasurementModuleMediaDelegate<NSObject>
 @optional
 
 // Media Monitor
-- (void)appMeasurementModuleMediaMonitor:(OMAppMeasurement *)s media:(OMAppMeasurementModuleMediaState *)media;
+- (void)appMeasurementModuleMediaMonitor:(AppMeasurement *)s media:(AppMeasurementModuleMediaState *)media;
 
 @end
+
+#pragma mark -
+#pragma mark Best Practices Module
+@interface ChurnMeasurement : NSObject<AppMeasurementDelegate>
+
+#pragma mark Methods
++ (ChurnMeasurement *)getInstanceWithAppMeasurement:(AppMeasurement *)s populateDefaults:(BOOL)populateDefaults;
++ (ChurnMeasurement *)getInstanceWithAppMeasurement:(AppMeasurement *)s;
+- (id)initWithAppMeasurement:(AppMeasurement *)s populateDefaults:(BOOL)populateDefaults;
+- (id)initWithAppMeasurement:(AppMeasurement *)s;
+- (void)start;
++ (void)quit;
+
+#pragma mark Properties
+@property(readwrite, copy) NSString * appInstallEvent;
+@property(readwrite, copy) NSString * appUpgradeEvent;
+@property(readwrite, copy) NSString * dailyEngagedUserEvent;
+@property(readwrite, copy) NSString * monthlyEngagedUserEvent;
+@property(readwrite, copy) NSString * appLaunchEvent;
+@property(readwrite, copy) NSString * appScreenViewEvent;
+@property(readwrite, copy) NSString * appCrashEvent;
+
+@property(readwrite, copy) NSString * appInstallDateEvar;
+@property(readwrite, copy) NSString * appIdEvar;
+@property(readwrite, copy) NSString * engagedDaysLifetimeEvar;
+@property(readwrite, copy) NSString * daysSinceFirstUseEvar;
+@property(readwrite, copy) NSString * daysSinceLastUseEvar;
+@property(readwrite, copy) NSString * appLaunchNumberEvar;
+@property(readwrite, copy) NSString * hourOfDayEvar;
+@property(readwrite, copy) NSString * dayOfWeekEvar;
+@property(readwrite, copy) NSString * appEnvironmentEvar;
+@property(readwrite, copy) NSString * daysSinceLastUpgradeEvar;
+@property(readwrite, copy) NSString * appLaunchNumberSinceLastUpgradeEvar;
+@property(readwrite, copy) NSString * engagedDaysMonthEvar;
+@property(readwrite, copy) NSString * engagedDaysLastUpgradeEvar;
+
+@property(readwrite, copy) NSString * appIdProp;
+@property(readwrite, copy) NSString * appLaunchNumberProp;
+@property(readwrite, copy) NSString * appLaunchNumberSinceLastUpgradeProp;
+
+@end
+
+
+

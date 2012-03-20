@@ -4,12 +4,12 @@
  */
 
 #import "TiProxy.h"
-#import "OMAppMeasurement.h"
+#import "AppMeasurement.h"
 
 @interface TiOmnitureMediaTracker : TiProxy {
 @private
 	double duration;
-	OMAppMeasurement *measurement;
+	AppMeasurement *measurement;
 	NSTimer *timer;
 	double offset;
 	NSString *mediaName;
