@@ -22,8 +22,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		2420AE9E11EC318700CC3D73 /* TiOmnitureSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 2420AE9C11EC318700CC3D73 /* TiOmnitureSession.h */; };
-		2420AE9F11EC318700CC3D73 /* TiOmnitureSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 2420AE9D11EC318700CC3D73 /* TiOmnitureSession.m */; };
 		247153E611F0B799008BB878 /* TiOmnitureMediaTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 247153E411F0B799008BB878 /* TiOmnitureMediaTracker.h */; };
 		247153E711F0B799008BB878 /* TiOmnitureMediaTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 247153E511F0B799008BB878 /* TiOmnitureMediaTracker.m */; };
 		24DD6CF91134B3F500162E58 /* TiOmnitureModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* TiOmnitureModule.h */; };
@@ -33,6 +31,8 @@
 		24ECBFA01518D22700214B66 /* libAppMeasurementNoThumb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24ECBF9F1518D22700214B66 /* libAppMeasurementNoThumb.a */; };
 		24ECBFA21518D38800214B66 /* AppMeasurement.h in Headers */ = {isa = PBXBuildFile; fileRef = 24ECBFA11518D38800214B66 /* AppMeasurement.h */; };
 		AA747D9F0F9514B9006C5449 /* TiOmniture_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiOmniture_Prefix.pch */; };
+		CEE85D08174D28FA00230B61 /* TiOmnitureSession.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE85D06174D28FA00230B61 /* TiOmnitureSession.m */; };
+		CEE85D09174D28FA00230B61 /* TiOmnitureSession.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE85D07174D28FA00230B61 /* TiOmnitureSession.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,8 +46,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2420AE9C11EC318700CC3D73 /* TiOmnitureSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiOmnitureSession.h; sourceTree = "<group>"; };
-		2420AE9D11EC318700CC3D73 /* TiOmnitureSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiOmnitureSession.m; sourceTree = "<group>"; };
 		247153E411F0B799008BB878 /* TiOmnitureMediaTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiOmnitureMediaTracker.h; path = Classes/TiOmnitureMediaTracker.h; sourceTree = "<group>"; };
 		247153E511F0B799008BB878 /* TiOmnitureMediaTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiOmnitureMediaTracker.m; path = Classes/TiOmnitureMediaTracker.m; sourceTree = "<group>"; };
 		24DD6CF71134B3F500162E58 /* TiOmnitureModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiOmnitureModule.h; path = Classes/TiOmnitureModule.h; sourceTree = "<group>"; };
@@ -58,6 +56,8 @@
 		24ECBF9F1518D22700214B66 /* libAppMeasurementNoThumb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAppMeasurementNoThumb.a; sourceTree = "<group>"; };
 		24ECBFA11518D38800214B66 /* AppMeasurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppMeasurement.h; path = Classes/AppMeasurement.h; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* TiOmniture_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiOmniture_Prefix.pch; sourceTree = SOURCE_ROOT; };
+		CEE85D06174D28FA00230B61 /* TiOmnitureSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiOmnitureSession.m; path = Classes/TiOmnitureSession.m; sourceTree = "<group>"; };
+		CEE85D07174D28FA00230B61 /* TiOmnitureSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiOmnitureSession.h; path = Classes/TiOmnitureSession.h; sourceTree = "<group>"; };
 		D2AAC07E0554694100DB518D /* libTiOmniture.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTiOmniture.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -108,8 +108,8 @@
 				24DE9E1011C5FE74003F90F6 /* TiOmnitureModuleAssets.m */,
 				24DD6CF71134B3F500162E58 /* TiOmnitureModule.h */,
 				24DD6CF81134B3F500162E58 /* TiOmnitureModule.m */,
-				2420AE9C11EC318700CC3D73 /* TiOmnitureSession.h */,
-				2420AE9D11EC318700CC3D73 /* TiOmnitureSession.m */,
+				CEE85D07174D28FA00230B61 /* TiOmnitureSession.h */,
+				CEE85D06174D28FA00230B61 /* TiOmnitureSession.m */,
 				247153E411F0B799008BB878 /* TiOmnitureMediaTracker.h */,
 				247153E511F0B799008BB878 /* TiOmnitureMediaTracker.m */,
 			);
@@ -135,9 +135,9 @@
 				AA747D9F0F9514B9006C5449 /* TiOmniture_Prefix.pch in Headers */,
 				24DD6CF91134B3F500162E58 /* TiOmnitureModule.h in Headers */,
 				24DE9E1111C5FE74003F90F6 /* TiOmnitureModuleAssets.h in Headers */,
-				2420AE9E11EC318700CC3D73 /* TiOmnitureSession.h in Headers */,
 				247153E611F0B799008BB878 /* TiOmnitureMediaTracker.h in Headers */,
 				24ECBFA21518D38800214B66 /* AppMeasurement.h in Headers */,
+				CEE85D09174D28FA00230B61 /* TiOmnitureSession.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,8 +210,8 @@
 			files = (
 				24DD6CFA1134B3F500162E58 /* TiOmnitureModule.m in Sources */,
 				24DE9E1211C5FE74003F90F6 /* TiOmnitureModuleAssets.m in Sources */,
-				2420AE9F11EC318700CC3D73 /* TiOmnitureSession.m in Sources */,
 				247153E711F0B799008BB878 /* TiOmnitureMediaTracker.m in Sources */,
+				CEE85D08174D28FA00230B61 /* TiOmnitureSession.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
