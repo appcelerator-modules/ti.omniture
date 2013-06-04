@@ -1,20 +1,13 @@
 /**
- * Appcelerator Titanium Mobile
- * Copyright (c) 2010 by Appcelerator, Inc. All Rights Reserved.
+ * Appcelerator Titanium Mobile Modules
+ * Copyright (c) 2010-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Proprietary and Confidential - This source code is not for redistribution
  */
 
 #import "TiProxy.h"
-#import "AppMeasurement.h"
 
 @interface TiOmnitureMediaTracker : TiProxy {
-@private
-	double duration;
-	AppMeasurement *measurement;
-	NSTimer *timer;
-	double offset;
-	NSString *mediaName;
-	BOOL openSent;
-	BOOL closeSent;
+
 }
 
 @end

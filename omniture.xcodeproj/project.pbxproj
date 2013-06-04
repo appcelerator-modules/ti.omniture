@@ -28,11 +28,13 @@
 		24DD6CFA1134B3F500162E58 /* TiOmnitureModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* TiOmnitureModule.m */; };
 		24DE9E1111C5FE74003F90F6 /* TiOmnitureModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* TiOmnitureModuleAssets.h */; };
 		24DE9E1211C5FE74003F90F6 /* TiOmnitureModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* TiOmnitureModuleAssets.m */; };
-		24ECBFA01518D22700214B66 /* libAppMeasurementNoThumb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24ECBF9F1518D22700214B66 /* libAppMeasurementNoThumb.a */; };
-		24ECBFA21518D38800214B66 /* AppMeasurement.h in Headers */ = {isa = PBXBuildFile; fileRef = 24ECBFA11518D38800214B66 /* AppMeasurement.h */; };
 		AA747D9F0F9514B9006C5449 /* TiOmniture_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiOmniture_Prefix.pch */; };
+		CEB88937175D03610070F517 /* ADMS_Measurement.h in Headers */ = {isa = PBXBuildFile; fileRef = CEB88934175D03610070F517 /* ADMS_Measurement.h */; };
+		CEB88938175D03610070F517 /* ADMS_MediaMeasurement.h in Headers */ = {isa = PBXBuildFile; fileRef = CEB88935175D03610070F517 /* ADMS_MediaMeasurement.h */; };
+		CEB88945175D09240070F517 /* admsAppLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB88944175D09240070F517 /* admsAppLibrary.a */; };
 		CEE85D08174D28FA00230B61 /* TiOmnitureSession.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE85D06174D28FA00230B61 /* TiOmnitureSession.m */; };
 		CEE85D09174D28FA00230B61 /* TiOmnitureSession.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE85D07174D28FA00230B61 /* TiOmnitureSession.h */; };
+		CEE85D151750382400230B61 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE85D141750382400230B61 /* Utils.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,11 +55,14 @@
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
 		24DE9E0F11C5FE74003F90F6 /* TiOmnitureModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiOmnitureModuleAssets.h; path = Classes/TiOmnitureModuleAssets.h; sourceTree = "<group>"; };
 		24DE9E1011C5FE74003F90F6 /* TiOmnitureModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiOmnitureModuleAssets.m; path = Classes/TiOmnitureModuleAssets.m; sourceTree = "<group>"; };
-		24ECBF9F1518D22700214B66 /* libAppMeasurementNoThumb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAppMeasurementNoThumb.a; sourceTree = "<group>"; };
-		24ECBFA11518D38800214B66 /* AppMeasurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppMeasurement.h; path = Classes/AppMeasurement.h; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* TiOmniture_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiOmniture_Prefix.pch; sourceTree = SOURCE_ROOT; };
+		CEB88934175D03610070F517 /* ADMS_Measurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMS_Measurement.h; sourceTree = "<group>"; };
+		CEB88935175D03610070F517 /* ADMS_MediaMeasurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADMS_MediaMeasurement.h; sourceTree = "<group>"; };
+		CEB88944175D09240070F517 /* admsAppLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = admsAppLibrary.a; sourceTree = "<group>"; };
 		CEE85D06174D28FA00230B61 /* TiOmnitureSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiOmnitureSession.m; path = Classes/TiOmnitureSession.m; sourceTree = "<group>"; };
 		CEE85D07174D28FA00230B61 /* TiOmnitureSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiOmnitureSession.h; path = Classes/TiOmnitureSession.h; sourceTree = "<group>"; };
+		CEE85D10174E6F1300230B61 /* admsAppLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = admsAppLibrary.a; sourceTree = "<group>"; };
+		CEE85D141750382400230B61 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Classes/Utils.h; sourceTree = "<group>"; };
 		D2AAC07E0554694100DB518D /* libTiOmniture.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTiOmniture.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -66,7 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24ECBFA01518D22700214B66 /* libAppMeasurementNoThumb.a in Frameworks */,
+				CEE85D11174E6F1300230B61 /* admsAppLibrary.a in Frameworks */,
+				CEB88945175D09240070F517 /* admsAppLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +90,7 @@
 		0867D691FE84028FC02AAC07 /* omniture */ = {
 			isa = PBXGroup;
 			children = (
+				CEB88933175D03610070F517 /* ADMS_AppLibrary */,
 				08FB77AEFE84172EC02AAC07 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
@@ -95,7 +102,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				24ECBF9F1518D22700214B66 /* libAppMeasurementNoThumb.a */,
+				CEE85D10174E6F1300230B61 /* admsAppLibrary.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -103,7 +110,7 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				24ECBFA11518D38800214B66 /* AppMeasurement.h */,
+				CEE85D141750382400230B61 /* Utils.h */,
 				24DE9E0F11C5FE74003F90F6 /* TiOmnitureModuleAssets.h */,
 				24DE9E1011C5FE74003F90F6 /* TiOmnitureModuleAssets.m */,
 				24DD6CF71134B3F500162E58 /* TiOmnitureModule.h */,
@@ -125,6 +132,16 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
+		CEB88933175D03610070F517 /* ADMS_AppLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				CEB88944175D09240070F517 /* admsAppLibrary.a */,
+				CEB88934175D03610070F517 /* ADMS_Measurement.h */,
+				CEB88935175D03610070F517 /* ADMS_MediaMeasurement.h */,
+			);
+			path = ADMS_AppLibrary;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -136,8 +153,10 @@
 				24DD6CF91134B3F500162E58 /* TiOmnitureModule.h in Headers */,
 				24DE9E1111C5FE74003F90F6 /* TiOmnitureModuleAssets.h in Headers */,
 				247153E611F0B799008BB878 /* TiOmnitureMediaTracker.h in Headers */,
-				24ECBFA21518D38800214B66 /* AppMeasurement.h in Headers */,
 				CEE85D09174D28FA00230B61 /* TiOmnitureSession.h in Headers */,
+				CEE85D151750382400230B61 /* Utils.h in Headers */,
+				CEB88937175D03610070F517 /* ADMS_Measurement.h in Headers */,
+				CEB88938175D03610070F517 /* ADMS_MediaMeasurement.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,11 +276,17 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(TITANIUM_BASE_SDK)",
+					"$(TITANIUM_BASE_SDK2)",
+					"\"$(SRCROOT)/ADMS_AppLibrary\"",
+				);
 				INSTALL_PATH = /usr/local/lib;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/lib\"",
+					"\"$(SRCROOT)/ADMS_AppLibrary\"",
 				);
 				OTHER_CFLAGS = (
 					"-DDEBUG",
@@ -307,12 +332,18 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(TITANIUM_BASE_SDK)",
+					"$(TITANIUM_BASE_SDK2)",
+					"\"$(SRCROOT)/ADMS_AppLibrary\"",
+				);
 				INSTALL_PATH = /usr/local/lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/lib\"",
+					"\"$(SRCROOT)/ADMS_AppLibrary\"",
 				);
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = "-ObjC";

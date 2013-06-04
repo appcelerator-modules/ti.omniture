@@ -1,158 +1,41 @@
 /**
- * Appcelerator Titanium Mobile
- * Copyright (c) 2010 by Appcelerator, Inc. All Rights Reserved.
+ * Appcelerator Titanium Mobile Modules
+ * Copyright (c) 2010-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Proprietary and Confidential - This source code is not for redistribution
  */
 
 #import "TiOmnitureMediaTracker.h"
 #import "TiUtils.h"
-#import "TiMediaVideoPlayerProxy.h"
-#import "TiOmnitureSession.h"
-
-@interface TiMediaVideoPlayerProxy(Private)
--(MPMoviePlayerController*)player;
-@end
-
+#import "Utils.h"
+#import "ADMS_MediaMeasurement.h"
 
 @implementation TiOmnitureMediaTracker
 
--(void)sendCloseEvent
+-(id)init
 {
-	ENSURE_UI_THREAD_0_ARGS
-	NSLog(@"[DEBUG] sending media close event: %@",mediaName);
-	[measurement.Media close:mediaName];
-	[measurement.Media track:mediaName];
-	openSent = NO;
-	closeSent = YES;
+    // Using automatic tracking of MPMoviePlayer
+    [[ADMS_MediaMeasurement sharedInstance] setAutoTrackingOptions:ADMS_MediaAutoTrackOptionsMPMoviePlayer];
+    return [super init];
 }
 
--(void)_destroy
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	if (closeSent==NO)
-	{
-		[self performSelectorOnMainThread:@selector(sendCloseEvent) withObject:nil waitUntilDone:YES];
-	}
-	RELEASE_TO_NIL(measurement);
-	if (timer!=nil && [timer isValid])
-	{
-		[timer invalidate];
-	}
-	RELEASE_TO_NIL(timer);
-	RELEASE_TO_NIL(mediaName);
-	[super _destroy];
-}
+#pragma mark - Properties
 
--(void)sendOpenEvent
-{
-	ENSURE_UI_THREAD_0_ARGS
-	
-	if (openSent) return;
+MAKE_STR_GETTER_SETTER(trackVars,   setTrackVars,   ADMS_MediaMeasurement);
+MAKE_STR_GETTER_SETTER(trackEvents, setTrackEvents, ADMS_MediaMeasurement);
+MAKE_STR_GETTER_SETTER(channel,     setChannel,     ADMS_MediaMeasurement);
+MAKE_DBL_GETTER_SETTER(completeCloseOffsetThreshold, setCompleteCloseOffsetThreshold,       ADMS_MediaMeasurement);
+MAKE_OBJ_GETTER_SETTER(contextDataMapping,           setContextDataMapping, NSDictionary,   ADMS_MediaMeasurement);
 
-	NSString *playerName = [self valueForUndefinedKey:@"playerName"];
-	NSString *playerId = [self valueForUndefinedKey:@"playerID"];
-	NSString *cuePoints = [self valueForUndefinedKey:@"cuePoints"];
-	if (cuePoints!=nil) {
-		[measurement.Media setTrackAtCuePoints:YES];
-	}
-	
-	NSLog(@"[DEBUG] sending media open event: %@ (%@)",playerName,mediaName);
-	[measurement.Media open:mediaName length:duration playerName:playerName cuePoints:cuePoints playerID:playerId];
-	openSent = YES;
-	closeSent = NO;
-}
+MAKE_INT_GETTER_SETTER(trackSeconds,                setTrackSeconds,                        ADMS_MediaMeasurement);
+MAKE_STR_GETTER_SETTER(trackMilestones,             setTrackMilestones,                     ADMS_MediaMeasurement);
+MAKE_BOOL_GETTER_SETTER(segmentByMilestones,        setSegmentByMilestones,                 ADMS_MediaMeasurement);
+MAKE_STR_GETTER_SETTER(trackOffsetMilestones,       setTrackOffsetMilestones,               ADMS_MediaMeasurement);
+MAKE_BOOL_GETTER_SETTER(segmentByOffsetMilestones,  setSegmentByOffsetMilestones,           ADMS_MediaMeasurement);
 
--(void)setMediaName:(id)args
-{
-	ENSURE_SINGLE_ARG(args,NSString);
-	RELEASE_TO_NIL(mediaName);
-	mediaName = [args retain];
-	NSLog(@"[DEBUG] media name set to: %@", mediaName);
-}
-
--(void)_initWithProperties:(NSDictionary*)properties
-{
-	// we need to wait and make sure the player is initialized
-	ENSURE_UI_THREAD_1_ARG(properties)   
-							   
-	[super _initWithProperties:properties];
-	
-	TiOmnitureSession *session = (TiOmnitureSession*)[properties objectForKey:@"session"];
-	TiMediaVideoPlayerProxy *player = [properties objectForKey:@"player"];
-	MPMoviePlayerController *controller = [player player];
-	duration = controller.duration;
-
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDuration:) name:MPMovieDurationAvailableNotification object:controller];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePlayerStateChanged:) name:MPMoviePlayerPlaybackStateDidChangeNotification object:controller];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePlayerFinished:) name:MPMoviePlayerPlaybackDidFinishNotification object:controller];
-	
-	measurement = [[session session] retain];
-	
-	if (duration > 0)
-	{
-		[self sendOpenEvent];
-	}
-}
-
-#pragma mark Delegate
--(void)timerTick:(id)sender
-{
-	offset+=1;
-}
-
--(void)handleDuration:(NSNotification*)note
-{
-	duration = [(MPMoviePlayerController*)[note object] duration];
-	NSLog(@"[DEBUG] player duration determined: %f",duration);
-	[self sendOpenEvent];
-}
-
--(void)handlePlayerFinished:(NSNotification*)note
-{
-	offset = 0;
-	[self sendCloseEvent];
-}
-
--(void)handlePlayerStateChanged:(NSNotification*)note
-{
-	MPMoviePlayerController *controller = (MPMoviePlayerController*)[note object];
-	MPMoviePlaybackState state = controller.playbackState;
-	
-	NSLog(@"[DEBUG] player state changed = %@, state = %d",note,state);
-
-	switch (state) 
-	{
-		case MPMoviePlaybackStatePlaying:
-		{
-			// we have to perform our own timer during play to track offset since it seems
-			// we can't currently get that from the media player
-			// TODO: probably just use a time offset instead of needing a timer -JGH
-			timer = [[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerTick:) userInfo:nil repeats:YES] retain];
-			if (openSent==NO)
-			{
-				duration = [controller duration];
-				[self sendOpenEvent];
-			}
-			[measurement.Media play:mediaName offset:offset];
-			break;
-		}
-		case MPMoviePlaybackStatePaused:
-		case MPMoviePlaybackStateStopped:
-		{
-			[timer invalidate];
-			RELEASE_TO_NIL(timer);
-			[measurement.Media stop:mediaName offset:offset];
-			
-			if (state == MPMoviePlaybackStateStopped)
-			{
-				[self sendCloseEvent];
-			}
-			break;
-		}
-		default:
-			break;
-	}
-
-}
-
-	
+MAKE_INT_GETTER_SETTER(adTrackSeconds,              setAdTrackSeconds,              ADMS_MediaMeasurement);
+MAKE_STR_GETTER_SETTER(adTrackMilestones,           setAdTrackMilestones,           ADMS_MediaMeasurement);
+MAKE_BOOL_GETTER_SETTER(adSegmentByMilestones,      setAdSegmentByMilestones,       ADMS_MediaMeasurement);
+MAKE_STR_GETTER_SETTER(adTrackOffsetMilestones,     setAdTrackOffsetMilestones,     ADMS_MediaMeasurement);
+MAKE_BOOL_GETTER_SETTER(adSegmentByOffsetMilestones, setAdSegmentByOffsetMilestones, ADMS_MediaMeasurement);
+    
 @end

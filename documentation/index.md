@@ -4,38 +4,86 @@
 
 Provides access to the Omniture tracking and analytics service.
 
+## Dependencies
+
+This module requires iOS 4.3 or later.
+
+## Omniture Resources
+
+* [AppMeasurement 3.x for iOS][AppMeasurement]
+* Test Mobile Applications using [Bloodhound][Bloodhound]
+
 ## Getting Started
 
 View the [Using Titanium Modules](http://docs.appcelerator.com/titanium/latest/#!/guide/Using_Titanium_Modules) document for instructions on getting
 started with using this module in your application.
 
-## Accessing the Ti.Omniture Module
+## Accessing the Module
 
-To access this module from JavaScript, you would do the following:
+Use `require` to access this module from JavaScript:
 
-	var Omniture = require('ti.omniture');
+	var Omniture = require("ti.omniture");
 
-## Functions
+The Omniture variable is a reference to the Module object.
 
-### Ti.Omniture.createSession({...})
+## Methods
 
-Creates and returns a [Ti.Omniture.Session][] object.
+### [Ti.Omniture.Session][] Ti.Omniture.startSession(props)
 
-Takes one argument, a dictionary which specifies the Omniture session properties.
+Configures and returns a [Ti.Omniture.Session][] object. There is only one session, calling `startSession` multiple times will return the same session and will not create multiple sessions.
 
-* account[string]: Your account identifier
-* trackingServer[string]: Your tracking server
+Takes one argument, a dictionary which specifies the [Ti.Omniture.Session][] properties. Look at [Ti.Omniture.Session][] for a list of properties. The following properties are required.
 
-### Ti.Omniture.createMediaTracker({...})
+* props[object]: key/value dictionary of [Ti.Omniture.Session][] properties
+	* reportSuiteIDs[string]: Comma-delimited list of Report Suite IDs (required).
+	* trackingServer[string]: Tracking Server to send data to (required).
 
-Creates and returns a [Ti.Omniture.MediaTracker][] object.
+* returns: [Ti.Omniture.Session][] object.
 
-Takes one argument, a dictionary with the properties:
+#### Example
 
-* session[ti.omniture.Session]: Your session object
-* player[Ti.Media.VideoPlayer]: Your video player control
-* playerName[string]: The name of the media player used to view the video
-* mediaName[string]: The name of the video
+	var session = Omniture.startSession({
+        reportSuiteIDs: "<<YOUR SUITE IDS HERE>>", // Required
+        trackingServer: "<<YOUR TRACKING SERVER HERE>>", // Required
+        ssl: true, // ssl is false by default
+        visitorID: "some_visitor_id",
+        eVar1: "E VAR ONE"
+    });
+
+### [Ti.Omniture.MediaTracker][] Ti.Omniture.startMediaTracker(props)
+
+Configures and returns a [Ti.Omniture.MediaTracker][] object. There is only one media tracker session, calling `startMediaTracker` multiple times will return the same media tracker session and will not create multiple sessions.
+
+Takes one argument, a dictionary which specifies the [Ti.Omniture.MediaTracker][] properties. Look at [Ti.Omniture.MediaTracker][] for a list of properties. 
+
+* props[object]: Key/value dictionary of [Ti.Omniture.MediaTracker][] properties
+
+* returns: [Ti.Omniture.MediaTracker][] object.
+
+#### Example
+
+	var mediaTracker = Omniture.startMediaTracker({
+        trackMilestones: "25,50,75",
+        contextDataMapping: {
+            "a.media.name": "eVar2,prop2",
+            "a.media.segment": "eVar3",
+            "a.contentType": "eVar1",
+            "a.media.timePlayed": "event3",
+            "a.media.view": "event1",
+            "a.media.segmentView": "event2",
+            "a.media.complete": "event7"
+        }
+    });
+
+## Properties
+
+### Ti.Omniture.version[string]
+
+The version of the Omniture library
+
+### Ti.Omniture.debugLogging[boolean]
+
+Enable/Disable Debug Logging. 
 
 ## Usage
 
@@ -43,7 +91,7 @@ See example
 
 ## Author
 
-Jeff Haynie
+Jeff Haynie & Jon Alter
 
 ## Module History
 
@@ -55,7 +103,10 @@ Please direct all questions, feedback, and concerns to [info@appcelerator.com](m
 
 ## License
 
-Copyright(c) 2010-2011 by Appcelerator, Inc. All Rights Reserved. Please see the LICENSE file included in the distribution for further details.
+Copyright(c) 2010-2013 by Appcelerator, Inc. All Rights Reserved. Please see the LICENSE file included in the distribution for further details.
 
 [Ti.Omniture.Session]: session.html
 [Ti.Omniture.MediaTracker]: mediaTracker.html
+[AppMeasurement]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/ios/index.html
+[Bloodhound]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/ios/index.html#Using_Bloodhound_to_Test_Mobile_Applications
+
