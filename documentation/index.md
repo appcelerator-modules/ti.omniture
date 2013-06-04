@@ -24,19 +24,19 @@ Use `require` to access this module from JavaScript:
 
 	var Omniture = require("ti.omniture");
 
-The Omniture variable is a reference to the Module object.
+The `Omniture` variable is a reference to the Module object.
 
 ## Methods
 
-### [Ti.Omniture.Session][] Ti.Omniture.startSession(props)
+### <[Ti.Omniture.Session][]\> startSession(props)
 
-Configures and returns a [Ti.Omniture.Session][] object. There is only one session, calling `startSession` multiple times will return the same session and will not create multiple sessions.
+Configures and returns a [Ti.Omniture.Session][] object. There is only one session. Calling `startSession` multiple times will return the same session and will not create multiple sessions.
 
-Takes one argument, a dictionary which specifies the [Ti.Omniture.Session][] properties. Look at [Ti.Omniture.Session][] for a list of properties. The following properties are required.
+Takes one argument, a dictionary that specifies the [Ti.Omniture.Session][] properties. Look at [Ti.Omniture.Session][] for a list of properties. The following properties are required:
 
-* props[object]: key/value dictionary of [Ti.Omniture.Session][] properties
-	* reportSuiteIDs[string]: Comma-delimited list of Report Suite IDs (required).
-	* trackingServer[string]: Tracking Server to send data to (required).
+* props (object): Key/value dictionary of [Ti.Omniture.Session][] properties.
+	* reportSuiteIDs (string): Comma-delimited list of report suite IDs (required).
+	* trackingServer (string): Tracking server to send data to (required).
 
 * returns: [Ti.Omniture.Session][] object.
 
@@ -50,13 +50,13 @@ Takes one argument, a dictionary which specifies the [Ti.Omniture.Session][] pro
         eVar1: "E VAR ONE"
     });
 
-### [Ti.Omniture.MediaTracker][] Ti.Omniture.startMediaTracker(props)
+### <[Ti.Omniture.MediaTracker][]\> startMediaTracker(props)
 
-Configures and returns a [Ti.Omniture.MediaTracker][] object. There is only one media tracker session, calling `startMediaTracker` multiple times will return the same media tracker session and will not create multiple sessions.
+Configures and returns a [Ti.Omniture.MediaTracker][] object. There is only one media tracker session. Calling `startMediaTracker` multiple times will return the same media tracker session and will not create multiple sessions.
 
-Takes one argument, a dictionary which specifies the [Ti.Omniture.MediaTracker][] properties. Look at [Ti.Omniture.MediaTracker][] for a list of properties. 
+Takes one argument, a dictionary that specifies the [Ti.Omniture.MediaTracker][] properties. Look at [Ti.Omniture.MediaTracker][] for a list of properties. 
 
-* props[object]: Key/value dictionary of [Ti.Omniture.MediaTracker][] properties
+* props (object): Key/value dictionary of [Ti.Omniture.MediaTracker][] properties.
 
 * returns: [Ti.Omniture.MediaTracker][] object.
 
@@ -77,17 +77,17 @@ Takes one argument, a dictionary which specifies the [Ti.Omniture.MediaTracker][
 
 ## Properties
 
-### Ti.Omniture.version[string]
+### version : string
 
-The version of the Omniture library
+The version of the Omniture library.
 
-### Ti.Omniture.debugLogging[boolean]
+### debugLogging : boolean
 
-Enable/Disable Debug Logging. 
+Enables or disables debug logging. 
 
 ## Usage
 
-See example
+See example.
 
 ## Author
 

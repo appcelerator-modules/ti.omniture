@@ -4,10 +4,10 @@
 
 An _omniture_ module object which represents a tracking session.
 
-Properties and Variables can be set on the _Ti.Omniture.Session_ object in two ways:
+Properties and variables can be set on the _Ti.Omniture.Session_ object in two ways:
 
-1. Set Properties and Variables by passing them as a dictionary of key value pairs to the `startSession` method.
-2. Set Properties and Variables by setting them on the _Ti.Omniture.Session_ object returned by the `startSession` method
+1. Set properties and variables by passing them as a dictionary of key/value pairs to the `startSession` method.
+2. Set properties and variables by setting them on the _Ti.Omniture.Session_ object returned by the `startSession` method.
 
 ## Omniture Resources
 
@@ -15,13 +15,13 @@ Properties and Variables can be set on the _Ti.Omniture.Session_ object in two w
 
 ## Methods
 
-### void Ti.Omniture.Session.setAutoTrackingOptions(options)
+### <void\> setAutoTrackingOptions(options)
 
-Set auto track options for the session.
+Sets auto track options for the session.
 
-* options[array]: Array of AUTO_TRACK_OPTIONS (set with constants _Ti.Omniture.Session.AUTO_TRACK_OPTIONS_LIFECYCLE_, _Ti.Omniture.Session.AUTO_TRACK_OPTIONS_NAVIGATION_, or _Ti.Omniture.Session.AUTO_TRACK_OPTIONS_NONE_)
+* options (array): Array of _AUTO_TRACK_OPTIONS_ (set with constants _AUTO_TRACK_OPTIONS_LIFECYCLE_, _AUTO_TRACK_OPTIONS_NAVIGATION_, or _AUTO_TRACK_OPTIONS_NONE_).
 
-__Default:__ Ti.Omniture.Session.AUTO_TRACK_OPTIONS_LIFECYCLE
+__Default:__ AUTO_TRACK_OPTIONS_LIFECYCLE
 
 #### Example
 
@@ -40,31 +40,31 @@ __Default:__ Ti.Omniture.Session.AUTO_TRACK_OPTIONS_LIFECYCLE
 	//fully disable auto tracking
 	session.setAutoTrackingOptions([ session.AUTO_TRACK_OPTIONS_NONE ]);
 	
-### void Ti.Omniture.Session.setOnline()
+### <void\> setOnline()
 
-Brings measurement functionality online
+Brings measurement functionality online.
 
 #### Example
 
 	session.setOnline();
 
-### void Ti.Omniture.Session.setOffline()
+### <void\> setOffline()
 
-Take measurement functionality offline
+Takes measurement functionality offline.
 
 #### Example
 
 	session.setOffline();
 
-### void Ti.Omniture.Session.trackAppState(props)
+### <void\> trackAppState(props)
 
 Tracks an application state change. 
 
-Increments overall page view count. AppState will be tracked as pageName by SiteCatalyst.
+Increments overall page view count. AppState will be tracked as `pageName` by SiteCatalyst.
 
-* props[object]: Key value dictionary of properties
-	* appState[string]: appState app state description (required)
-	* contextData[object]: additional data to send with this state change
+* props (object): Key/value dictionary of properties.
+	* appState (string): application state description (required).
+	* contextData (object): additional data to send with this state change.
 
 #### Example
 
@@ -75,13 +75,13 @@ Increments overall page view count. AppState will be tracked as pageName by Site
 	    }
 	});
 
-### void Ti.Omniture.Session.trackEvents(props)
+### <void\> trackEvents(props)
 
 Tracks an application event. Does not increment overall page view count.
 
-* props[object]: Key value dictionary of properties
-	* eventNames[string]: comma delimited list of events (required)
-	* contextData[object]: additional data to send with this event
+* props (object): Key/value dictionary of properties.
+	* eventNames (string): comma-delimited list of events (required).
+	* contextData (object): additional data to send with this event.
 	
 #### Example
 
@@ -92,13 +92,13 @@ Tracks an application event. Does not increment overall page view count.
 	    }
 	});
 
-### void Ti.Omniture.Session.track(props)
+### <void\> track(props)
 
 Sends a tracking call with preset options. Increments overall page view count.
 
-* props[object]: Key value dictionary of properties
-	* variables[object]: additional variables to send with this event
-	* contextData[object]: additional data to send with this event
+* props (object): Key/value dictionary of properties.
+	* variables (object): additional variables to send with this event.
+	* contextData (object): additional data to send with this event.
 			
 #### Example
 
@@ -111,16 +111,16 @@ Sends a tracking call with preset options. Increments overall page view count.
         }
     });
 
-### void Ti.Omniture.Session.trackLink(props)
+### <void\> trackLink(props)
 
 Sends a tracking call with preset options. Does not increment overall page view count.
 
-* props[object]: Key value dictionary of properties
-	* linkURL[string]: The link URL (required)
-	* linkType[string]: The link type (required) (set with constants _Ti.Omniture.Session.LINK_TYPE_CUSTOM_, _Ti.Omniture.Session.LINK_TYPE_FILE_DOWNLOAD_, or _Ti.Omniture.Session.LINK_TYPE_EXIT_)
-	* linkName[string]: name of link
-	* contextData[object]: additional data to send with this event
-	* variables[object]: additional variables to send with this event
+* props (object): Key/value dictionary of properties.
+	* linkURL (string): The link URL (required).
+	* linkType (string): The link type (required) (set with constants _LINK_TYPE_CUSTOM_, _LINK_TYPE_FILE_DOWNLOAD_, or _LINK_TYPE_EXIT_).
+	* linkName (string): name of link.
+	* contextData (object): additional data to send with this event.
+	* variables (object): additional variables to send with this event.
 	
 #### Example
 
@@ -136,18 +136,18 @@ Sends a tracking call with preset options. Does not increment overall page view 
         }
     });
 
-### void Ti.Omniture.Session.trackLight(props)
+### <void\> trackLight(props)
 
 Sends a light tracking call with preset options. Light tracking must be configured with Adobe ClientCare.
 
-* props[object]: Key value dictionary of properties
-	* profileID[string]: light profile id (required)
-	* storeForSeconds[number]: number of seconds to hold hit while waiting for additional hits
-	* incrementBy[number]: number of times to increment metric count associated with light profile id
-	* contextData[object]: additional data to send with this call
-	* variables[object]: additional variables to send with this call
+* props (object): Key/value dictionary of properties.
+	* profileID (string): light profile ID (required)
+	* storeForSeconds (number): number of seconds to hold hi.t while waiting for additional hits.
+	* incrementBy (number): number of times to increment metric count associated with light profile ID.
+	* contextData (object): additional data to send with this call.
+	* variables (object): additional variables to send with this call.
 
-### Ti.Omniture.Session.clearVars()
+### <void\> clearVars()
 
 Clears all persistent track variables.
 
@@ -155,17 +155,17 @@ Clears all persistent track variables.
 
 	session.clearVars();
 
-### number Ti.Omniture.Session.trackingQueueSize()
+### <number\> trackingQueueSize()
 
-Get number of hits currently in the queue
+Gets the number of hits currently in the queue.
 
 #### Example
 
 	session.trackingQueueSize();
 
-### void Ti.Omniture.Session.clearTrackingQueue()
+### <void\> clearTrackingQueue()
 
-Clear all hits currently in the queue waiting to be sent. This will delete all pending hits, they will not be sent or saved.
+Clears all hits currently in the queue waiting to be sent. This will delete all pending hits. They will not be sent or saved.
 
 #### Example
 
@@ -173,60 +173,60 @@ Clear all hits currently in the queue waiting to be sent. This will delete all p
 
 ## Constants
 
-### Ti.Omniture.Session.LINK_TYPE_CUSTOM
+### LINK_TYPE_CUSTOM : string
 
-A link type constant for a custom link
+A link type constant for a custom link.
 
-### Ti.Omniture.Session.LINK_TYPE_FILE_DOWNLOAD
+### LINK_TYPE_FILE_DOWNLOAD : string
 
-A link type constant for a file download
+A link type constant for a file download.
 
-### Ti.Omniture.Session.LINK_TYPE_EXIT
+### LINK_TYPE_EXIT : string
 
-A link type constant for an exit link
+A link type constant for an exit link.
 
-### Ti.Omniture.Session.AUTO_TRACK_OPTIONS_NONE
+### AUTO_TRACK_OPTIONS_NONE : number
 
-Disable all auto tracking
+Disables all auto tracking.
 
-### Ti.Omniture.Session.AUTO_TRACK_OPTIONS_LIFECYCLE
+### AUTO_TRACK_OPTIONS_LIFECYCLE : number
 
-Track application lifecycle
+Tracks application lifecycle.
 
-### Ti.Omniture.Session.AUTO_TRACK_OPTIONS_NAVIGATION
+### AUTO_TRACK_OPTIONS_NAVIGATION : number
 
-Track navigation events
+Tracks navigation events.
 
 
 ## Variables
 
-### Ti.Omniture.Session.list1-list3[string]
+### list1 - list3 : string
 
-Gets and sets the value of a specific list variable
+Gets and sets the value of a specific list variable.
 
 #### Example
 
 	session.list1 = "L ONE";
 
-### Ti.Omniture.Session.hier1-heir5[string]
+### hier1 - heir5 : string
 
-Gets and sets the value of a specific hierarchy var
+Gets and sets the value of a specific hierarchy var.
 
 #### Example
 
 	session.hier2 = "H TWO";
 
-### Ti.Omniture.Session.prop1-prop75[string]
+### prop1 - prop75 : string
 
-Gets and sets the value of a specific prop
+Gets and sets the value of a specific prop.
 
 #### Example
 
 	session.prop3 = "P THREE";
 
-### Ti.Omniture.Session.eVar1-eVar75[string]
+### eVar1 - eVar75 : string
 
-Gets and sets the value of a specific eVar
+Gets and sets the value of a specific eVar.
 
 #### Example
 
@@ -235,87 +235,87 @@ Gets and sets the value of a specific eVar
 
 ## Properties
 
-### Ti.Omniture.Session.reportSuiteIDs[string]
+### reportSuiteIDs : string
 
-Comma-delimited list of Report Suite IDs
+Comma-delimited list of report suite IDs.
 
-### Ti.Omniture.Session.trackingServer[string]
+### trackingServer : string
 
-Tracking Server to send data to
+Tracking server to send data to.
 
-### Ti.Omniture.Session.visitorID [string]
+### visitorID : string
 
-Custom visitor ID
+Custom visitor ID.
 
-__Default:__ App-Specific UUID will be used if not set.
+__Default:__ App-specific UUID will be used if not set.
 
-### Ti.Omniture.Session.charSet[string]
+### charSet : string
 
-Character Encoding
+Character encoding.
 
 __Default:__ "UTF-8"
 
-### Ti.Omniture.Session.currencyCode[string]
+### currencyCode : string
 
-Currency Code 
+Currency code.
 
 __Default:__ "USD"
 
-### Ti.Omniture.Session.ssl[boolean]
+### ssl : boolean
 
-Transfer hits by SSL connection 
+Transfer hits by SSL connection.
 
 __Default:__ false
 
-### Ti.Omniture.Session.purchaseID[string]
+### purchaseID : string
 
-ID to attach to a purchase
+ID to attach to a purchase.
 
-### Ti.Omniture.Session.transactionID[string]
+### transactionID : string
 
-ID to attach to a transaction
+ID to attach to a transaction.
 
-### Ti.Omniture.Session.appState[string]
+### appState : string
 
-State of application at time of hit. Same as PageName in SiteCatalyst.
+State of application at time of hit. Same as `PageName` in SiteCatalyst.
 
-### Ti.Omniture.Session.channel[string]
+### channel : string
 
-Custom channel variable
+Custom channel variable.
 
-### Ti.Omniture.Session.appSection[string]
+### appSection : string
 
-Application Section. Same as Server in SiteCatalyst.
+Application section. Same as `Server` in SiteCatalyst.
 
-### Ti.Omniture.Session.campaign[string]
+### campaign : string
 
 Related campaign for hit(s).
 
-### Ti.Omniture.Session.products[string]
+### products : string
 
 Comma-delimited list of products.
 
-### Ti.Omniture.Session.events[string]
+### events : string
 
 Comma-delimited list of events.
 
-### Ti.Omniture.Session.geoState[string]
+### geoState : string
 
-Geographical State/Province variable.
+Geographical state/province variable.
 
 ##### Example
 
 	session.geoState = "CA";
 
-### Ti.Omniture.Session.geoZip[string]
+### geoZip : string
 
-Geographical Zip/Postal Code variable.
+Geographical zip/postal code variable.
 
 #### Example
 
 	session.geoZip = "94043";
 
-### Ti.Omniture.Session.persistentContextData[object]
+### persistentContextData : object
 
 Persistent context data to include with every hit.
 
@@ -325,37 +325,37 @@ Persistent context data to include with every hit.
         "custom key": "value"
     };
 
-### Ti.Omniture.Session.lifecycleSessionTimeout[number]
+### lifecycleSessionTimeout : number
 
-Set the total amount of time to ignore between sessions.
+Sets the total amount of time to ignore between sessions.
 
-### Ti.Omniture.Session.linkTrackVars[string]
+### linkTrackVars : string
 
-Comma-delimited list of variables to send with a trackLink or trackEvent call. 
+Comma-delimited list of variables to send with a `trackLink` or `trackEvents` call. 
 
-All set variables and context data will be filtered by linkTrackVars.  If linkTrackVars is not set all set variables will be sent.
+All set variables and context data will be filtered by `linkTrackVars`.  If `linkTrackVars` is not set, all set variables will be sent.
 
-### Ti.Omniture.Session.linkTrackEvents[string]
+### linkTrackEvents : string
 
-Comma-delimited list of events to send with a trackLink or trackEvent call
+Comma-delimited list of events to send with a `trackLink` or `trackEvents` call.
 
-The events list will be filtered by linkTrackEvents.  If linkTrackEvents is not set, all set events will be sent.
+The events list will be filtered by `linkTrackEvents`.  If `linkTrackEvents` is not set, all set events will be sent.
 
-### Ti.Omniture.Session.lightTrackVar[string]
+### lightTrackVar : string
 
-Comma-delimited list of variables to send with a trackLight call
+Comma-delimited list of variables to send with a trackLight call.
 
-All set variables and context data will be filtered by lightTrackVars.  If lightTrackVars is not set all set variables will be sent.
+All set variables and context data will be filtered by `lightTrackVars`.  If `lightTrackVars` is not set, all set variables will be sent.
 
-### Ti.Omniture.Session.offlineTrackingEnabled[boolean]
+### offlineTrackingEnabled : boolean
 
-Enable/Disable offline tracking.
+Enables or disables offline tracking.
 
-You will need to be using a timestamped report suite to use this functionality.
+You need to use a timestamped report suite to use this functionality.
 
 __Default:__ false
 
-### Ti.Omniture.Session.offlineHitLimit[number]
+### offlineHitLimit : number
 
 Maximum number of hits to cache when in offline mode.
 

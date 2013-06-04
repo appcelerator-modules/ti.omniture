@@ -2,16 +2,16 @@
 
 ## Description
 
-An _omniture_ module object which represents an Omniture Media Tracker.
+An _omniture_ module object which represents an Omniture media tracker.
 
-_Ti.Omniture.MediaTracker_ automatically tracks [Ti.Media.VideoPlayer][] events such as start, stop, and pause.
+_Ti.Omniture.MediaTracker_ automatically tracks [Ti.Media.VideoPlayer][] events, such as start, stop, and pause.
 
-This prevents you from needing to manually track these events and call the open, play, stop, and close methods directly.
+This prevents you from needing to manually track these events and call the `open`, `play`, `stop`, and `close` methods directly.
 
 Properties can be set on the _Ti.Omniture.MediaTracker_ object in two ways:
 
-1. Set Properties by passing them as a dictionary of key value pairs to the `startMediaTracker` method.
-2. Set Properties by setting them on the _Ti.Omniture.MediaTracker_ object returned by the `startMediaTracker` method
+1. Set properties by passing them as a dictionary of key/value pairs to the `startMediaTracker` method.
+2. Set properties by setting them on the _Ti.Omniture.MediaTracker_ object returned by the `startMediaTracker` method.
 
 ## Omniture Resources
 
@@ -21,27 +21,27 @@ Properties can be set on the _Ti.Omniture.MediaTracker_ object in two ways:
 
 ## Properties
 
-### Ti.Omniture.MediaTracker.trackVars[string]
+### trackVars : string
 
-Comma-delimited list of variables
+Comma-delimited list of variables.
 
-### Ti.Omniture.MediaTracker.trackEvents[string]
+### trackEvents : string
 
-Comma-delimited list of events
+Comma-delimited list of events.
 
-### Ti.Omniture.MediaTracker.channel[string]
+### channel : string
 
-Channel
+Channel.
 
-### Ti.Omniture.MediaTracker.completeCloseOffsetThreshold[number]
+### completeCloseOffsetThreshold : number
 
-Number of second before the end of the media that it should be considered complete
+Number of seconds before the end of the media that it should be considered complete.
 
 __Default:__ 1
 
-### Ti.Omniture.MediaTracker.contextDataMapping[object]
+### contextDataMapping : object
 
-Defines variable mapping to eVars and Events
+Defines variable mapping to eVars and events.
 
 #### Example
 
@@ -55,63 +55,63 @@ Defines variable mapping to eVars and Events
         "a.media.complete": "event7"
     };
 
-### Ti.Omniture.MediaTracker.trackSeconds[number]
+### trackSeconds : number
 
-Interval for sending tracking data
+Interval for sending tracking data.
 
 __Default:__ 0
 
-### Ti.Omniture.MediaTracker.trackMilestones[string]
+### trackMilestones : string
 
-Comma-delimited list of intervals (as a percentage) for sending tracking data
+Comma-delimited list of intervals (as a percentage) for sending tracking data.
 
 #### Example
 
 	mediaTracker.trackMilestones = "25,50,75";
 
-### Ti.Omniture.MediaTracker.segmentByMilestones[boolean]
+### segmentByMilestones : boolean
 
-Automatically generates segment info based on trackMilestones
+Automatically generates segment info based on the `trackMilestones` property.
 
 __Default:__ false
 
-### Ti.Omniture.MediaTracker.trackOffsetMilestones[string]
+### trackOffsetMilestones : string
 
-Comma-delimited list of intervals (in seconds) for sending tracking data
+Comma-delimited list of intervals (in seconds) for sending tracking data.
 
 #### Example
 
 	mediaTracker.trackOffsetMilestones = "15,30,45,60,75,90";
 
-### Ti.Omniture.MediaTracker.segmentByOffsetMilestones[boolean]
+### segmentByOffsetMilestones : boolean
 
-Automatically generates segment info based on trackOffsetMilestones
+Automatically generates segment info based on the `trackOffsetMilestones` property.
 
 __Default:__ false
 
-### Ti.Omniture.MediaTracker.adTrackSeconds[number]
+### adTrackSeconds : number
 
-Interval for sending ad tracking data
+Interval for sending ad tracking data.
 
 __Default:__ 0
 
-### Ti.Omniture.MediaTracker.adTrackMilestones[string]
+### adTrackMilestones : string
 
-Comma-delimited list of intervals (as a percentage) for sending ad tracking data
+Comma-delimited list of intervals (as a percentage) for sending ad tracking data.
 
-### Ti.Omniture.MediaTracker.adSegmentByMilestones[boolean]
+### adSegmentByMilestones : boolean
 
-Automatically generates segment info based on adTrackMilestones
+Automatically generates segment info based on the `adTrackMilestones` property.
 
 __Default:__ false
 
-### Ti.Omniture.MediaTracker.adTrackOffsetMilestones[string]
+### adTrackOffsetMilestones : string
 
-Comma-delimited list of intervals (in seconds) for sending ad tracking data
+Comma-delimited list of intervals (in seconds) for sending ad tracking data.
 
-### Ti.Omniture.MediaTracker.adSegmentByOffsetMilestones[boolean]
+### adSegmentByOffsetMilestones : boolean
 
-Automatically generates segment info based on adTrackOffsetMilestones
+Automatically generates segment info based on the `adTrackOffsetMilestones` property.
 
 __Default:__ false
 
