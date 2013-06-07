@@ -26,6 +26,17 @@ Use `require` to access this module from JavaScript:
 
 The `Omniture` variable is a reference to the Module object.
 
+## Breaking Changes
+
+If you are upgrading from an earlier version of this module (prior to version 2.0.0) you should be
+aware of the following breaking changes to the API:
+
+* Session properties have changed. See the [iOS Version 2.x to 3.x Migration Guide](http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/ios/index.html#iOS_Version_2x_to_3x_Migration_Guide) for a list of SDK property changes that are reflected in the module.
+* `createSession` and `createMediaTracker` have been replaced with `startSession` and `startMediaTracker` respectively.
+* `startMediaTracker` does not require `session` or `player` to be passed to it.
+* `playerName` and 'mediaName' are no longer properties of `MediaTracker`. They will be set automatically, `playerName` with "MPMoviePlayer" and `mediaName` with the name of the media file.
+* The argument structure and names have changed for the `track` and `trackLink` methods.
+
 ## Methods
 
 ### <[Ti.Omniture.Session][]\> startSession(props)
