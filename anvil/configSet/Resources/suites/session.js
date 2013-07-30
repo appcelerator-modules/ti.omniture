@@ -9,6 +9,8 @@ module.exports = new function ()
 {
     var finish;
     var valueOf;
+    var isAndroid = (Ti.Platform.name === "android");
+    var isIOS = (Ti.Platform.name === "iPhone");
     var Omniture;
     
     this.init = function (testUtils)
@@ -45,9 +47,11 @@ module.exports = new function ()
         valueOf(testRun, session.LINK_TYPE_FILE_DOWNLOAD).shouldBeString();
         valueOf(testRun, session.LINK_TYPE_EXIT).shouldBeString();
 
-        valueOf(testRun, session.AUTO_TRACK_OPTIONS_NONE).shouldBeNumber();
-        valueOf(testRun, session.AUTO_TRACK_OPTIONS_LIFECYCLE).shouldBeNumber();
-        valueOf(testRun, session.AUTO_TRACK_OPTIONS_NAVIGATION).shouldBeNumber();
+        if (isIOS) {
+            valueOf(testRun, session.AUTO_TRACK_OPTIONS_NONE).shouldBeNumber();
+            valueOf(testRun, session.AUTO_TRACK_OPTIONS_LIFECYCLE).shouldBeNumber();
+            valueOf(testRun, session.AUTO_TRACK_OPTIONS_NAVIGATION).shouldBeNumber();
+        }
 
         finish(testRun);
     };  
@@ -57,8 +61,8 @@ module.exports = new function ()
     {
         var session = Omniture.startSession();
 
-        valueOf(testRun, session.setAutoTrackingOptions).shouldBeFunction();
-        valueOf(testRun, session.setOnLine).shouldBeFunction();
+        isIOS && valueOf(testRun, session.setAutoTrackingOptions).shouldBeFunction();
+        valueOf(testRun, session.setOnline).shouldBeFunction();
         valueOf(testRun, session.setOffline).shouldBeFunction();
 
         valueOf(testRun, session.trackAppState).shouldBeFunction();
@@ -66,16 +70,6 @@ module.exports = new function ()
         valueOf(testRun, session.track).shouldBeFunction();
         valueOf(testRun, session.trackLink).shouldBeFunction();
         valueOf(testRun, session.trackLight).shouldBeFunction();
-
-        valueOf(testRun, session.getEvar).shouldBeFunction();
-        valueOf(testRun, session.getProp).shouldBeFunction();
-        valueOf(testRun, session.getHier).shouldBeFunction();
-        valueOf(testRun, session.getListVar).shouldBeFunction();
-
-        valueOf(testRun, session.setEvar).shouldBeFunction();
-        valueOf(testRun, session.setProp).shouldBeFunction();
-        valueOf(testRun, session.setHier).shouldBeFunction();
-        valueOf(testRun, session.setListVar).shouldBeFunction();
 
         valueOf(testRun, session.clearVars).shouldBeFunction();
         valueOf(testRun, session.trackingQueueSize).shouldBeFunction();
@@ -103,30 +97,32 @@ module.exports = new function ()
         finish(testRun);
     };
 
-    this.testAutoTrackingOptionsFuntionCalls = function (testRun)
-    {
-        var session = Omniture.startSession();
+    if (isIOS) {
+        this.testAutoTrackingOptionsFuntionCalls = function (testRun)
+        {
+            var session = Omniture.startSession();
 
-        valueOf(testRun, function() {
-            session.setAutoTrackingOptions();
-        }).shouldNotThrowException();
-        valueOf(testRun, function() {
-            session.setAutoTrackingOptions([
-                session.AUTO_TRACK_OPTIONS_LIFECYCLE,
-                session.AUTO_TRACK_OPTIONS_NAVIGATION
-            ]);
-        }).shouldNotThrowException();
-        valueOf(testRun, function() {
-            session.setAutoTrackingOptions([
-                session.AUTO_TRACK_OPTIONS_NONE
-            ]);
-        }).shouldNotThrowException();
-        valueOf(testRun, function() {
-            session.setAutoTrackingOptions(["STRING"]);
-        }).shouldThrowException();
+            valueOf(testRun, function() {
+                session.setAutoTrackingOptions();
+            }).shouldNotThrowException();
+            valueOf(testRun, function() {
+                session.setAutoTrackingOptions([
+                    session.AUTO_TRACK_OPTIONS_LIFECYCLE,
+                    session.AUTO_TRACK_OPTIONS_NAVIGATION
+                ]);
+            }).shouldNotThrowException();
+            valueOf(testRun, function() {
+                session.setAutoTrackingOptions([
+                    session.AUTO_TRACK_OPTIONS_NONE
+                ]);
+            }).shouldNotThrowException();
+            valueOf(testRun, function() {
+                session.setAutoTrackingOptions(["STRING"]);
+            }).shouldThrowException();
 
-        finish(testRun);
-    };
+            finish(testRun);
+        };
+    }
 
     this.testOnlineOfflineFuntionCalls = function (testRun)
     {
@@ -243,12 +239,6 @@ module.exports = new function ()
         }).shouldThrowException();
         valueOf(testRun, function() {
             session.trackLink({
-                linkURL: "http://example.com",
-                linkType: 12
-            });
-        }).shouldThrowException();
-        valueOf(testRun, function() {
-            session.trackLink({
                 linkType: session.LINK_TYPE_EXIT
             });
         }).shouldThrowException();
@@ -274,13 +264,6 @@ module.exports = new function ()
             session.trackLink({
                 linkURL: "http://example.com",
                 linkType: session.LINK_TYPE_FILE_DOWNLOAD,
-                linkName: 21
-            });
-        }).shouldThrowException();
-        valueOf(testRun, function() {
-            session.trackLink({
-                linkURL: "http://example.com",
-                linkType: session.LINK_TYPE_FILE_DOWNLOAD,
                 linkName: "name"
             });
         }).shouldNotThrowException();
@@ -288,23 +271,9 @@ module.exports = new function ()
             session.trackLink({
                 linkURL: "http://example.com",
                 linkType: session.LINK_TYPE_FILE_DOWNLOAD,
-                contextData: "STRING"
-            });
-        }).shouldThrowException();
-        valueOf(testRun, function() {
-            session.trackLink({
-                linkURL: "http://example.com",
-                linkType: session.LINK_TYPE_FILE_DOWNLOAD,
                 contextData: {}
             });
         }).shouldNotThrowException();
-        valueOf(testRun, function() {
-            session.trackLink({
-                linkURL: "http://example.com",
-                linkType: session.LINK_TYPE_FILE_DOWNLOAD,
-                variables: 19
-            });
-        }).shouldThrowException();
         valueOf(testRun, function() {
             session.trackLink({
                 linkURL: "http://example.com",
@@ -367,21 +336,9 @@ module.exports = new function ()
         valueOf(testRun, function() {
             session.trackLight({
                 profileID: "id",
-                contextData: "STRING"
-            });
-        }).shouldThrowException();
-        valueOf(testRun, function() {
-            session.trackLight({
-                profileID: "id",
                 contextData: {}
             });
         }).shouldNotThrowException();
-        valueOf(testRun, function() {
-            session.trackLight({
-                profileID: "id",
-                variables: 19
-            });
-        }).shouldThrowException();
         valueOf(testRun, function() {
             session.trackLight({
                 profileID: "id",
@@ -421,7 +378,7 @@ module.exports = new function ()
         valueOf(testRun, session.visitorID).shouldBeString();
         valueOf(testRun, session.charSet).shouldBeUndefined();
         valueOf(testRun, session.currencyCode).shouldBeUndefined();
-        valueOf(testRun, session.ssl).shouldBeBoolean();
+        isIOS && valueOf(testRun, session.ssl).shouldBeBoolean();
 
         valueOf(testRun, session.purchaseID).shouldBeUndefined();
         valueOf(testRun, session.transactionID).shouldBeUndefined();
@@ -442,7 +399,7 @@ module.exports = new function ()
         valueOf(testRun, session.linkTrackVars).shouldBeUndefined();
         valueOf(testRun, session.linkTrackEvents).shouldBeUndefined();
         valueOf(testRun, session.lightTrackVars).shouldBeUndefined();
-        valueOf(testRun, session.offlineTrackingEnabled).shouldBeBoolean();
+        isIOS && valueOf(testRun, session.offlineTrackingEnabled).shouldBeBoolean();
         valueOf(testRun, session.offlineHitLimit).shouldBeNumber();
 
         finish(testRun);
@@ -506,7 +463,7 @@ module.exports = new function ()
         valueOf(testRun, session.visitorID).shouldBe(visitorID);
         valueOf(testRun, session.charSet).shouldBe(charSet);
         valueOf(testRun, session.currencyCode).shouldBe(currencyCode);
-        valueOf(testRun, session.ssl).shouldBe(ssl);
+        isIOS && valueOf(testRun, session.ssl).shouldBe(ssl);
 
         valueOf(testRun, session.purchaseID).shouldBe(purchaseID);
         valueOf(testRun, session.transactionID).shouldBe(transactionID);
@@ -527,7 +484,7 @@ module.exports = new function ()
         valueOf(testRun, session.linkTrackVars).shouldBe(linkTrackVars);
         valueOf(testRun, session.linkTrackEvents).shouldBe(linkTrackEvents);
         valueOf(testRun, session.lightTrackVars).shouldBe(lightTrackVars);
-        valueOf(testRun, session.offlineTrackingEnabled).shouldBe(offlineTrackingEnabled);
+        isIOS && valueOf(testRun, session.offlineTrackingEnabled).shouldBe(offlineTrackingEnabled);
         valueOf(testRun, session.offlineHitLimit).shouldBe(offlineHitLimit);
 
         finish(testRun);

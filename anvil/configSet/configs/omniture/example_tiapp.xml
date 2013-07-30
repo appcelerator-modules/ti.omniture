@@ -38,6 +38,7 @@
         <theme>default</theme>
     </mobileweb>
     <modules>
-        <module platform="iphone" version="2.0.0">ti.omniture</module>
+        <module platform="iphone">ti.omniture</module>
+        <module platform="android">ti.omniture</module>
     </modules>
 </ti:app>

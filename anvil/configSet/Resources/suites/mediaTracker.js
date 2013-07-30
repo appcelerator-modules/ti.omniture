@@ -9,6 +9,8 @@ module.exports = new function ()
 {
     var finish;
     var valueOf;
+    var isAndroid = (Ti.Platform.name === "android");
+    var isIOS = (Ti.Platform.name === "iPhone");
     var Omniture;
     
     this.init = function (testUtils)
@@ -49,11 +51,13 @@ module.exports = new function ()
         valueOf(testRun, mediaTracker.trackOffsetMilestones).shouldBeUndefined();
         valueOf(testRun, mediaTracker.segmentByOffsetMilestones).shouldBeBoolean();
 
-        valueOf(testRun, mediaTracker.adTrackSeconds).shouldBeNumber();
-        valueOf(testRun, mediaTracker.adTrackMilestones).shouldBeUndefined();
-        valueOf(testRun, mediaTracker.adSegmentByMilestones).shouldBeBoolean();
-        valueOf(testRun, mediaTracker.adTrackOffsetMilestones).shouldBeUndefined();
-        valueOf(testRun, mediaTracker.adSegmentByOffsetMilestones).shouldBeBoolean();
+        if (isIOS) {
+            valueOf(testRun, mediaTracker.adTrackSeconds).shouldBeNumber();
+            valueOf(testRun, mediaTracker.adTrackMilestones).shouldBeUndefined();
+            valueOf(testRun, mediaTracker.adSegmentByMilestones).shouldBeBoolean();
+            valueOf(testRun, mediaTracker.adTrackOffsetMilestones).shouldBeUndefined();
+            valueOf(testRun, mediaTracker.adSegmentByOffsetMilestones).shouldBeBoolean();   
+        }
 
         finish(testRun);
     };
@@ -111,11 +115,13 @@ module.exports = new function ()
         valueOf(testRun, mediaTracker.trackOffsetMilestones).shouldBe(trackOffsetMilestones);
         valueOf(testRun, mediaTracker.segmentByOffsetMilestones).shouldBe(segmentByOffsetMilestones);
 
-        valueOf(testRun, mediaTracker.adTrackSeconds).shouldBe(adTrackSeconds);
-        valueOf(testRun, mediaTracker.adTrackMilestones).shouldBe(adTrackMilestones);
-        valueOf(testRun, mediaTracker.adSegmentByMilestones).shouldBe(adSegmentByMilestones);
-        valueOf(testRun, mediaTracker.adTrackOffsetMilestones).shouldBe(adTrackOffsetMilestones);
-        valueOf(testRun, mediaTracker.adSegmentByOffsetMilestones).shouldBe(adSegmentByOffsetMilestones);
+        if (isIOS) {
+            valueOf(testRun, mediaTracker.adTrackSeconds).shouldBe(adTrackSeconds);
+            valueOf(testRun, mediaTracker.adTrackMilestones).shouldBe(adTrackMilestones);
+            valueOf(testRun, mediaTracker.adSegmentByMilestones).shouldBe(adSegmentByMilestones);
+            valueOf(testRun, mediaTracker.adTrackOffsetMilestones).shouldBe(adTrackOffsetMilestones);
+            valueOf(testRun, mediaTracker.adSegmentByOffsetMilestones).shouldBe(adSegmentByOffsetMilestones);
+        }
 
         finish(testRun);
     };

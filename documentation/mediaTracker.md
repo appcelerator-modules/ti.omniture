@@ -4,9 +4,11 @@
 
 An _omniture_ module object which represents an Omniture media tracker.
 
-_Ti.Omniture.MediaTracker_ automatically tracks [Ti.Media.VideoPlayer][] events, such as start, stop, and pause.
+On iOS _Ti.Omniture.MediaTracker_ automatically tracks [Ti.Media.VideoPlayer][] events, such as start, stop, and pause.
 
 This prevents you from needing to manually track these events and call the `open`, `play`, `stop`, and `close` methods directly.
+
+On Android there is not automatic tracking, so open, play, stop, and close methods must be called manually. See the examples below and in the example app.
 
 Properties can be set on the _Ti.Omniture.MediaTracker_ object in two ways:
 
@@ -16,8 +18,91 @@ Properties can be set on the _Ti.Omniture.MediaTracker_ object in two ways:
 ## Omniture Resources
 
 * [Video Metrics][VideoMetrics]
-* [Measuring Video][MeasuringVideo]
+* [Measuring Video iOS][MeasuringVideoIOS]
+* [Measuring Video Android][MeasuringVideoAndroid]
 * [Configure Milestones][ConfigureMilestones]
+
+## Methods
+
+## <void\> open(props)
+
+Tracking method to be called when a video is opened
+
+* props (object): Key/value dictionary of properties.
+	* mediaName (string): Name of the media (required).
+	* mediaLength (number): Length of media in seconds (required).
+	* mediaPlayerName (string): Name of the media player (required).
+
+* returns: void.
+
+__Android only__
+
+#### Example
+
+	mediaTracker.open({
+       mediaName: mediaName,
+       mediaLength: secondsFromMs(e.duration), // `e.duration` is in milliseconds, but `mediaLength` is in seconds
+       mediaPlayerName: "Ti.Media.VideoPlayer"
+    });
+    
+## <void\> play(props)
+
+Tracking method to be called when a video is played
+
+* props (object): Key/value dictionary of properties.
+	* mediaName (string): Name of the media being played (required).
+	* mediaOffset (number): The current offset of media in seconds (required).
+
+* returns: void.
+
+__Android only__
+
+#### Example
+
+	 mediaTracker.play({
+         mediaName: mediaName,
+         // VideoPlayer times are in milliseconds, but Omniture.mediaTracker times are in seconds
+         mediaOffset: secondsFromMs($.videoPlayer.currentPlaybackTime)
+     });
+
+## <void\> stop(props)
+
+Tracking method to be called when a video is stoped
+
+* props (object): Key/value dictionary of properties.
+	* mediaName (string): Name of the media (required).
+	* mediaOffset (number): The current offset of media in seconds (required).
+
+* returns: void.
+
+__Android only__
+
+#### Example
+
+	 mediaTracker.stop({
+         mediaName: mediaName,
+         // VideoPlayer times are in milliseconds, but Omniture.mediaTracker times are in seconds
+         mediaOffset: secondsFromMs($.videoPlayer.currentPlaybackTime)
+     });
+ 
+## <void\> close(props)
+
+Tracking method to be called when a video is closed/finished
+
+* props (object): Key/value dictionary of properties.
+	* mediaName (string): Name of the media (required).
+
+* returns: void.
+
+__Android only__
+
+#### Example
+
+	 mediaTracker.close({
+         mediaName: mediaName
+     });    
+     
+    
 
 ## Properties
 
@@ -95,9 +180,13 @@ Interval for sending ad tracking data.
 
 __Default:__ 0
 
+__iOS only__
+
 ### adTrackMilestones : string
 
 Comma-delimited list of intervals (as a percentage) for sending ad tracking data.
+
+__iOS only__
 
 ### adSegmentByMilestones : boolean
 
@@ -105,9 +194,13 @@ Automatically generates segment info based on the `adTrackMilestones` property.
 
 __Default:__ false
 
+__iOS only__
+
 ### adTrackOffsetMilestones : string
 
 Comma-delimited list of intervals (in seconds) for sending ad tracking data.
+
+__iOS only__
 
 ### adSegmentByOffsetMilestones : boolean
 
@@ -115,7 +208,10 @@ Automatically generates segment info based on the `adTrackOffsetMilestones` prop
 
 __Default:__ false
 
+__iOS only__
+
 [Ti.Media.VideoPlayer]: http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.Media.VideoPlayer
 [VideoMetrics]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/video/index.html#Video_Metrics
-[MeasuringVideo]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/video/index.html#Apple_iOS
+[MeasuringVideoIOS]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/video/index.html#Apple_iOS
+[MeasuringVideoAndroid]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/android/index.html#AppMeasurement_3x_for_Android
 [ConfigureMilestones]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/video/index.html#Configure_Milestones

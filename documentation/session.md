@@ -23,6 +23,8 @@ Sets auto track options for the session.
 
 __Default:__ AUTO_TRACK_OPTIONS_LIFECYCLE
 
+__iOS only__
+
 #### Example
 
 	//only LifeCycle auto tracking enabled (default)
@@ -170,6 +172,31 @@ Clears all hits currently in the queue waiting to be sent. This will delete all 
 #### Example
 
 	session.clearTrackingQueue();
+	
+### <void\> startActivity()
+
+Lifecycle tracking method to be called when the app's window is opened
+
+* returns: void.
+
+__Android only__
+
+#### Example
+
+	session.startActivity();
+
+### <void\> stopActivity()
+
+Lifecycle tracking method to be called when the app's window is closed
+
+* returns: void.
+
+__Android only__
+
+#### Example
+
+	session.stopActivity();
+	
 
 ## Constants
 
@@ -187,15 +214,21 @@ A link type constant for an exit link.
 
 ### AUTO_TRACK_OPTIONS_NONE : number
 
-Disables all auto tracking.
+Disables all auto tracking. 
+
+__iOS only__
 
 ### AUTO_TRACK_OPTIONS_LIFECYCLE : number
 
-Tracks application lifecycle.
+Tracks application lifecycle. 
+
+__iOS only__
 
 ### AUTO_TRACK_OPTIONS_NAVIGATION : number
 
-Tracks navigation events.
+Tracks navigation events. 
+
+__iOS only__
 
 
 ## Variables
@@ -266,6 +299,8 @@ __Default:__ "USD"
 Transfer hits by SSL connection.
 
 __Default:__ false
+
+__Android:__ (writeonly)
 
 ### purchaseID : string
 
@@ -354,6 +389,8 @@ Enables or disables offline tracking.
 You need to use a timestamped report suite to use this functionality.
 
 __Default:__ false
+
+__Android:__ (writeonly)
 
 ### offlineHitLimit : number
 

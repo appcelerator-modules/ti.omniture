@@ -45,7 +45,10 @@ module.exports = new function ()
     this.testProperties = function (testRun)
     {
         valueOf(testRun, Omniture.version).shouldBeString();
-        valueOf(testRun, Omniture.debugLogging).shouldBeBoolean();
+        // Property Getters
+        valueOf(testRun, Omniture.getVersion).shouldBeFunction();
+        // Property Setters
+        valueOf(testRun, Omniture.setDebugLogging).shouldBeFunction();
 
         finish(testRun);
     };

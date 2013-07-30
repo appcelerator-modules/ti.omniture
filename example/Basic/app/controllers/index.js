@@ -105,7 +105,9 @@ var rows = [
                 }
             });
             // Open the media tracker window
-            Alloy.createController("mediaTracker").getView().open();
+            // mediaTracker is needed in the mediaTracker contoller so it is passed in
+            var args = {mediaTracker: mediaTracker};
+            Alloy.createController("mediaTracker", args).getView().open();
         }
     }
 ];
@@ -117,10 +119,27 @@ Omniture.debugLogging = true;
 // properties can also be set on the session object that is returned by startSession
 var session = Omniture.startSession({
     reportSuiteIDs: "my_rsid",
-    trackingServer: "<< YOUR TRACKING SERVER ADDRESS HERE >>",
+    trackingServer: "10.0.0.5:51657",
     ssl: false
 });
-session.setAutoTrackingOptions([session.AUTO_TRACK_OPTIONS_LIFECYCLE]); // AUTO_TRACK_OPTIONS_LIFECYCLE is default
+
+// Session AutoTracking is only supported on iOS
+if (OS_IOS) {
+    session.setAutoTrackingOptions([session.AUTO_TRACK_OPTIONS_LIFECYCLE]); // AUTO_TRACK_OPTIONS_LIFECYCLE is default   
+}
+
+// Session tracking using start/stopActivity is only supported on Android 
+// call `startActivity` when the base window of the app opens
+// call `stopActivity` when the base window of the app closes
+if (OS_ANDROID) {
+    $.win.addEventListener('open', function() {
+       session.startActivity();
+    });
+    
+    $.win.addEventListener('close', function() {
+       session.stopActivity(); 
+    });
+}
 
 function Log(text) {
     $.textLog.value = text + "\n" + $.textLog.value;
@@ -128,7 +147,7 @@ function Log(text) {
 }
 
 function onRowClick(e) {  
-    e.source.onClick && e.source.onClick();
+    rows[e.index].onClick && rows[e.index].onClick();
 }
 
 $.tableView.data = rows;
