@@ -5,12 +5,10 @@
     <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
     <classpathentry kind="lib" path="/usr/android-sdk/platforms/android-7/android.jar"/>
     <classpathentry kind="lib" path="/usr/android-sdk/add-ons/addon_google_apis_google_inc_7/libs/maps.jar"/>
-    <classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/1.8.0.1/android/titanium.jar"/>
-    <classpathentry kind="lib"
-                    path="/Library/Application Support/Titanium/mobilesdk/osx/1.8.0.1/android/kroll-common.jar"/>
-    <classpathentry kind="lib"
-                    path="/Library/Application Support/Titanium/mobilesdk/osx/1.8.0.1/android/kroll-apt.jar"/>
-    <classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/1.8.0.1/android/js.jar"/>
-    <classpathentry kind="lib" path="lib/OmnitureAppMeasurement-Android.jar"/>
+    <classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/3.0.0.GA/android/titanium.jar" sourcepath="/titanium"/>
+    <classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/3.0.0.GA/android/kroll-common.jar" sourcepath="/kroll-common"/>
+    <classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/3.0.0.GA/android/kroll-apt.jar"/>
+    <classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/3.0.0.GA/android/js.jar"/>
+    <classpathentry kind="lib" path="lib/admsAppLibrary.jar"/>
     <classpathentry kind="output" path="bin"/>
 </classpath>

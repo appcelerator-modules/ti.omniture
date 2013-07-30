@@ -1,0 +1,24 @@
+".container": {
+    backgroundColor: "white",
+    modal: false
+},
+"#closeView": {
+    top: 0,
+    height: 44,
+    backgroundColor: "#000"
+},
+"#closeLabel": {
+    color: "#FFF"
+},
+"#videoPlayer": {
+    height: "80%",
+    width: "80%", 
+    autoplay: true
+},
+"#videoPlayer[platform=ios]": {
+    url: "movie.mp4"
+},
+"#videoPlayer[platform=android]": {
+    url: "../../movie.mp4"
+}
+
