@@ -93,19 +93,10 @@ var rows = [
             // The mediaTracker variable is not used in this example.
             // It is here to show that the MediaTracker object is returned by startMediaTracker 
             var mediaTracker = Omniture.startMediaTracker({
-                trackMilestones:"25,50,75",
-                contextDataMapping: {
-                    "a.media.name": "eVar2,prop2",
-                    "a.media.segment": "eVar3",
-                    "a.contentType": "eVar1", //note that this is not in the .media namespace
-                    "a.media.timePlayed": "event3",
-                    "a.media.view": "event1",
-                    "a.media.segmentView": "event2",
-                    "a.media.complete": "event7"
-                }
+                trackMilestones:"25,50,75"
             });
             // Open the media tracker window
-            // mediaTracker is needed in the mediaTracker contoller so it is passed in
+            // mediaTracker is needed in the mediaTracker contoller so it is passed in here
             var args = {mediaTracker: mediaTracker};
             Alloy.createController("mediaTracker", args).getView().open();
         }
@@ -129,8 +120,8 @@ if (OS_IOS) {
 }
 
 // Session tracking using start/stopActivity is only supported on Android 
-// call `startActivity` when the base window of the app opens
-// call `stopActivity` when the base window of the app closes
+// call `startActivity` when the window opens
+// call `stopActivity` when the window closes
 if (OS_ANDROID) {
     $.win.addEventListener('open', function() {
        session.startActivity();

@@ -29,9 +29,9 @@ Properties can be set on the _Ti.Omniture.MediaTracker_ object in two ways:
 Tracking method to be called when a video is opened
 
 * props (object): Key/value dictionary of properties.
-	* mediaName (string): Name of the media (required).
-	* mediaLength (number): Length of media in seconds (required).
-	* mediaPlayerName (string): Name of the media player (required).
+    * mediaName (string): Name of the media (required).
+    * mediaLength (number): Length of media in seconds (required).
+    * mediaPlayerName (string): Name of the media player (required).
 
 * returns: void.
 
@@ -39,9 +39,10 @@ __Android only__
 
 #### Example
 
-	mediaTracker.open({
+    mediaTracker.open({
        mediaName: mediaName,
-       mediaLength: secondsFromMs(e.duration), // `e.duration` is in milliseconds, but `mediaLength` is in seconds
+       // VideoPlayer times are in milliseconds, but Omniture.mediaTracker times are in seconds
+       mediaLength: secondsFromMs(e.duration),
        mediaPlayerName: "Ti.Media.VideoPlayer"
     });
     
@@ -50,8 +51,8 @@ __Android only__
 Tracking method to be called when a video is played
 
 * props (object): Key/value dictionary of properties.
-	* mediaName (string): Name of the media being played (required).
-	* mediaOffset (number): The current offset of media in seconds (required).
+    * mediaName (string): Name of the media being played (required).
+    * mediaOffset (number): The current offset of media in seconds (required).
 
 * returns: void.
 
@@ -59,7 +60,7 @@ __Android only__
 
 #### Example
 
-	 mediaTracker.play({
+     mediaTracker.play({
          mediaName: mediaName,
          // VideoPlayer times are in milliseconds, but Omniture.mediaTracker times are in seconds
          mediaOffset: secondsFromMs($.videoPlayer.currentPlaybackTime)
@@ -70,8 +71,8 @@ __Android only__
 Tracking method to be called when a video is stoped
 
 * props (object): Key/value dictionary of properties.
-	* mediaName (string): Name of the media (required).
-	* mediaOffset (number): The current offset of media in seconds (required).
+    * mediaName (string): Name of the media (required).
+    * mediaOffset (number): The current offset of media in seconds (required).
 
 * returns: void.
 
@@ -79,7 +80,7 @@ __Android only__
 
 #### Example
 
-	 mediaTracker.stop({
+     mediaTracker.stop({
          mediaName: mediaName,
          // VideoPlayer times are in milliseconds, but Omniture.mediaTracker times are in seconds
          mediaOffset: secondsFromMs($.videoPlayer.currentPlaybackTime)
@@ -90,7 +91,7 @@ __Android only__
 Tracking method to be called when a video is closed/finished
 
 * props (object): Key/value dictionary of properties.
-	* mediaName (string): Name of the media (required).
+    * mediaName (string): Name of the media (required).
 
 * returns: void.
 
@@ -98,7 +99,7 @@ __Android only__
 
 #### Example
 
-	 mediaTracker.close({
+     mediaTracker.close({
          mediaName: mediaName
      });    
      
@@ -130,7 +131,7 @@ Defines variable mapping to eVars and events.
 
 #### Example
 
-	mediaTracker.contextDataMapping = {
+    mediaTracker.contextDataMapping = {
         "a.media.name": "eVar2,prop2",
         "a.media.segment": "eVar3",
         "a.contentType": "eVar1",
@@ -152,7 +153,7 @@ Comma-delimited list of intervals (as a percentage) for sending tracking data.
 
 #### Example
 
-	mediaTracker.trackMilestones = "25,50,75";
+    mediaTracker.trackMilestones = "25,50,75";
 
 ### segmentByMilestones : boolean
 
@@ -166,7 +167,7 @@ Comma-delimited list of intervals (in seconds) for sending tracking data.
 
 #### Example
 
-	mediaTracker.trackOffsetMilestones = "15,30,45,60,75,90";
+    mediaTracker.trackOffsetMilestones = "15,30,45,60,75,90";
 
 ### segmentByOffsetMilestones : boolean
 

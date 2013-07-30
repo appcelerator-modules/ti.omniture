@@ -48,6 +48,10 @@ public class MediaTrackerProxy extends KrollProxy implements KrollProxyListener
 		}
 	}
 	
+	/*
+	 * KrollProxyListener methods
+	 */
+	
 	@Override
 	public void propertyChanged(String key, Object oldValue, Object newValue, KrollProxy proxy) {
 		
@@ -137,8 +141,8 @@ public class MediaTrackerProxy extends KrollProxy implements KrollProxyListener
 	@Kroll.getProperty @Kroll.method
 	public Object getTrackVars() {
 		String toReturn = ADMS_MediaMeasurement.sharedInstance().trackVars;
-		// In the iOS module getTrackVars returns the string "None" if no trackVars exist
-		// doing the same strange thing to maintain parity
+		// In the iOS module getTrackVars returns the string "None" if no
+		// trackVars exist, doing the same thing here to maintain parity
 		return Utils.stringOrNone(toReturn);
 	}
 	
@@ -151,8 +155,8 @@ public class MediaTrackerProxy extends KrollProxy implements KrollProxyListener
 	@Kroll.getProperty @Kroll.method
 	public Object getTrackEvents() {
 		String toReturn = ADMS_MediaMeasurement.sharedInstance().trackEvents;
-		// In the iOS module getTrackVars returns the string "None" if no trackVars exist
-		// doing the same strange thing to maintain parity
+		// In the iOS module getTrackVars returns the string "None" if no
+		// trackVars exist, doing the same thing here to maintain parity
 		return Utils.stringOrNone(toReturn);
 	}
 	

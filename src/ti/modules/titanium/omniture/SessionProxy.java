@@ -127,23 +127,24 @@ public class SessionProxy extends KrollProxy implements KrollProxyListener
 	
 	private Boolean setNumberedProperty(String key, Object oldValue, Object newValue, KrollProxy proxy) {
 		// If the 'modelListener' property has been set for this proxy then this method is called
-        // whenever a proxy property value is updated. Note that this method is called whenever the
-        // setter is called, so it will get called even if the value of the property has not changed.
-        if ((oldValue == newValue) || ((oldValue != null) && oldValue.equals(newValue))) {
-            return false;
-        }
+		// whenever a proxy property value is updated. Note that this method is called whenever the
+		// setter is called, so it will get called even if the value of the property has not changed.
+		if ((oldValue == newValue) || ((oldValue != null) && oldValue.equals(newValue))) {
+    		return false;
+    	}
         
 		// Special handling for numbered properties
-	    //    list1-list3;         
-	    //    hier1-heir5;         
-	    //    prop1-prop75;
-	    //    eVar1-eVar75;
-	    // These numbered props will be set on the session
+		//    list1-list3;         
+		//    hier1-heir5;         
+		//    prop1-prop75;
+		//    eVar1-eVar75;
+		// These numbered props will be set on the session
 		if (key.startsWith("list")) {
 			String prefix = "list";
 			int num = TiConvert.toInt(key.substring(prefix.length()));
 			ADMS_Measurement.sharedInstance().setListVar(num, TiConvert.toString(newValue));
 			proxy.setProperty(key, ADMS_Measurement.sharedInstance().getListVar(num));
+			// Saving keys so they can be easily removed later when clearing vars
 			numberedKeysInProxy.add(key);
 			return true;
 		}
@@ -334,225 +335,193 @@ public class SessionProxy extends KrollProxy implements KrollProxyListener
 	 */
 
 	// reportSuiteIDs
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setReportSuiteIDs(Object arg) {
 		ADMS_Measurement.sharedInstance().setReportSuiteIDs(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getReportSuiteIDs() {
 		String toReturn = ADMS_Measurement.sharedInstance().getReportSuiteIDs();
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// trackingServer
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setTrackingServer(Object arg) {
 		ADMS_Measurement.sharedInstance().setTrackingServer(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getTrackingServer() {
 		String toReturn = ADMS_Measurement.sharedInstance().getTrackingServer();
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// visitorID
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setVisitorID(Object arg) {
 		ADMS_Measurement.sharedInstance().setVisitorID(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getVisitorID() {
 		String toReturn = ADMS_Measurement.sharedInstance().getVisitorID();
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// charSet
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setCharSet(Object arg) {
 		ADMS_Measurement.sharedInstance().setCharSet(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getCharSet() {
 		String toReturn = ADMS_Measurement.sharedInstance().getCharSet(); 
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// currencyCode
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setCurrencyCode(Object arg) {
 		ADMS_Measurement.sharedInstance().setCurrencyCode(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getCurrencyCode() {
 		String toReturn = ADMS_Measurement.sharedInstance().getCurrencyCode();
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// ssl
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setSsl(Object arg) {
 		ADMS_Measurement.sharedInstance().setSSL(TiConvert.toBoolean(arg));
 	}
 
 	// purchaseID
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setPurchaseID(Object arg) {
 		ADMS_Measurement.sharedInstance().setPurchaseID(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getPurchaseID() {
 		String toReturn = ADMS_Measurement.sharedInstance().getPurchaseID();
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// transactionID
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setTransactionID(Object arg) {
 		ADMS_Measurement.sharedInstance().setTransactionID(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getTransactionID() {
 		String toReturn = ADMS_Measurement.sharedInstance().getTransactionID();
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// appState
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setAppState(Object arg) {
 		ADMS_Measurement.sharedInstance().setAppState(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getAppState() {
 		String toReturn = ADMS_Measurement.sharedInstance().getAppState();
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// channel
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setChannel(Object arg) {
 		ADMS_Measurement.sharedInstance().setChannel(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getChannel() {
 		String toReturn = ADMS_Measurement.sharedInstance().getChannel();
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// appSection
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setAppSection(Object arg) {
 		ADMS_Measurement.sharedInstance().setAppSection(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getAppSection() {
 		String toReturn = ADMS_Measurement.sharedInstance().getAppSection();
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// campaign
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setCampaign(Object arg) {
 		ADMS_Measurement.sharedInstance().setCampaign(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getCampaign() {
 		String toReturn = ADMS_Measurement.sharedInstance().getCampaign();
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// products
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setProducts(Object arg) {
 		ADMS_Measurement.sharedInstance().setProducts(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getProducts() {
 		String toReturn = ADMS_Measurement.sharedInstance().getProducts();
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// events
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setEvents(Object arg) {
 		ADMS_Measurement.sharedInstance().setEvents(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getEvents() {
 		String toReturn = ADMS_Measurement.sharedInstance().getEvents();
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// geoState
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setGeoState(Object arg) {
 		ADMS_Measurement.sharedInstance().setGeoState(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getGeoState() {
 		String toReturn = ADMS_Measurement.sharedInstance().getGeoState();
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// geoZip
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setGeoZip(Object arg) {
 		ADMS_Measurement.sharedInstance().setGeoZip(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getGeoZip() {
 		String toReturn = ADMS_Measurement.sharedInstance().getGeoZip();
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// persistentContextData
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setPersistentContextData(Object arg) {
 		if (!(arg instanceof HashMap)) {
 			throw new IllegalArgumentException("`persistentContextData` must be a <Dictionary> of key-value pairs");
@@ -560,83 +529,71 @@ public class SessionProxy extends KrollProxy implements KrollProxyListener
 		ADMS_Measurement.sharedInstance().setPersistentContextData(new Hashtable<String, Object>((HashMap) arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public HashMap getPersistentContextData() {
 		return new HashMap<String, Object>(ADMS_Measurement.sharedInstance().getPersistentContextData());
 	}
 
 	// lifecycleSessionTimeout
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setLifecycleSessionTimeout(Object arg) {
 		ADMS_Measurement.sharedInstance().setLifecycleSessionTimeout(TiConvert.toInt(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public int getLifecycleSessionTimeout() {
 		return ADMS_Measurement.sharedInstance().getLifecycleSessionTimeout();
 	}
 
 	// linkTrackVars
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setLinkTrackVars(Object arg) {
 		ADMS_Measurement.sharedInstance().setLinkTrackVars(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getLinkTrackVars() {
 		String toReturn = ADMS_Measurement.sharedInstance().getLinkTrackVars();
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// linkTrackEvents
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setLinkTrackEvents(Object arg) {
 		ADMS_Measurement.sharedInstance().setLinkTrackEvents(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getLinkTrackEvents() {
 		String toReturn = ADMS_Measurement.sharedInstance().getLinkTrackEvents();
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// lightTrackVars
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setLightTrackVars(Object arg) {
 		ADMS_Measurement.sharedInstance().setLightTrackVars(TiConvert.toString(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public Object getLightTrackVars() {
 		String toReturn = ADMS_Measurement.sharedInstance().getLightTrackVars();
 		return Utils.stringOrUndefined(toReturn);
 	}
 
 	// offlineTrackingEnabled
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setOfflineTrackingEnabled(Object arg) {
 		ADMS_Measurement.sharedInstance().setOfflineTrackingEnabled(TiConvert.toBoolean(arg));
 	}
 
 	// offlineHitLimit
-	@Kroll.setProperty
-	@Kroll.method
+	@Kroll.setProperty @Kroll.method
 	public void setOfflineHitLimit(Object arg) {
 		ADMS_Measurement.sharedInstance().setOfflineHitLimit(TiConvert.toInt(arg));
 	}
 
-	@Kroll.getProperty
-	@Kroll.method
+	@Kroll.getProperty @Kroll.method
 	public int getOfflineHitLimit() {
 		return ADMS_Measurement.sharedInstance().getOfflineHitLimit();
 	}
