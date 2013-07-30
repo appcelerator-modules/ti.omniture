@@ -7,7 +7,7 @@ Provides access to the Omniture tracking and analytics service.
 ## Dependencies
 
 This iOS module requires iOS 4.3 or later.
-This Android module Requires Android 2.0 or later.
+This Android module Requires Android 2.3.3 or later.
 
 ## Omniture Resources
 
@@ -33,11 +33,11 @@ The `Omniture` variable is a reference to the Module object.
 If you are upgrading from an earlier version of this module (prior to version 2.0.0) you should be
 aware of the following breaking changes to the API:
 
-* Session properties have changed. See the [iOS Version 2.x to 3.x Migration Guide](http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/ios/index.html#iOS_Version_2x_to_3x_Migration_Guide) and [Android Version 2.x to 3.x Migration Guide](http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/android/index.html#Android_Version_2x_to_3x_Migration_Guide) for a list of SDK property changes that are reflected in the module.
+* Session properties have changed. See the [iOS Version 2.x to 3.x Migration Guide][iOSMigrationGuide] and [Android Version 2.x to 3.x Migration Guide][AndroidMigrationGuide] for a list of SDK property changes that are reflected in the module.
 * `createSession` and `createMediaTracker` have been replaced with `startSession` and `startMediaTracker` respectively.
 * `startMediaTracker` does not require `session` or `player` to be passed to it.
 * On iOS, `playerName` and 'mediaName' are no longer properties of `MediaTracker`. They will be set automatically, `playerName` with "MPMoviePlayer" and `mediaName` with the name of the media file.
-* On Android MediaTracking events will need to be connected to VideoPlayer events manually
+* On Android, MediaTracking events will need to be connected to VideoPlayer events manually.
 * The argument structure and names have changed for the `track` and `trackLink` methods.
 
 ## Methods
@@ -126,4 +126,5 @@ Copyright(c) 2010-2013 by Appcelerator, Inc. All Rights Reserved. Please see the
 [AppMeasurementIOS]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/ios/index.html
 [AppMeasurementAndroid]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/android/index.html
 [Bloodhound]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/ios/index.html#Using_Bloodhound_to_Test_Mobile_Applications
-
+[iOSMigrationGuide]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/ios/index.html#iOS_Version_2x_to_3x_Migration_Guide
+[AndroidMigrationGuide]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/android/index.html#Android_Version_2x_to_3x_Migration_Guide
