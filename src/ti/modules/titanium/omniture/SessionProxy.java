@@ -1,3 +1,9 @@
+/**
+ * Appcelerator Titanium Mobile Modules
+ * Copyright (c) 2010-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Proprietary and Confidential - This source code is not for redistribution
+ */
+
 package ti.modules.titanium.omniture;
 
 import java.lang.reflect.Method;
@@ -15,8 +21,6 @@ import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.titanium.util.TiConvert;
 import org.appcelerator.kroll.common.Log;
-import org.appcelerator.kroll.common.TiConfig;
-
 import android.app.Activity;
 
 import com.adobe.adms.measurement.ADMS_Measurement;
@@ -46,7 +50,6 @@ import com.adobe.adms.measurement.ADMS_Measurement;
 public class SessionProxy extends KrollProxy implements KrollProxyListener 
 {
 	private static final String LCAT = "OmnitureModule";
-	private static final boolean DBG = TiConfig.DEBUG;
 	
 	private static ArrayList<String> numberedKeysInProxy = new ArrayList<String>();
 	

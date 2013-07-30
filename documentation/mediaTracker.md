@@ -4,11 +4,11 @@
 
 An _omniture_ module object which represents an Omniture media tracker.
 
-On iOS _Ti.Omniture.MediaTracker_ automatically tracks [Ti.Media.VideoPlayer][] events, such as start, stop, and pause.
+On iOS, _Ti.Omniture.MediaTracker_ automatically tracks [Ti.Media.VideoPlayer][] events, such as start, stop, and pause.
 
 This prevents you from needing to manually track these events and call the `open`, `play`, `stop`, and `close` methods directly.
 
-On Android there is not automatic tracking, so open, play, stop, and close methods must be called manually. See the examples below and in the example app.
+On Android, there is no automatic tracking, so open, play, stop, and close methods must be called manually. See the examples below and in the example app.
 
 Properties can be set on the _Ti.Omniture.MediaTracker_ object in two ways:
 
