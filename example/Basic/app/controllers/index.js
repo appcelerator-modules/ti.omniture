@@ -119,7 +119,7 @@ Omniture.debugLogging = true;
 // properties can also be set on the session object that is returned by startSession
 var session = Omniture.startSession({
     reportSuiteIDs: "my_rsid",
-    trackingServer: "10.0.0.5:51657",
+    trackingServer: "<< YOUR TRACKING SERVER ADDRESS HERE >>",
     ssl: false
 });
 
