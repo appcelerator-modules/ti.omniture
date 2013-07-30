@@ -13,6 +13,24 @@ Properties and variables can be set on the _Ti.Omniture.Session_ object in two w
 
 * [Omniture Method Documentation][Methods]
 
+## Lifecycle Tracking
+
+### iOS
+The iOS module will automatically handle lifecycle tracking. It can be configured using `setAutoTrackingOptions` seen below.
+
+### Android
+The Android module does not support automatic lifecycle tracking. It must be handled manually by calling `startActivity` and `stopActivity` when [Heavyweight Windows][HeavyweightWindows] are opened and closed respectively.
+
+#### Example
+
+	$.win.addEventListener('open', function() {
+       session.startActivity();
+    });
+    
+    $.win.addEventListener('close', function() {
+       session.stopActivity(); 
+    });
+
 ## Methods
 
 ### <void\> setAutoTrackingOptions(options)
@@ -402,3 +420,4 @@ __Default:__ 1000
 
 
 [Methods]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/ios/index.html#Methods
+[HeavyweightWindows]: https://wiki.appcelerator.org/display/guides/Android+Module+Development+Guide#AndroidModuleDevelopmentGuide-HeavyweightandLightweightWindows
