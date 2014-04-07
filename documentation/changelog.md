@@ -1,5 +1,7 @@
 # Change Log
 <pre>
+v3.0.1  Fixed issue with x86 support [MOD-1704]
+
 v3.0.0  Updated Omniture SDK to v3.1.0 [MOD-1452]
 
 v2.1	Better error handling within track and trackLink, and more graceful data input.
