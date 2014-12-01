@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 3.0.1
+apiversion: 2
+description: Omniture Site Catalyst Reporting Module
+author: Fred Spencer & Jon Alter
+license: Appcelerator Commercial License
+copyright: Copyright (c) 2010-2013 by Appcelerator, Inc.
+
+
+# these should not be edited
+name: omniture
+moduleid: ti.omniture
+guid: 5f64860a-2d93-491b-8ba7-abcda6ffca0e
+platform: android
+minsdk: 3.0.0.GA
