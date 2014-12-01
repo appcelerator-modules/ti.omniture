@@ -1,0 +1,8 @@
+<Alloy>
+	<Window class="container" id="win">
+		<View id="closeView" onClick="onClickClose">
+			<Label id="closeLabel">Close</Label>	
+		</View>
+		<VideoPlayer id="videoPlayer" ns="Ti.Media"/>
+	</Window>
+</Alloy>
