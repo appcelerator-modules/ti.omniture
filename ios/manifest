@@ -4,6 +4,7 @@
 #
 version: 2.0.0
 description: Omniture Site Catalyst Reporting Module 
+architectures: armv7 i386
 author: Jeff Haynie & Jon Alter
 license: Appcelerator Commercial License
 copyright: Copyright (c) 2010-2013 by Appcelerator, Inc.
