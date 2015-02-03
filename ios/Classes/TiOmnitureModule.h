@@ -5,14 +5,14 @@
  */
 
 #import "TiModule.h"
-#import "TiOmnitureSession.h"
-#import "TiOmnitureMediaTracker.h"
+#import "ADBMobile.h"
+#import <CoreLocation/CoreLocation.h>
+#import "TiOmnitureMediaSettings.h"
+#import "TiOmnitureMediaState.h"
+#import "TiOmnitureTargetLocationRequest.h"
 
 @interface TiOmnitureModule : TiModule 
 {
-@private
-    TiOmnitureSession *session;
-    TiOmnitureMediaTracker *mediaTracker;
 }
 
 @end
