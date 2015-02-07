@@ -1,10 +1,8 @@
-//
-//  TiOmnitureTargetLocationRequest.h
-//  omniture
-//
-//  Created by Zsombor Papp on 2/2/15.
-//
-//
+/**
+ * Appcelerator Titanium Mobile Modules
+ * Copyright (c) 2010-2015 by Appcelerator, Inc. All Rights Reserved.
+ * Proprietary and Confidential - This source code is not for redistribution
+ */
 
 #import "TiProxy.h"
 #import "ADBMobile.h"

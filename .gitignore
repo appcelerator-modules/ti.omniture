@@ -1,6 +1,19 @@
-ios/omniture.xcodeproj/project.xcworkspace/xcuserdata/zpapp.xcuserdatad/UserInterfaceState.xcuserstate
-ios/omniture.xcodeproj/project.xcworkspace/xcuserdata/zpapp.xcuserdatad/WorkspaceSettings.xcsettings
-ios/omniture.xcodeproj/xcuserdata/zpapp.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
-ios/omniture.xcodeproj/xcuserdata/zpapp.xcuserdatad/xcschemes/Build & Test.xcscheme
-ios/omniture.xcodeproj/xcuserdata/zpapp.xcuserdatad/xcschemes/omniture.xcscheme
-ios/omniture.xcodeproj/xcuserdata/zpapp.xcuserdatad/xcschemes/xcschememanagement.plist
+build/*
+build
+build.log
+*.class
+*.pyc
+*.pyo
+tmp
+.DS_Store
+.svn
+.svnignore
+Instruments.trace/*
+ios/yuidoc/*
+android/yuidoc/*
+*.jar
+*.so
+*.zip
+*.xccheckout
+ios/omniture.xcodeproj/xcuserdata/*
+ios/omniture.xcodeproj/project.xcworkspace/xcuserdata/*

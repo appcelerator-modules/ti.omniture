@@ -1,10 +1,11 @@
 /**
  * Appcelerator Titanium Mobile Modules
- * Copyright (c) 2010-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2010-2015 by Appcelerator, Inc. All Rights Reserved.
  * Proprietary and Confidential - This source code is not for redistribution
  */
 
 #import "TiOmnitureModule.h"
+#import "Utils.h"
 
 @implementation TiOmnitureModule
 
@@ -13,7 +14,7 @@
 // this is generated for your module, please do not change it
 -(id)moduleGUID
 {
-    return @"5f64860a-2d93-491b-8ba7-abcda6ffca0e";
+    return @"5f64860a-2d93-491b-8ba7-abcda6ffca0f";
 }
 
 // this is generated for your module, please do not change it
@@ -33,32 +34,25 @@ MAKE_SYSTEM_PROP(PRIVACY_STATUS_OPT_IN, ADBMobilePrivacyStatusOptIn);
 MAKE_SYSTEM_PROP(PRIVACY_STATUS_OPT_OUT, ADBMobilePrivacyStatusOptOut);
 MAKE_SYSTEM_PROP(PRIVACY_STATUS_UNKNOWN, ADBMobilePrivacyStatusUnknown);
 
+MAKE_SYSTEM_STR(TARGET_PARAM_ORDER_ID, ADBTargetParameterOrderId);
+MAKE_SYSTEM_STR(TARGET_PARAM_ORDER_TOTAL, ADBTargetParameterOrderTotal);
+MAKE_SYSTEM_STR(TARGET_PARAM_PRODUCT_PURCHASE_ID, ADBTargetParameterProductPurchasedId);
+MAKE_SYSTEM_STR(TARGET_PARAM_CATEGORY_ID, ADBTargetParameterCategoryId);
+MAKE_SYSTEM_STR(TARGET_PARAM_MBOX_3RD_PARTY_ID, ADBTargetParameterMbox3rdPartyId);
+MAKE_SYSTEM_STR(TARGET_PARAM_MBOX_PAGE_VALUE, ADBTargetParameterMboxPageValue);
+MAKE_SYSTEM_STR(TARGET_PARAM_MBOX_PC, ADBTargetParameterMboxPc);
+MAKE_SYSTEM_STR(TARGET_PARAM_MBOX_SESSION_ID, ADBTargetParameterMboxSessionId);
+MAKE_SYSTEM_STR(TARGET_PARAM_MBOX_HOST, ADBTargetParameterMboxHost);
+
 MAKE_SYSTEM_STR(version, [ADBMobile version]);
-MAKE_SYSTEM_PROP(privacyStatus, [ADBMobile privacyStatus]);
 MAKE_SYSTEM_PROP(lifetimeValue, [[ADBMobile lifetimeValue] intValue]);
-MAKE_SYSTEM_STR(userIdentifier, [ADBMobile userIdentifier]);
-MAKE_SYSTEM_NUMBER(debugLogging, NUMBOOL([ADBMobile debugLogging]));
 MAKE_SYSTEM_NUMBER(trackingQueueSize, [NSNumber numberWithUnsignedLong:[ADBMobile trackingGetQueueSize]]);
 
+MAKE_INT_GETTER_SETTER(privacyStatus, setPrivacyStatus, ADBMobile.privacyStatus);
+MAKE_STR_GETTER_SETTER(userIdentifier, setUserIdentifier, ADBMobile.userIdentifier);
+MAKE_BOOL_GETTER_SETTER(debugLogging, setDebugLogging, ADBMobile.debugLogging);
+
 #pragma mark - Public Methods
-
--(void) setPrivacyStatus:(id)newPrivacyStatus
-{
-    ENSURE_SINGLE_ARG(newPrivacyStatus, NSNumber);
-    [ADBMobile setPrivacyStatus:[newPrivacyStatus intValue]];
-}
-
--(void) setUserIdentifier:(id)newUserIdentifier
-{
-    ENSURE_SINGLE_ARG(newUserIdentifier, NSString);
-    [ADBMobile setUserIdentifier:newUserIdentifier];
-}
-
--(void) setDebugLogging:(id)newDebugLogging
-{
-    ENSURE_SINGLE_ARG(newDebugLogging, NSNumber);
-    [ADBMobile setDebugLogging:[newDebugLogging boolValue]];
-}
 
 -(void) keepLifecycleSessionAlive:(id)unused
 {
@@ -165,7 +159,7 @@ MAKE_SYSTEM_NUMBER(trackingQueueSize, [NSNumber numberWithUnsignedLong:[ADBMobil
         data = [params objectAtIndex:1];
     }
     
-    [ADBMobile trackLifetimeValueIncrease:[NSDecimalNumber decimalNumberWithDecimal:[amount decimalValue] data:data]];
+    [ADBMobile trackLifetimeValueIncrease:[NSDecimalNumber decimalNumberWithDecimal:[amount decimalValue]] data:data];
 }
 
 -(void) trackTimedActionStart:(NSArray*)params
@@ -212,6 +206,10 @@ MAKE_SYSTEM_NUMBER(trackingQueueSize, [NSNumber numberWithUnsignedLong:[ADBMobil
     
     [ADBMobile trackTimedActionEnd:action
                              logic:^BOOL(NSTimeInterval inAppDuration, NSTimeInterval totalDuration, NSMutableDictionary *data) {
+                                 if (callback == nil) {
+                                     return YES;
+                                 }
+                                 
                                  NSMutableDictionary *callbackParams = [NSMutableDictionary dictionary];
                                  [callbackParams setObject:[NSNumber numberWithDouble:inAppDuration]
                                                     forKey:@"inAppDuration"];
@@ -225,21 +223,19 @@ MAKE_SYSTEM_NUMBER(trackingQueueSize, [NSNumber numberWithUnsignedLong:[ADBMobil
                                  
                                  id callbackRetVal = [callback call:[NSArray arrayWithObject:callbackParams]
                                                          thisObject:nil];
-                                 if (callbackRetVal) {
+                                 
+                                 if (callbackRetVal != nil) {
                                      return [callbackRetVal boolValue];
                                  } else {
                                      return YES;
                                  }
                              }];
 }
-/**
- * 	@brief Returns whether or not a timed action is in progress
- *  @return a bool value indicating the existence of the given timed action
- */
--(void) trackingTimedActionExists:(id)action
+
+-(NSNumber*) trackTimedActionExists:(id)action
 {
     ENSURE_SINGLE_ARG(action, NSString);
-    [ADBMobile trackingTimedActionExists:action];
+    return NUMBOOL([ADBMobile trackingTimedActionExists:action]);
 }
 
 /**
@@ -316,15 +312,6 @@ MAKE_SYSTEM_NUMBER(trackingQueueSize, [NSNumber numberWithUnsignedLong:[ADBMobil
     return nil;
 }
 
-
-/**
- * 	@brief Opens a media item for tracking.
- *  @param settings a pointer to the configured ADBMediaSettings
- *  @param callback a block pointer to call with an ADBMediaState pointer every second.
- */
-//+ (void) mediaOpenWithSettings:(ADBMediaSettings *)settings
-//                      callback:(void (^)(ADBMediaState *mediaState))callback;
-
 -(void) mediaOpen:(NSArray*)params
 {
     TiOmnitureMediaSettings *mediaSettingsProxy = [params objectAtIndex:0];
@@ -344,6 +331,7 @@ MAKE_SYSTEM_NUMBER(trackingQueueSize, [NSNumber numberWithUnsignedLong:[ADBMobil
                                 }
                         }];
 }
+
 -(void) mediaClose:(id)name
 {
     ENSURE_SINGLE_ARG(name, NSString);
