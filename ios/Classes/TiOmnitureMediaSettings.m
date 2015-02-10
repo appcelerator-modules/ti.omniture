@@ -30,8 +30,8 @@ MAKE_STR_GETTER_SETTER(playerName, setPlayerName, self.adbMediaSettings.playerNa
 MAKE_STR_GETTER_SETTER(playerID, setPlayerID, self.adbMediaSettings.playerID);
 MAKE_STR_GETTER_SETTER(milestones, setMilestones, self.adbMediaSettings.milestones);
 MAKE_STR_GETTER_SETTER(offsetMilestones, setOffsetMilestones, self.adbMediaSettings.offsetMilestones);
-MAKE_UINT_GETTER_SETTER(trackSeconds, setTrackSeconds, self.adbMediaSettings.trackSeconds);
-MAKE_UINT_GETTER_SETTER(completeCloseOffsetThreshold, setCompleteCloseOffsetThreshold, self.adbMediaSettings.completeCloseOffsetThreshold);
+MAKE_ULONG_GETTER_SETTER(trackSeconds, setTrackSeconds, self.adbMediaSettings.trackSeconds);
+MAKE_ULONG_GETTER_SETTER(completeCloseOffsetThreshold, setCompleteCloseOffsetThreshold, self.adbMediaSettings.completeCloseOffsetThreshold);
 
 // Media Ad settings
 MAKE_BOOL_GETTER_SETTER(isMediaAd, setIsMediaAd, self.adbMediaSettings.isMediaAd);

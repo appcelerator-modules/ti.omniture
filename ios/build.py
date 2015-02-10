@@ -60,7 +60,8 @@ def generate_doc(config):
 	except ImportError:
 		import markdown
 	documentation = []
-	for file in os.listdir(docdir):
+	for path_to_file in glob.glob(os.path.join(docdir, '*.md')):
+		file = os.path.basename(path_to_file)
 		if file in ignoreFiles or os.path.isdir(os.path.join(docdir, file)):
 			continue
 		md = open(os.path.join(docdir,file)).read()

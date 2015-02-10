@@ -71,7 +71,7 @@ MAKE_BOOL_GETTER_SETTER(debugLogging, setDebugLogging, ADBMobile.debugLogging);
 }
 
 // TODO: This function must be called before applicationDidFinishLaunching
-// has completed and before any othe rinteractions with the Adobe Mobile
+// has completed and before any other interactions with the Adobe Mobile
 // library have happened. I suspect that this is not possible from JS,
 // so exposing this function is probably not helpful. We'll need to discuss
 // what if anything can be done to provide this feature to Titanium developers.
@@ -282,7 +282,9 @@ MAKE_BOOL_GETTER_SETTER(debugLogging, setDebugLogging, ADBMobile.debugLogging);
                                                                     playerID:playerId];
 
     if (mediaSettings) {
-        return [[[TiOmnitureMediaSettings alloc] initWithMediaSettings:mediaSettings] autorelease];
+        TiOmnitureMediaSettings *proxy = [[[TiOmnitureMediaSettings alloc] initWithMediaSettings:mediaSettings] autorelease];
+        [proxy setValuesForKeysWithDictionary:params];
+        return proxy;
     }
     return nil;
 }
@@ -320,7 +322,7 @@ MAKE_BOOL_GETTER_SETTER(debugLogging, setDebugLogging, ADBMobile.debugLogging);
     KrollCallback *callback = nil;
     
     if (params.count > 1) {
-        [params objectAtIndex:1];
+        callback = [params objectAtIndex:1];
     }
     
     [ADBMobile mediaOpenWithSettings:mediaSettingsProxy.adbMediaSettings

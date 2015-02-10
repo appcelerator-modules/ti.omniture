@@ -61,6 +61,17 @@ ENSURE_SINGLE_ARG(newValue, NSNumber);\
 map = [TiUtils intValue:newValue];\
 }\
 
+#define MAKE_ULONG_GETTER_SETTER(name,setName,map) \
+-(NSNumber*)name\
+{\
+return [NSNumber numberWithUnsignedLong:map];\
+}\
+-(void)setName:(id)newValue \
+{\
+ENSURE_SINGLE_ARG(newValue, NSNumber);\
+map = [TiUtils intValue:newValue];\
+}\
+
 #define MAKE_DATE_GETTER_SETTER(name,setName,map) \
 -(NSDate*)name\
 {\
