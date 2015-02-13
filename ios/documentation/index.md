@@ -40,7 +40,10 @@ match the changes in the underlying native library.
 
 The Ti.Omniture.Session class is no longer used. Instead of creating a Session
 object using the `startSession` function, basic parameters such as tracking
-server address and suite IDs are specified in a configuration file.
+server address and suite IDs are specified in a configuration file called
+ADBMobileConfig.json. Download a pre-configured instance of this file from the
+Adobe Mobile Services web site.
+
 The functions of the Session class have been replaced with functions of
 the module object itself.
 
@@ -210,8 +213,8 @@ Creates a [Ti.Omniture.MediaSettings][] object with the specified properties.
 
 * props (Object): See [Ti.Omniture.MediaSettings][] properties.
 
-TODO: How is this different from createMediaSettings? Does it set isMediaAd
-to true by default? Anything else?
+The difference between createMediaSettings and this function is that this
+function sets isMediaAd to true by default.
 
 ### <void\> mediaOpen(mediaSettings[, callback])
 
