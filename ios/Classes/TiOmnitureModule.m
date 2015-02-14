@@ -59,15 +59,15 @@ MAKE_BOOL_GETTER_SETTER(debugLogging, setDebugLogging, ADBMobile.debugLogging);
     [ADBMobile keepLifecycleSessionAlive];
 }
 
--(void) collectLifecycleData:(id)unused
+-(void) collectLifecycleData:(id)data
 {
-    [ADBMobile collectLifecycleData];
-}
-
--(void) collectLifecycleDataWithAdditionalData:(id)data
-{
-    ENSURE_SINGLE_ARG(data, NSDictionary);
-    [ADBMobile collectLifecycleDataWithAdditionalData:data];
+    ENSURE_SINGLE_ARG_OR_NIL(data, NSDictionary);
+    
+    if (data) {
+        [ADBMobile collectLifecycleDataWithAdditionalData:data];
+    } else {
+        [ADBMobile collectLifecycleData];
+    }
 }
 
 // TODO: This function must be called before applicationDidFinishLaunching
@@ -238,20 +238,46 @@ MAKE_BOOL_GETTER_SETTER(debugLogging, setDebugLogging, ADBMobile.debugLogging);
     return NUMBOOL([ADBMobile trackingTimedActionExists:action]);
 }
 
-/**
- *	@brief Retrieves the analytics tracking identifier
- *	@return an NSString value containing the tracking identifier
- *	@note This method can cause a blocking network call and should not be used from a UI thread.
- */
 -(NSString*) trackingIdentifier
 {
-    // TODO: This looks like a simple property, but the header file
+    // Note: This looks like a simple property, but the header file
     // comment says "This method can cause a blocking network call and should
-    // not be used from a UI thread." Can we leave it up to the JS code to know
-    // how to avoid the UI thread? If not, we'll need to make this an async
-    // call (with callback for result) and force execution into the background
-    // from here.
-    [ADBMobile trackingIdentifier];
+    // not be used from a UI thread." I didn't think we could shift this
+    // responsibility to the user of the module, so I created an async function,
+    // retrieveTrackingId, see below.
+    return [ADBMobile trackingIdentifier];
+}
+
+-(void) retrieveTrackingId:(id)callback
+{
+    ENSURE_SINGLE_ARG(callback, KrollCallback);
+    
+    if (callback) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0), ^{
+            [callback call:[NSArray arrayWithObject:[ADBMobile trackingIdentifier]] thisObject:nil];
+        });
+    }
+}
+
+-(NSString*) visitorMarketingCloudId
+{
+    // Note: This looks like a simple property, but the header file
+    // comment says "This method can cause a blocking network call and should
+    // not be used from a UI thread." I didn't think we could shift this
+    // responsibility to the user of the module, so I created an async function,
+    // retrieveVisitorMarketingCloudID, see below.
+    return [ADBMobile visitorMarketingCloudID];
+}
+
+-(void) retrieveVisitorMarketingCloudID:(id)callback
+{
+    ENSURE_SINGLE_ARG(callback, KrollCallback);
+    
+    if (callback) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0), ^{
+            [callback call:[NSArray arrayWithObject:[ADBMobile visitorMarketingCloudID]] thisObject:nil];
+        });
+    }
 }
 
 -(void) trackingSendQueuedHits:(id)unused
@@ -392,7 +418,8 @@ MAKE_BOOL_GETTER_SETTER(debugLogging, setDebugLogging, ADBMobile.debugLogging);
     NSDictionary* data = nil;
     
     if (params.count > 1) {
-        [params objectAtIndex:1];
+        data = [params objectAtIndex:1];
+        ENSURE_TYPE(data, NSDictionary);
     }
     
     [ADBMobile mediaTrack:name data:data];
@@ -406,7 +433,8 @@ MAKE_BOOL_GETTER_SETTER(debugLogging, setDebugLogging, ADBMobile.debugLogging);
     KrollCallback *callback = nil;
     
     if (params.count > 1) {
-        [params objectAtIndex:1];
+        callback = [params objectAtIndex:1];
+        ENSURE_TYPE(callback, KrollCallback);
     }
     
     [ADBMobile targetLoadRequest:requestProxy.adbTargetLocationRequest
@@ -453,7 +481,6 @@ MAKE_BOOL_GETTER_SETTER(debugLogging, setDebugLogging, ADBMobile.debugLogging);
     ENSURE_TYPE_OR_NIL(orderTotal, NSString);
     ENSURE_TYPE_OR_NIL(productPurchasedId, NSString);
     ENSURE_TYPE_OR_NIL(parameters, NSDictionary);
-    
     
     return [[[TiOmnitureTargetLocationRequest alloc]
              initWithTargetLocationRequest:[ADBMobile targetCreateOrderConfirmRequestWithName:name
@@ -520,11 +547,6 @@ MAKE_BOOL_GETTER_SETTER(debugLogging, setDebugLogging, ADBMobile.debugLogging);
 -(void) audienceReset:(id)unused
 {
     [ADBMobile audienceReset];
-}
-
--(NSString*) visitorMarketingCloudId
-{
-    [ADBMobile visitorMarketingCloudID];
 }
 
 -(void) visitorSyncIdentifiers:(id)identifiers

@@ -28,4 +28,9 @@ MAKE_STR_GETTER_SETTER(defaultContent, setDefaultContent, self.adbTargetLocation
     return self.adbTargetLocationRequest.parameters;
 }
 
+-(void) setParameters:(NSDictionary*)params
+{
+    self.adbTargetLocationRequest.parameters = [NSMutableDictionary dictionaryWithDictionary:params];
+}
+
 @end

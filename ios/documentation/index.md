@@ -106,11 +106,6 @@ keepLifecycleSessionAlive will prevent your app from launching a new session
 the next time it is resumed from background. Only use this if your app
 registers for notifications in the background.
 
-### <void\> collectLifecycleData()
-
-Begins the collection of lifecycle data. This should be the first method
-called upon app launch.
-
 ### <void\> collectLifecycleDataWithAdditionalData(data)
 
 Begins the collection of lifecycle data. This should be the first method
@@ -119,6 +114,21 @@ called upon app launch.
 * data (object): Key/value dictionary containing the context data to be added
 to the lifecycle hit.
 
+### <void\> keepLifecycleSessionAlive()
+
+Sets the preference of lifecycle session keep alive.
+Calling keepLifecycleSessionAlive will prevent your app from launching a new
+session the next time it is resumed from background. Only use this if your app
+registers for notifications in the background
+
+### <void\> collectLifecycleData([contextData])
+
+Begins the collection of lifecycle data. This should be the first method called
+upon app launch.
+
+* data (Object): A dictionary containing the context data to be added to the
+lifecycle hit. Optional.
+
 ### <void\> trackState(state [, data])
 
 Tracks a state with context data. This method increments page views.
@@ -126,7 +136,7 @@ Tracks a state with context data. This method increments page views.
 * state (String): The state value to be tracked.
 * data (Object): Key/value dictionary containing the context data to be tracked.
 
-### <void\> trackActio(action [, data])n
+### <void\> trackAction(action [, data])n
 
 Tracks an action with context data. This method does not increment page views.
 
@@ -169,9 +179,9 @@ If an action with the same name already exists it will be deleted and a new one 
 
 ### <void\> trackTimedActionUpdate(action[, data])
 
-Tracks the start of a timed event
-			   *  @note This method does not send a tracking hit
-			    *  @attention When the timed event is updated the contents of the parameter data will overwrite existing context data keys and append new ones.
+Tracks the start of a timed event. This method does not send a tracking hit.
+When the timed event is updated the contents of the parameter data will 
+overwrite existing context data keys and append new ones.
 
 * action (String): denotes the action name to track.
 * data (Object): Key/value dictionary containing the context data to be tracked.
@@ -184,20 +194,40 @@ Tracks the end of a timed event
 * callback (Function): Optional callback function to be executed when
 this timed event ends. The function can cancel the sending of the hit by
 returning false. The callback function will receive as parameter a single
-object with the following properties
+object with the following properties:
 	* inAppDuration (Number)
 	* totalDuration (Number)
 	* data (Object)
 
-### <void\> trackingTimedActionExists(action)
+### <Boolean\> trackTimedActionExists(action)
 
 Returns whether or not a timed action is in progress.
 
-### <void\> trackingSendQueuedHits
+* action (String): denotes the action name to track.
+
+### <void\> retrieveVisitorMarketingCloudID(callback)
+
+Retrieves the Marketing Cloud Identifier from the Visitor ID Service. Querying
+this propert can cause a blocking network call, therefore this is an async
+function: the result will be delivered to the provided callback function.
+
+* callback (Function): A callback function that will receive the Marketing 
+Cloud Identifier, a String, as its single parameter.
+
+### <void\> retrieveTrackingId(callback)
+
+Retrieves the analytics tracking identifier. Querying this propert can cause a
+blocking network call, therefore this is an async function: the result will
+be delivered to the provided callback function.
+
+* callback (Function): A callback function that will receive the tracking ID,
+a String, as its single parameter.
+
+### <void\> trackingSendQueuedHits()
 
 Force library to send all queued hits regardless of current batch options.
 
-### <void\> trackingClearQueue
+### <void\> trackingClearQueue()
 
 Clears any hits out of the tracking queue and removes them from the database.
 
@@ -213,7 +243,7 @@ Creates a [Ti.Omniture.MediaSettings][] object with the specified properties.
 
 * props (Object): See [Ti.Omniture.MediaSettings][] properties.
 
-The difference between createMediaSettings and this function is that this
+The difference between `createMediaSettings` and this function is that this
 function sets isMediaAd to true by default.
 
 ### <void\> mediaOpen(mediaSettings[, callback])
@@ -231,12 +261,98 @@ Closes a media item.
 
 * name (String): Name of the media item.
 
+### <void\> mediaPlay(name, offset)
+
+Begins tracking a media item.
+
+* name (String): Name of media item.
+* offset (Number): The point that the media items is being played from (in seconds).
+
+### <void\> mediaComplete:(name, offset)
+
+Artificially completes a media item.
+
+* name (String): Name of media item.
+* offset (Number): The point that the media items is when `mediaComplete` is called (in seconds).
+
+### <void\> mediaStop:(name, offset)
+
+Notifies the media module that the media item has been paused or stopped.
+
+* name (String): Name of media item.
+* offset (Number): The point that the media items is when the media item was stopped (in seconds).
+
+### <void\> mediaClick:(name, offset)
+
+Notifies the media module that the media item has been clicked.
+
+* name (String): Name of media item.
+* offset (Number): The point that the media items is when the media item was clicked (in seconds).
+
+### <void\> mediaTrack:(name[, contextData])
+
+Sends a track event with the current media state
+
+* name (String): Name of media item.
+* contextData (Object): Context data to track with this media action.
+
+### <void\> targetLoadRequest(request, callback)
+
+Processes a Target service request.
+
+* request ([Ti.Omniture.TargetLocationRequest][]): The target request created with the `createTargetLocationRequest` or `createTargetOrderConfirmRequest` function.
+* callback (Function): The function to call with a response string parameter
+upon completion of the service request.
+
+### <TiOmnitureTargetLocationRequest\> createTargetLocationRequest(params)
+
+Creates a [Ti.Omniture.TargetLocationRequest][] object.
+
+* params (Object): A dictionary with the following parameters:
+    * name (String)
+    * defaultContent (String)
+    * parameters (Object): a dictionary of key-value pairs that will be added to the request
+
+### <TiOmnitureTargetLocationRequest\> createTargetOrderConfirmRequest(params)
+
+Creates a [Ti.Omniture.TargetLocationRequest][] object.
+
+* params (Object): A dictionary with the following parameters:
+    * name (String)
+    * orderId (String)
+    * orderTotal (String)
+    * productPurchaseId (String)
+    * parameters (Object): a dictionary of key-value pairs that will be added to the request.
+
+
+### <void\> targetClearCookies()
+
+Clears target cookies from shared cookie storage.
+
+### <void\> setAudienceIds(dpid, dpuuid)
+
+Sets the DPID and DPUUID.
+
+### <void\> audienceSignalWithData(data[, callback])
+
+Processes an Audience Manager service request.
+
+* data (Object)
+* callback (Function): Function to call with a response dictionary parameter
+upon completion of the service request.
+
+### <void\> audienceReset()
+
+Resets audience manager UUID and purges current visitor profile.
+
+### <void\> visitorSyncIdentifiers(identifiers)
+
+Synchronizes the provided identifiers to the visitor id service
+
+* identifiers (Object): A dictionary containing identifiers, with the keys
+being the id types and the values being the correlating identifiers
+
 ## Properties
-
-### trackingIdentifier : String
-
-Retrieves the analytics tracking identifier. Querying this propert can cause a
-blocking network call and should not be used from a UI thread.
 
 ### version : String
 
@@ -257,6 +373,18 @@ The number of hits currently in the tracking queue.
 ### privacyStatus : Number
 
 The privacy status.
+
+### audienceVisitorProfile : Object
+
+The visitor's profile.
+
+### audienceDpid: String
+
+A string containing the DPID value.
+
+### audienceDpuuid: String
+
+A string containing the DPUUID value.
 
 ### PRIVACY_STATUS_OPT_IN : Number
 
@@ -335,3 +463,4 @@ Copyright(c) 2010-2015 by Appcelerator, Inc. All Rights Reserved. Please see the
 [Bloodhound]: https://marketing.adobe.com/resources/help/en_US/mobile/ios/bloodhound.html
 [Ti.Omniture.MediaSettings]: mediaSettings.html
 [Ti.Omniture.MediaState]: mediaState.html
+[Ti.Omniture.TargetLocationRequest]: targetLocationRequest.html
