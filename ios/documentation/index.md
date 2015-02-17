@@ -99,28 +99,6 @@ becomes this:
 
 ## Methods
 
-### <void\> keepLifecycleSessionAlive()
-
-Sets the preference of lifecycle session keep alive. Calling
-keepLifecycleSessionAlive will prevent your app from launching a new session
-the next time it is resumed from background. Only use this if your app
-registers for notifications in the background.
-
-### <void\> collectLifecycleDataWithAdditionalData(data)
-
-Begins the collection of lifecycle data. This should be the first method
-called upon app launch.
-
-* data (object): Key/value dictionary containing the context data to be added
-to the lifecycle hit.
-
-### <void\> keepLifecycleSessionAlive()
-
-Sets the preference of lifecycle session keep alive.
-Calling keepLifecycleSessionAlive will prevent your app from launching a new
-session the next time it is resumed from background. Only use this if your app
-registers for notifications in the background
-
 ### <void\> collectLifecycleData([contextData])
 
 Begins the collection of lifecycle data. This should be the first method called
@@ -208,7 +186,7 @@ Returns whether or not a timed action is in progress.
 ### <void\> retrieveVisitorMarketingCloudID(callback)
 
 Retrieves the Marketing Cloud Identifier from the Visitor ID Service. Querying
-this propert can cause a blocking network call, therefore this is an async
+this property can cause a blocking network call, therefore this is an async
 function: the result will be delivered to the provided callback function.
 
 * callback (Function): A callback function that will receive the Marketing 
@@ -216,7 +194,7 @@ Cloud Identifier, a String, as its single parameter.
 
 ### <void\> retrieveTrackingId(callback)
 
-Retrieves the analytics tracking identifier. Querying this propert can cause a
+Retrieves the analytics tracking identifier. Querying this property can cause a
 blocking network call, therefore this is an async function: the result will
 be delivered to the provided callback function.
 
@@ -268,28 +246,28 @@ Begins tracking a media item.
 * name (String): Name of media item.
 * offset (Number): The point that the media items is being played from (in seconds).
 
-### <void\> mediaComplete:(name, offset)
+### <void\> mediaComplete(name, offset)
 
 Artificially completes a media item.
 
 * name (String): Name of media item.
 * offset (Number): The point that the media items is when `mediaComplete` is called (in seconds).
 
-### <void\> mediaStop:(name, offset)
+### <void\> mediaStop(name, offset)
 
 Notifies the media module that the media item has been paused or stopped.
 
 * name (String): Name of media item.
 * offset (Number): The point that the media items is when the media item was stopped (in seconds).
 
-### <void\> mediaClick:(name, offset)
+### <void\> mediaClick(name, offset)
 
 Notifies the media module that the media item has been clicked.
 
 * name (String): Name of media item.
 * offset (Number): The point that the media items is when the media item was clicked (in seconds).
 
-### <void\> mediaTrack:(name[, contextData])
+### <void\> mediaTrack(name[, contextData])
 
 Sends a track event with the current media state
 
