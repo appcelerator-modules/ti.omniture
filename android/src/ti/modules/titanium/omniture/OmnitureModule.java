@@ -9,6 +9,7 @@ import org.appcelerator.kroll.KrollFunction;
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.common.Log;
+import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.titanium.util.TiConvert;
 
 import android.location.Location;
@@ -35,84 +36,115 @@ public class OmnitureModule
 	public OmnitureModule() {
 		super();
 
-		Config.setContext(getActivity().getApplicationContext());
+		Config.setContext(TiApplication.getInstance());
 		Log.d(LCAT, "OmnitureModule Loaded");
 	}
 
+	private HashMap<String, Object> convert(
+			@SuppressWarnings("rawtypes") HashMap data
+	) {
+		HashMap<String, Object> result = new HashMap<String, Object>();
+
+		for (Object key: data.keySet()) {
+			if (key instanceof String) {
+				result.put((String)key, data.get(key));
+			}
+		}
+		return result;
+	}
+	
 	@Kroll.method
 	public void keepLifecycleSessionAlive() {
 		// iOS only?
 	}
 
 	@Kroll.method
-	public void collectLifecycleData(HashMap<String, Object> contextData) {
+	public void collectLifecycleData(
+			@SuppressWarnings("rawtypes") HashMap contextData
+	) {
 		if (contextData == null) {
 			Config.collectLifecycleData(getActivity());
 		} else {
-			Config.collectLifecycleData(getActivity(), contextData);
+			Config.collectLifecycleData(getActivity(), convert(contextData));
 		}
 	}
 
 	@Kroll.method
-	public void trackState(String state, HashMap<String, Object> contextData) {
-		Analytics.trackState(state, contextData);
+	public void trackState(
+			String state,
+			@SuppressWarnings("rawtypes")
+			@Kroll.argument(optional=true) HashMap contextData
+	) {
+		Analytics.trackState(state, convert(contextData));
 	}
 
 	@Kroll.method
-	public void trackAction(String state, HashMap<String, Object> contextData) {
-		Analytics.trackAction(state, contextData);
+	public void trackAction(
+			String state,
+			@SuppressWarnings("rawtypes")
+			@Kroll.argument(optional=true) HashMap contextData
+	) {
+		Analytics.trackAction(state, convert(contextData));
 	}
 	
 	@Kroll.method
 	public void trackActionFromBackground(
 			String state,
-			HashMap<String, Object> contextData
+			@SuppressWarnings("rawtypes")
+			@Kroll.argument(optional=true) HashMap contextData
 	) {
 		// NOTE: Not a type; the Android version of the native library doesn't
 		// have a 'trackActionFromBackground' method. This is here to provide
 		// parity with iOS.
-		Analytics.trackAction(state, contextData);
+		Analytics.trackAction(state, convert(contextData));
 	}
 
 	@Kroll.method
 	public void trackLocation(
 					float latitude,
 					float longitude,
-					HashMap<String, Object> contextData
+					@SuppressWarnings("rawtypes")
+					@Kroll.argument(optional=true) HashMap contextData
 	) {
 		Location loc = new Location("ti.omniture");
 		loc.setLatitude(latitude);
 		loc.setLongitude(longitude);
-		Analytics.trackLocation(loc, contextData);
+		Analytics.trackLocation(loc, convert(contextData));
 	}
 
 	@Kroll.method
 	public void trackLifetimeValueIncrease(
 				float amount,
-				HashMap<String, Object> contextData) {
-		Analytics.trackLifetimeValueIncrease(BigDecimal.valueOf(amount), contextData);
+				@SuppressWarnings("rawtypes")
+				@Kroll.argument(optional=true) HashMap contextData
+	) {
+		Analytics.trackLifetimeValueIncrease(
+				BigDecimal.valueOf(amount),
+				convert(contextData));
 	}
 
 	@Kroll.method
 	public void trackTimedActionStart(
 					String action,
-					HashMap<String, Object> contextData
+					@SuppressWarnings("rawtypes")
+					@Kroll.argument(optional=true) HashMap contextData
 	) {
-		Analytics.trackTimedActionStart(action, contextData);
+		Analytics.trackTimedActionStart(action, convert(contextData));
 	}
 
 	@Kroll.method
 	public void trackTimedActionUpdate(
 			String action,
-			HashMap<String, Object> contextData
+			@SuppressWarnings("rawtypes")
+			@Kroll.argument(optional=true) HashMap contextData
 	) {
-		Analytics.trackTimedActionUpdate(action, contextData);
+		Analytics.trackTimedActionUpdate(action, convert(contextData));
 	}
 
 	@Kroll.method
 	public void trackTimedActionEnd(
 			String action,
-			final KrollFunction callback
+			@Kroll.argument(optional=true) final KrollFunction callback
 	) {
 		Analytics.trackTimedActionEnd(
 				action,
@@ -133,10 +165,14 @@ public class OmnitureModule
 						callbackParams.put("inAppDuration", inAppDuration);
 						callbackParams.put("totalDuration", totalDuration);
 						callbackParams.put("data", data);
-						return TiConvert.toBoolean(
-								callback.call(
-										getKrollObject(),
-										callbackParams));
+						
+						Object callbackResult = callback.call(
+													getKrollObject(),
+													callbackParams);
+						if (callbackResult == null) {
+							return false;
+						}
+						return TiConvert.toBoolean(callbackResult);
 					}
 				}
 		);
@@ -149,10 +185,6 @@ public class OmnitureModule
 
 	@Kroll.method
 	public void retrieveVisitorMarketingCloudID(KrollFunction callback) {
-		if (callback == null) {
-			return;
-		}
-
 		Object[] callbackParams = new Object[1];
 		callbackParams[0] = Visitor.getMarketingCloudId();
 		callback.callAsync(getKrollObject(), callbackParams);
@@ -160,10 +192,6 @@ public class OmnitureModule
 
 	@Kroll.method
 	public void retrieveTrackingId(KrollFunction callback) {
-		if (callback == null) {
-			return;
-		}
-
 		Object[] callbackParams = new Object[1];
 		callbackParams[0] = Analytics.getTrackingIdentifier();
 		callback.callAsync(getKrollObject(), callbackParams);
@@ -181,14 +209,14 @@ public class OmnitureModule
 	
 	@Kroll.method
 	public MediaSettingsProxy createMediaSettings(
-			HashMap<String, Object> args
+			@SuppressWarnings("rawtypes") HashMap props
 	) {
 		MediaSettings settings =
 				Media.settingsWith(
-						(String)args.get("name"),
-						TiConvert.toDouble(args.get("length")),
-						(String)args.get("playerName"),
-						(String)args.get("playerID"));
+						(String)props.get("name"),
+						TiConvert.toDouble(props.get("length")),
+						(String)props.get("playerName"),
+						(String)props.get("playerID"));
 		
 		MediaSettingsProxy proxy = new MediaSettingsProxy(settings);
 		// TODO: Will need to copy other parameters from args to proxy.
@@ -197,17 +225,17 @@ public class OmnitureModule
 
 	@Kroll.method
 	public MediaSettingsProxy createMediaAdSettings(
-			HashMap<String, Object> args
+			@SuppressWarnings("rawtypes") HashMap props
 	) {
 		MediaSettings settings =
 				Media.adSettingsWith(
-						(String)args.get("name"),
-						TiConvert.toDouble(args.get("length")),
-						(String)args.get("playerName"),
-						(String)args.get("parentName"),
-						(String)args.get("parentPod"),
-						TiConvert.toDouble(args.get("parentPod")),
-						(String)args.get("CPM")
+						(String)props.get("name"),
+						TiConvert.toDouble(props.get("length")),
+						(String)props.get("playerName"),
+						(String)props.get("parentName"),
+						(String)props.get("parentPod"),
+						TiConvert.toDouble(props.get("parentPod")),
+						(String)props.get("CPM")
 						);
 		
 		MediaSettingsProxy proxy = new MediaSettingsProxy(settings);
@@ -218,7 +246,7 @@ public class OmnitureModule
 	@Kroll.method
 	public void mediaOpen(
 				MediaSettingsProxy mediaSettingsProxy, 
-				final KrollFunction callback
+				@Kroll.argument(optional=true) final KrollFunction callback
 	) {
 		Media.open(mediaSettingsProxy.getSettings(), new MediaCallback<MediaState>() {
 			@Override
@@ -259,8 +287,12 @@ public class OmnitureModule
     }
 
 	@Kroll.method
-	public void mediaTrack(String name, HashMap<String, Object> contextData) {
-		Media.track(name, contextData);
+	public void mediaTrack(
+			String name, 
+			@SuppressWarnings("rawtypes")
+			@Kroll.argument(optional=true) HashMap contextData
+	) {
+		Media.track(name, convert(contextData));
     }
 	
 	@Kroll.method
@@ -286,28 +318,35 @@ public class OmnitureModule
 
 	@Kroll.method
 	public TargetLocationRequestProxy createTargetLocationRequest(
-											HashMap<String, Object> params
+								@SuppressWarnings("rawtypes") HashMap props
 	) {
-		return new TargetLocationRequestProxy(
-				Target.createRequest(
-						(String)params.get("name"), 
-						(String)params.get("defaultContent"), 
-						(HashMap<String, Object>)params.get("parameters"))
+		TargetLocationRequestProxy proxy =
+				new TargetLocationRequestProxy(
+					Target.createRequest(
+						(String)props.get("name"), 
+						(String)props.get("defaultContent"), 
+						(HashMap<String, Object>)props.get("parameters"))
 			);
+		// TODO: Will need to copy other parameters from args to proxy.
+		return proxy;
 	}
 
 	@Kroll.method
 	public TargetLocationRequestProxy createTargetOrderConfirmRequest(
-											HashMap<String, Object> params
+								@SuppressWarnings("rawtypes") HashMap props
 	) {
-		return new TargetLocationRequestProxy(
-				Target.createOrderConfirmRequest(
-						(String)params.get("name"), 
-						(String)params.get("orderId"), 
-						(String)params.get("orderTotal"), 
-						(String)params.get("productPurchasedId"), 
-						(HashMap<String, Object>)params.get("parameters"))
+		TargetLocationRequestProxy proxy =
+				new TargetLocationRequestProxy(
+					Target.createOrderConfirmRequest(
+						(String)props.get("name"), 
+						(String)props.get("orderId"), 
+						(String)props.get("orderTotal"), 
+						(String)props.get("productPurchasedId"), 
+						(HashMap<String, Object>)props.get("parameters"))
 			);
+	
+		// TODO: Will need to copy other parameters from args to proxy.
+		return proxy;
 	}
 
 	@Kroll.method
@@ -322,11 +361,11 @@ public class OmnitureModule
 
 	@Kroll.method
 	public void audienceSignalWithData(
-			HashMap<String, Object> data,
-			final KrollFunction callback
+			@SuppressWarnings("rawtypes") HashMap data,
+			@Kroll.argument(optional=true) final KrollFunction callback
 	) {
 		AudienceManager.signalWithData(
-				data,
+				convert(data),
 				new AudienceManagerCallback<Map<String,Object>>() {
 					@Override
 					public void call(Map<String, Object> response) {
@@ -344,13 +383,15 @@ public class OmnitureModule
 	}
 
 	@Kroll.method
-	public void visitorSyncIdentifiers(HashMap<String, Object>identifiers) {
+	public void visitorSyncIdentifiers(
+			@SuppressWarnings("rawtypes") HashMap identifiers
+	) {
 		HashMap<String, String> nativeIds = new HashMap<String, String>();
 		
-		for(String key: identifiers.keySet()) {
+		for(Object key: identifiers.keySet()) {
 			Object value = identifiers.get(key);
-			if (value instanceof String) {
-				nativeIds.put(key, (String)value);
+			if (key instanceof String && value instanceof String) {
+				nativeIds.put((String)key, (String)value);
 			}
 		}
 		Visitor.syncIdentifiers(nativeIds);
