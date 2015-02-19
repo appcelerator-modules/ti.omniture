@@ -64,7 +64,7 @@ considered complete, the default is 1.
 
 Indicates if the media item is an ad or not.
 
-### parentPodPosition : Boolean
+### parentPodPosition : Number
 
 The position within the pod where the ad is played.
 

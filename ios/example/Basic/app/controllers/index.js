@@ -1,5 +1,5 @@
 function Log(text) {
-	$.textLog.value = text + '\n' + $.textLog.value;
+	$.textLog.value = $.textLog.value + '\n' + text;
 	Ti.API.info(text);
 }
 
@@ -115,6 +115,79 @@ var rows = [
 		title: 'Media Tracker',
 		onClick: function(){
 			Alloy.createController('mediaTracker').getView().open();
+		}
+	},
+	{
+		title: 'Retrieve Tracking ID',
+		onClick: function() {
+			// This is an async function because it can cause a blocking network call.
+			Omniture.retrieveTrackingId(function(trackingId) {
+				Log('Tracking ID:' + trackingId);
+			});
+		}
+	},
+	{
+		title: 'Visitor profile',
+		onClick: function() {
+			if (Omniture.audienceVisitorProfile) {
+				Object.keys(Omniture.audienceVisitorProfile).forEach(
+					function(key) {
+						Log('audienceVisitorProfile[' + key + ']: ' +
+										Omniture.audienceVisitorProfile[key]);
+				});
+			} else {
+				Log('audienceVisitorProfile is null');
+			}
+		}
+	},
+	{
+		title: 'Tracking Queue Size',
+		onClick: function() {
+			Log('Tracking queue size: ' + Omniture.trackingQueueSize);
+		}
+	},
+	{
+		title: 'Send Queued Hits',
+		onClick: function() {
+			Omniture.trackingSendQueuedHits();
+		}
+	},
+	{
+		title: 'Clear Tracking Queue',
+		onClick: function() {
+			Omniture.trackingClearQueue();
+		}
+	},
+	{
+		title: 'Timed Event',
+		onClick: function() {
+			Omniture.trackTimedActionStart('timedActionOne', {
+				data1: 'value1',
+				data2: 'value2'
+			});
+			setTimeout(function() {
+				Log('Timed Action One exists: ' + // Should say 'true'
+							Omniture.trackTimedActionExists('timedActionOne'));
+				Log('Timed Action Two exists: ' + // Should say 'false'
+							Omniture.trackTimedActionExists('timedActionTwo'));
+			}, 200);
+			setTimeout(function() {
+				Omniture.trackTimedActionEnd('timedActionOne', function(e) {
+					Log('timedActionOne inAppDuration: ' + e.inAppDuration);
+					Log('timedActionOne totalDuration: ' + e.totalDuration);
+					if (e.data) {
+						Object.keys(e.data).forEach(function(key) {
+							Log('timedActionOne data[' + key + ']: ' +
+																e.data[key]);
+						});
+					}
+					return true;
+				});
+				Log('Timed Action One exists: ' + // Should say 'false'
+							Omniture.trackTimedActionExists('timedActionOne'));
+			
+			}, 1000);
+
 		}
 	}
 ];

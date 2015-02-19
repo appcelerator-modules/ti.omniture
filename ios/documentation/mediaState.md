@@ -48,9 +48,13 @@ The total time played so far in seconds.
 
 The amount of time played since the last track event occurred in seconds.
 
+iOS only.
+
 ### timestamp : Number
 
 The number of seconds since 1970 when this media state was created.
+
+iOS only.
 
 ### openTime : Date
 
@@ -87,3 +91,5 @@ The current segment.
 ### eventType : Number
 
 The current event type.
+
+iOS only.
