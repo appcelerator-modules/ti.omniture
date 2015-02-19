@@ -219,7 +219,9 @@ public class OmnitureModule
 						(String)props.get("playerID"));
 		
 		MediaSettingsProxy proxy = new MediaSettingsProxy(settings);
-		// TODO: Will need to copy other parameters from args to proxy.
+
+		proxy.addProps(props);
+		
 		return proxy;
 	}
 
@@ -239,7 +241,9 @@ public class OmnitureModule
 						);
 		
 		MediaSettingsProxy proxy = new MediaSettingsProxy(settings);
-		// TODO: Will need to copy other parameters from args to proxy.
+		
+		proxy.addProps(props);
+
 		return proxy;
 	}
 
@@ -326,8 +330,7 @@ public class OmnitureModule
 						(String)props.get("name"), 
 						(String)props.get("defaultContent"), 
 						(HashMap<String, Object>)props.get("parameters"))
-			);
-		// TODO: Will need to copy other parameters from args to proxy.
+				);
 		return proxy;
 	}
 
@@ -343,9 +346,14 @@ public class OmnitureModule
 						(String)props.get("orderTotal"), 
 						(String)props.get("productPurchasedId"), 
 						(HashMap<String, Object>)props.get("parameters"))
-			);
+				);
 	
-		// TODO: Will need to copy other parameters from args to proxy.
+		Object value;
+		
+		value = props.get("defaultContent");
+		if (value != null) {
+			proxy.setDefaultContent(TiConvert.toString(value));
+		}
 		return proxy;
 	}
 
