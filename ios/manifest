@@ -2,16 +2,18 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 2.0.0
+version: 3.0.0
+apiversion: 2
+architectures: armv7 arm64 i386 x86_64
 description: Omniture Site Catalyst Reporting Module 
-author: Jeff Haynie & Jon Alter
+author: Jeff Haynie & Jon Alter & Zsombor Papp
 license: Appcelerator Commercial License
-copyright: Copyright (c) 2010-2013 by Appcelerator, Inc.
+copyright: Copyright (c) 2010-2015 by Appcelerator, Inc.
 
 
 # these should not be edited
 name: omniture
 moduleid: ti.omniture
-guid: 5f64860a-2d93-491b-8ba7-abcda6ffca0e
+guid: 5f64860a-2d93-491b-8ba7-abcda6ffca0f
 platform: iphone
 minsdk: 3.0.0.GA

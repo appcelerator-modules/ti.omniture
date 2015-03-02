@@ -1,47 +1,85 @@
 /**
  * Appcelerator Titanium Mobile Modules
- * Copyright (c) 2010-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2010-2015 by Appcelerator, Inc. All Rights Reserved.
  * Proprietary and Confidential - This source code is not for redistribution
  */
 
-// MAKE_OBJ_GETTER_SETTER(name, setName, type, className)
-#define MAKE_OBJ_GETTER_SETTER(name, setName, type, className) \
--(id)name \
-{ \
-    return [[className sharedInstance] name]; \
-} \
--(void)setName:(id)args \
-{ \
-    ENSURE_SINGLE_ARG(args, type); \
-    [[className sharedInstance] setName:args]; \
-} \
+#import "TiUtils.h"
 
-// MAKE_INT_GETTER_SETTER(name, setName, className)
-#define MAKE_INT_GETTER_SETTER(name, setName, className) \
-MAKE_SYSTEM_PROP(name, [[className sharedInstance] name]); \
--(void)setName:(id)args \
-{ \
-    ENSURE_SINGLE_ARG(args, NSNumber); \
-    [[className sharedInstance] setName:[TiUtils intValue:args]]; \
-} \
+#define MAKE_STR_GETTER_SETTER(name,setName,map) \
+-(NSString*)name\
+{\
+return (NSString*)map;\
+}\
+-(void)setName:(id)newValue \
+{\
+ENSURE_SINGLE_ARG(newValue, NSString);\
+map = (NSString*)newValue;\
+}\
 
-// MAKE_BOOL_GETTER_SETTER(name, setName, className)
-#define MAKE_BOOL_GETTER_SETTER(name, setName, className) \
-MAKE_SYSTEM_NUMBER(name, NUMBOOL([[className sharedInstance] name])); \
--(void)setName:(id)args \
-{ \
-    ENSURE_SINGLE_ARG(args, NSNumber); \
-    [[className sharedInstance] setName:[TiUtils boolValue:args]]; \
-} \
+#define MAKE_BOOL_GETTER_SETTER(name,setName,map) \
+-(NSNumber*)name\
+{\
+return NUMBOOL(map);\
+}\
+-(void)setName:(id)newValue \
+{\
+ENSURE_SINGLE_ARG(newValue, NSNumber);\
+map = [TiUtils boolValue:newValue];\
+}\
 
-// MAKE_DBL_GETTER_SETTER(name, setName, className)
-#define MAKE_DBL_GETTER_SETTER(name, setName, className) \
-MAKE_SYSTEM_PROP_DBL(name, [[className sharedInstance] name]); \
--(void)setName:(id)args \
-{ \
-    ENSURE_SINGLE_ARG(args, NSNumber); \
-    [[className sharedInstance] setName:[TiUtils doubleValue:args]]; \
-} \
+#define MAKE_DBL_GETTER_SETTER(name,setName,map) \
+-(NSNumber*)name\
+{\
+return [NSNumber numberWithDouble:map];\
+}\
+-(void)setName:(id)newValue \
+{\
+ENSURE_SINGLE_ARG(newValue, NSNumber);\
+map = [TiUtils doubleValue:newValue];\
+}\
 
-// MAKE_STR_GETTER_SETTER(name, setName, className)
-#define MAKE_STR_GETTER_SETTER(name, setName, className) MAKE_OBJ_GETTER_SETTER(name, setName, NSString, className)
+#define MAKE_INT_GETTER_SETTER(name,setName,map) \
+-(NSNumber*)name\
+{\
+return [NSNumber numberWithInt:map];\
+}\
+-(void)setName:(id)newValue \
+{\
+ENSURE_SINGLE_ARG(newValue, NSNumber);\
+map = [TiUtils intValue:newValue];\
+}\
+
+#define MAKE_UINT_GETTER_SETTER(name,setName,map) \
+-(NSNumber*)name\
+{\
+return [NSNumber numberWithUnsignedInt:map];\
+}\
+-(void)setName:(id)newValue \
+{\
+ENSURE_SINGLE_ARG(newValue, NSNumber);\
+map = [TiUtils intValue:newValue];\
+}\
+
+#define MAKE_ULONG_GETTER_SETTER(name,setName,map) \
+-(NSNumber*)name\
+{\
+return [NSNumber numberWithUnsignedLong:map];\
+}\
+-(void)setName:(id)newValue \
+{\
+ENSURE_SINGLE_ARG(newValue, NSNumber);\
+map = [TiUtils intValue:newValue];\
+}\
+
+#define MAKE_DATE_GETTER_SETTER(name,setName,map) \
+-(NSDate*)name\
+{\
+return (NSDate*)map;\
+}\
+-(void)setName:(id)newValue \
+{\
+ENSURE_SINGLE_ARG(newValue, NSDate);\
+map = newValue;\
+}\
+

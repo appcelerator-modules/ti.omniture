@@ -4,15 +4,13 @@
  * Proprietary and Confidential - This source code is not for redistribution
  */
 
-#import "TiModule.h"
+#import "TiProxy.h"
 #import "ADBMobile.h"
-#import <CoreLocation/CoreLocation.h>
-#import "TiOmnitureMediaSettings.h"
-#import "TiOmnitureMediaState.h"
-#import "TiOmnitureTargetLocationRequest.h"
 
-@interface TiOmnitureModule : TiModule 
-{
-}
+@interface TiOmnitureMediaState : TiProxy
+
+@property(retain,nonatomic,readonly) ADBMediaState *adbMediaState;
+
+-(TiOmnitureMediaState*)initWithMediaState:(ADBMediaState*)mediaState;
 
 @end

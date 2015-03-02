@@ -6,13 +6,15 @@ Provides access to the Omniture tracking and analytics service.
 
 ## Dependencies
 
-This iOS module requires iOS 4.3 or later.
+This iOS module requires iOS 6.0 or later.
 This Android module Requires Android 2.3.3 or later.
 
 ## Omniture Resources
 
-* [AppMeasurement 3.x for iOS][AppMeasurementIOS]
-* [AppMeasurement 3.x for Android][AppMeasurementAndroid]
+* [Native Documentation for iOS][iOSNativeDocumentation]
+* [Native Documentation for Android][AndroidNativeDocumentation]
+* [Native Migration Guide 4.x for iOS][iOSMigrationGuide]
+* [Native Migration Guide 4.x for Android][AndroidMigrationGuide]
 * Test Mobile Applications using [Bloodhound][Bloodhound]
 
 ## Getting Started
@@ -30,76 +32,385 @@ The `Omniture` variable is a reference to the Module object.
 
 ## Breaking Changes
 
-If you are upgrading from an earlier version of this module (prior to version 2.0.0) you should be
-aware of the following breaking changes to the API:
+If you are upgrading from an earlier version of this module (prior to version
+3.0.0) you should be aware that API of the module changed substantially to
+match the changes in the underlying native library.
 
-* Session properties have changed. See the [iOS Version 2.x to 3.x Migration Guide][iOSMigrationGuide] and [Android Version 2.x to 3.x Migration Guide][AndroidMigrationGuide] for a list of SDK property changes that are reflected in the module.
-* `createSession` and `createMediaTracker` have been replaced with `startSession` and `startMediaTracker` respectively.
-* `startMediaTracker` does not require `session` or `player` to be passed to it.
-* On iOS, `playerName` and 'mediaName' are no longer properties of `MediaTracker`. They will be set automatically, `playerName` with "MPMoviePlayer" and `mediaName` with the name of the media file.
-* On Android, MediaTracking events will need to be connected to VideoPlayer events manually.
-* The argument structure and names have changed for the `track` and `trackLink` methods.
+### Sessions and Basic Functions
+
+The Ti.Omniture.Session class is no longer used. Instead of creating a Session
+object using the `startSession` function, basic parameters such as tracking
+server address and suite IDs are specified in a configuration file called
+ADBMobileConfig.json. Download a pre-configured instance of this file from the
+Adobe Mobile Services web site.
+
+The functions of the Session class have been replaced with functions of
+the module object itself.
+
+The name of many functions has changed to match the native library. Also,
+the way parameters are provided has changed to allow for a more concise
+coding style.
+
+For example, this:
+
+		session.trackAppState({
+					appState: "state1",
+					contextData: {
+							key: "value"
+					}
+		});
+
+will become this:
+
+		Omniture.trackState('state1', { key: 'value' });
+
+### Media Tracker
+
+The Ti.Omniture.MediaTracker class is no longer used. Instead of creating a
+MediaTracker object using the `startMediaTracker` function, use the
+`createMediaSettings` function to create a [Ti.Omniture.MediaSettings][] object
+and pass it to the `mediaOpen` function.
+
+For example, this:
+
+		var mediaTracker = Omniture.startMediaTracker({
+			trackMilestones: "25,50,75",
+			contextDataMapping: {
+				"a.media.name": "eVar2,prop2",
+				"a.media.segment": "eVar3",
+				"a.contentType": "eVar1",
+				"a.media.timePlayed": "event3",
+				"a.media.view": "event1",
+				"a.media.segmentView": "event2",
+				"a.media.complete": "event7"
+			}
+		});
+
+becomes this:
+
+		var mediaSettings = Omniture.createMediaSettings({
+			name: 'media1',
+			milestones: '25,50,75',
+			...
+		});
+		Omniture.mediaOpen(mediaSettings);
+		...
+		Omniture.mediaClose('media1');
 
 ## Methods
 
-### <[Ti.Omniture.Session][]\> startSession(props)
+### <void\> collectLifecycleData([contextData])
 
-Configures and returns a [Ti.Omniture.Session][] object. There is only one session. Calling `startSession` multiple times will return the same session and will not create multiple sessions.
+Begins the collection of lifecycle data. This should be the first method called
+upon app launch.
 
-Takes one argument, a dictionary that specifies the [Ti.Omniture.Session][] properties. Look at [Ti.Omniture.Session][] for a list of properties. The following properties are required:
+* data (Object): A dictionary containing the context data to be added to the
+lifecycle hit. Optional.
 
-* props (object): Key/value dictionary of [Ti.Omniture.Session][] properties.
-	* reportSuiteIDs (string): Comma-delimited list of report suite IDs (required).
-	* trackingServer (string): Tracking server to send data to (required).
+### <void\> trackState(state [, data])
 
-* returns: [Ti.Omniture.Session][] object.
+Tracks a state with context data. This method increments page views.
 
-#### Example
+* state (String): The state value to be tracked.
+* data (Object): Key/value dictionary containing the context data to be tracked.
 
-	var session = Omniture.startSession({
-        reportSuiteIDs: "<<YOUR SUITE IDS HERE>>", // Required
-        trackingServer: "<<YOUR TRACKING SERVER HERE>>", // Required
-        ssl: true, // ssl is false by default
-        visitorID: "some_visitor_id",
-        eVar1: "E VAR ONE"
-    });
+### <void\> trackAction(action [, data])n
 
-### <[Ti.Omniture.MediaTracker][]\> startMediaTracker(props)
+Tracks an action with context data. This method does not increment page views.
 
-Configures and returns a [Ti.Omniture.MediaTracker][] object. There is only one media tracker session. Calling `startMediaTracker` multiple times will return the same media tracker session and will not create multiple sessions.
+* action (String): The action value to be tracked.
+* data (Object): Key/value dictionary containing the context data to be tracked.
 
-Takes one argument, a dictionary that specifies the [Ti.Omniture.MediaTracker][] properties. Look at [Ti.Omniture.MediaTracker][] for a list of properties. 
+### <void\> trackActionFromBackground(action [, data])
 
-* props (object): Key/value dictionary of [Ti.Omniture.MediaTracker][] properties.
+Tracks an action with context data. This method does not increment page views.
+This method is intended to be called while your app is in the background (it
+will not cause lifecycle data to send if the session timeout has been exceeded).
 
-* returns: [Ti.Omniture.MediaTracker][] object.
+* action (String): The action value to be tracked.
+* data (Object): Key/value dictionary containing the context data to be tracked.
 
-#### Example
+### <void\>trackLocation(latitude, longitude[, data])
 
-	var mediaTracker = Omniture.startMediaTracker({
-        trackMilestones: "25,50,75",
-        contextDataMapping: {
-            "a.media.name": "eVar2,prop2",
-            "a.media.segment": "eVar3",
-            "a.contentType": "eVar1",
-            "a.media.timePlayed": "event3",
-            "a.media.view": "event1",
-            "a.media.segmentView": "event2",
-            "a.media.complete": "event7"
-        }
-    });
+Tracks a location with context data. This method does not increment page views.
+
+* latitude (Number): Latitude of the location.
+* longitude (Number): Longitude of the location.
+* data (Object): Key/value dictionary containing the context data to be tracked.
+
+### <void\> trackLifetimeValueIncrease(amount[, data])
+
+Tracks an increase in a user's lifetime value.
+This method does not increment page views.
+
+* amount (Number): a positive number detailing the amount to increase lifetime value by.
+* data (Object): Key/value dictionary containing the context data to be tracked.
+
+### <void\> trackTimedActionStart(action[, data])
+
+Tracks the start of a timed event.
+This method does not send a tracking hit
+If an action with the same name already exists it will be deleted and a new one will replace it.
+
+* action (String): denotes the action name to track.
+* data (Object): Key/value dictionary containing the context data to be tracked.
+
+### <void\> trackTimedActionUpdate(action[, data])
+
+Tracks the start of a timed event. This method does not send a tracking hit.
+When the timed event is updated the contents of the parameter data will 
+overwrite existing context data keys and append new ones.
+
+* action (String): denotes the action name to track.
+* data (Object): Key/value dictionary containing the context data to be tracked.
+
+### <void\> trackTimedActionEnd(action[, callback])
+
+Tracks the end of a timed event
+
+* action (String): denotes the action name to track.
+* callback (Function): Optional callback function to be executed when
+this timed event ends. The function can cancel the sending of the hit by
+returning false. The callback function will receive as parameter a single
+object with the following properties:
+	* inAppDuration (Number)
+	* totalDuration (Number)
+	* data (Object)
+
+### <Boolean\> trackTimedActionExists(action)
+
+Returns whether or not a timed action is in progress.
+
+* action (String): denotes the action name to track.
+
+### <void\> retrieveVisitorMarketingCloudID(callback)
+
+Retrieves the Marketing Cloud Identifier from the Visitor ID Service. Querying
+this property can cause a blocking network call, therefore this is an async
+function: the result will be delivered to the provided callback function.
+
+* callback (Function): A callback function that will receive the Marketing 
+Cloud Identifier, a String, as its single parameter.
+
+### <void\> retrieveTrackingId(callback)
+
+Retrieves the analytics tracking identifier. Querying this property can cause a
+blocking network call, therefore this is an async function: the result will
+be delivered to the provided callback function.
+
+* callback (Function): A callback function that will receive the tracking ID,
+a String, as its single parameter.
+
+### <void\> trackingSendQueuedHits()
+
+Force library to send all queued hits regardless of current batch options.
+
+### <void\> trackingClearQueue()
+
+Clears any hits out of the tracking queue and removes them from the database.
+
+### <Ti.Omniture.MediaSettings\> createMediaSettings(props)
+
+Creates a [Ti.Omniture.MediaSettings][] object with the specified properties.
+
+* props (Object): See [Ti.Omniture.MediaSettings][] properties.
+
+### <Ti.Omniture.MediaSettings\> createMediaAdSettings(props)
+
+Creates a [Ti.Omniture.MediaSettings][] object with the specified properties.
+
+* props (Object): See [Ti.Omniture.MediaSettings][] properties.
+
+The difference between `createMediaSettings` and this function is that this
+function sets isMediaAd to true by default.
+
+### <void\> mediaOpen(mediaSettings[, callback])
+
+Opens a media item for tracking.
+
+* mediaSettings (Ti.Omniture.MediaSettings)
+* callback (Function): Optional function to be called every second. 
+The function will receive as parameter a single [Ti.Omniture.MediaState][]
+object.
+
+### <void\> mediaClose(name)
+
+Closes a media item.
+
+* name (String): Name of the media item.
+
+### <void\> mediaPlay(name, offset)
+
+Begins tracking a media item.
+
+* name (String): Name of media item.
+* offset (Number): The point that the media items is being played from (in seconds).
+
+### <void\> mediaComplete(name, offset)
+
+Artificially completes a media item.
+
+* name (String): Name of media item.
+* offset (Number): The point that the media items is when `mediaComplete` is called (in seconds).
+
+### <void\> mediaStop(name, offset)
+
+Notifies the media module that the media item has been paused or stopped.
+
+* name (String): Name of media item.
+* offset (Number): The point that the media items is when the media item was stopped (in seconds).
+
+### <void\> mediaClick(name, offset)
+
+Notifies the media module that the media item has been clicked.
+
+* name (String): Name of media item.
+* offset (Number): The point that the media items is when the media item was clicked (in seconds).
+
+### <void\> mediaTrack(name[, contextData])
+
+Sends a track event with the current media state
+
+* name (String): Name of media item.
+* contextData (Object): Context data to track with this media action.
+
+### <void\> targetLoadRequest(request, callback)
+
+Processes a Target service request.
+
+* request ([Ti.Omniture.TargetLocationRequest][]): The target request created with the `createTargetLocationRequest` or `createTargetOrderConfirmRequest` function.
+* callback (Function): The function to call with a response string parameter
+upon completion of the service request.
+
+### <TiOmnitureTargetLocationRequest\> createTargetLocationRequest(params)
+
+Creates a [Ti.Omniture.TargetLocationRequest][] object.
+
+* params (Object): A dictionary with the following parameters:
+    * name (String)
+    * defaultContent (String)
+    * parameters (Object): a dictionary of key-value pairs that will be added to the request
+
+### <TiOmnitureTargetLocationRequest\> createTargetOrderConfirmRequest(params)
+
+Creates a [Ti.Omniture.TargetLocationRequest][] object.
+
+* params (Object): A dictionary with the following parameters:
+    * name (String)
+    * orderId (String)
+    * orderTotal (String)
+    * productPurchaseId (String)
+    * parameters (Object): a dictionary of key-value pairs that will be added to the request.
+
+
+### <void\> targetClearCookies()
+
+Clears target cookies from shared cookie storage.
+
+### <void\> setAudienceIds(dpid, dpuuid)
+
+Sets the DPID and DPUUID.
+
+### <void\> audienceSignalWithData(data[, callback])
+
+Processes an Audience Manager service request.
+
+* data (Object)
+* callback (Function): Function to call with a response dictionary parameter
+upon completion of the service request.
+
+### <void\> audienceReset()
+
+Resets audience manager UUID and purges current visitor profile.
+
+### <void\> visitorSyncIdentifiers(identifiers)
+
+Synchronizes the provided identifiers to the visitor id service
+
+* identifiers (Object): A dictionary containing identifiers, with the keys
+being the id types and the values being the correlating identifiers
 
 ## Properties
 
-### version : string
+### version : String
 
 The version of the Omniture library.
 
-### debugLogging : boolean
+### debugLogging : Boolean
 
 Enables or disables debug logging. 
 
-__Android:__ (writeonly)
+### lifetimeValue : Number
+
+The user's current lifetime value.
+
+### trackingQueueSize : Number
+
+The number of hits currently in the tracking queue.
+
+### privacyStatus : Number
+
+The privacy status.
+
+### audienceVisitorProfile : Object
+
+The visitor's profile.
+
+### audienceDpid: String
+
+A string containing the DPID value.
+
+### audienceDpuuid: String
+
+A string containing the DPUUID value.
+
+### PRIVACY_STATUS_OPT_IN : Number
+
+One of the possible values of the `privacyStatus` property.
+
+### PRIVACY_STATUS_OPT_OUT : Number
+
+One of the possible values of the `privacyStatus` property.
+
+### PRIVACY_STATUS_OPT_UNKNOWN : Number
+
+One of the possible values of the `privacyStatus` property.
+
+### TARGET_PARAM_ORDER_ID : String
+
+Constant string that can be used as keys to add common target parameters.
+
+### TARGET_PARAM_ORDER_TOTAL : String
+
+Constant string that can be used as keys to add common target parameters.
+
+### TARGET_PARAM_PRODUCT_PURCHASE_ID : String
+
+Constant string that can be used as keys to add common target parameters.
+
+### TARGET_PARAM_CATEGORY_ID : String
+
+Constant string that can be used as keys to add common target parameters.
+
+### TARGET_PARAM_MBOX_3RD_PARTY_ID : String
+
+Constant string that can be used as keys to add common target parameters.
+
+### TARGET_PARAM_MBOX_PAGE_VALUE : String
+
+Constant string that can be used as keys to add common target parameters.
+
+### TARGET_PARAM_MBOX_PC : String
+
+Constant string that can be used as keys to add common target parameters.
+
+### TARGET_PARAM_MBOX_SESSION_ID : String
+
+Constant string that can be used as keys to add common target parameters.
+
+### TARGET_PARAM_MBOX_HOST : String
+
+Constant string that can be used as keys to add common target parameters.
 
 ## Usage
 
@@ -107,7 +418,9 @@ See example.
 
 ## Author
 
-Jeff Haynie, Fred Spencer, & Jon Alter
+Original: Jeff Haynie, Fred Spencer, & Jon Alter
+
+Rewrite based on 4.x: Zsombor Papp
 
 ## Module History
 
@@ -115,16 +428,17 @@ View the [change log](changelog.html) for this module.
 
 ## Feedback and Support
 
-Please direct all questions, feedback, and concerns to [info@appcelerator.com](mailto:info@appcelerator.com?subject=Android%20Omniture%20Module).
+Please direct all questions, feedback, and concerns to [info@appcelerator.com](mailto:info@appcelerator.com?subject=iOS%20Omniture%20Module).
 
 ## License
 
-Copyright(c) 2010-2013 by Appcelerator, Inc. All Rights Reserved. Please see the LICENSE file included in the distribution for further details.
+Copyright(c) 2010-2015 by Appcelerator, Inc. All Rights Reserved. Please see the LICENSE file included in the distribution for further details.
 
-[Ti.Omniture.Session]: session.html
-[Ti.Omniture.MediaTracker]: mediaTracker.html
-[AppMeasurementIOS]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/ios/index.html
-[AppMeasurementAndroid]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/android/index.html
-[Bloodhound]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/ios/index.html#Using_Bloodhound_to_Test_Mobile_Applications
-[iOSMigrationGuide]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/ios/index.html#iOS_Version_2x_to_3x_Migration_Guide
-[AndroidMigrationGuide]: http://microsite.omniture.com/t2/help/en_US/sc/appmeasurement/android/index.html#Android_Version_2x_to_3x_Migration_Guide
+[iOSNativeDocumentation]: https://marketing.adobe.com/resources/help/en_US/mobile/ios/
+[AndroidNativeDocumentation]: https://marketing.adobe.com/resources/help/en_US/mobile/android/
+[iOSMigrationGuide]: https://marketing.adobe.com/resources/help/en_US/mobile/ios/migration_v3.html
+[AndroidMigrationGuide]: https://marketing.adobe.com/resources/help/en_US/mobile/android/migration_v3.html
+[Bloodhound]: https://marketing.adobe.com/resources/help/en_US/mobile/ios/bloodhound.html
+[Ti.Omniture.MediaSettings]: mediaSettings.html
+[Ti.Omniture.MediaState]: mediaState.html
+[Ti.Omniture.TargetLocationRequest]: targetLocationRequest.html
