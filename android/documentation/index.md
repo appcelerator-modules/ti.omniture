@@ -215,11 +215,28 @@ Creates a [Ti.Omniture.MediaSettings][] object with the specified properties.
 
 * props (Object): See [Ti.Omniture.MediaSettings][] properties.
 
+The following properties are mandatory:
+
+* name
+* length
+* playerName
+* playerID
+
 ### <Ti.Omniture.MediaSettings\> createMediaAdSettings(props)
 
 Creates a [Ti.Omniture.MediaSettings][] object with the specified properties.
 
 * props (Object): See [Ti.Omniture.MediaSettings][] properties.
+
+The following properties are mandatory:
+
+* name
+* length
+* playerName
+* parentName
+* parentPod
+* parentPodPosition
+* PCM
 
 The difference between `createMediaSettings` and this function is that this
 function sets isMediaAd to true by default.
