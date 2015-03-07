@@ -236,7 +236,7 @@ public class OmnitureModule
 						(String)props.get("playerName"),
 						(String)props.get("parentName"),
 						(String)props.get("parentPod"),
-						TiConvert.toDouble(props.get("parentPod")),
+						TiConvert.toDouble(props.get("parentPodPosition")),
 						(String)props.get("CPM")
 						);
 		
