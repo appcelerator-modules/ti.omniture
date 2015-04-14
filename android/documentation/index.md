@@ -42,7 +42,9 @@ The Ti.Omniture.Session class is no longer used. Instead of creating a Session
 object using the `startSession` function, basic parameters such as tracking
 server address and suite IDs are specified in a configuration file called
 ADBMobileConfig.json. Download a pre-configured instance of this file from the
-Adobe Mobile Services web site.
+Adobe Mobile Services web site and place it into the `platform/iphone` folder
+(for iOS) and into the `platform/android/bin/assets` folder (for Android)
+of your Titanium Alloy project.
 
 The functions of the Session class have been replaced with functions of
 the module object itself.
