@@ -1,6 +1,8 @@
 # Change Log
 <pre>
-v3.0.0  Updated Omniture SDK to v4.4.0 [MOD-2079]
+v4.0.1  Improved documentation. [MOD-2108]
+
+v4.0.0  Updated Omniture SDK to v4.4.0 [MOD-2079]
 
 v3.0.1  Fixed issue with x86 support [MOD-1704]
 
