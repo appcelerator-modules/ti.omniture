@@ -355,6 +355,16 @@ being the id types and the values being the correlating identifiers
 
 The version of the Omniture library.
 
+### userIdentifier : String
+
+The custom user identifier.
+
+Note : If your app upgrades from the Marketing Cloud 3.x to 4.x SDK, the
+previous visitor ID (either custom or automatically generated) is retrieved
+and stored as the custom user identifier. This preserves visitor data between
+upgrades of the SDK. For new installations on the 4.x SDK, user identifier is 
+null until set.
+
 ### debugLogging : Boolean
 
 Enables or disables debug logging. 

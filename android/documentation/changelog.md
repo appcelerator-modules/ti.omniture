@@ -1,5 +1,7 @@
 # Change Log
 <pre>
+v4.0.2	Added userIdentifier property. [MOD-2127]
+
 v4.0.1  Improved documentation. [MOD-2108]
 
 v4.0.0  Updated Omniture SDK to v4.4.0 [MOD-2079]

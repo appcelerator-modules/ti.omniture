@@ -411,6 +411,16 @@ public class OmnitureModule
 	}
 	
 	@Kroll.getProperty
+	public String getUserIdentifier() {
+		return Config.getUserIdentifier();
+	}
+	
+	@Kroll.setProperty
+	public void setUserIdentifier(String identifier) {
+		Config.setUserIdentifier(identifier);
+	}
+	
+	@Kroll.getProperty
 	public boolean getDebugLogging() {
 		return Config.getDebugLogging();
 	}

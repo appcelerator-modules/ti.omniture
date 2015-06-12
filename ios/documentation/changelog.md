@@ -1,5 +1,7 @@
 # Change Log
 <pre>
+v3.0.2	Improved documentation. [MOD-2127]
+
 v3.0.1  Improved documentation. [MOD-2108]
 
 v3.0.0  Updated Omniture SDK to v4.4.0 [MOD-2079]
