@@ -17,3 +17,4 @@ android/yuidoc/*
 *.xccheckout
 ios/omniture.xcodeproj/xcuserdata/*
 ios/omniture.xcodeproj/project.xcworkspace/xcuserdata/*
+android/build.properties
