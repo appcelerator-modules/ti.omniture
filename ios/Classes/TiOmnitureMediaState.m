@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile Modules
- * Copyright (c) 2010-2015 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2010-present by Appcelerator, Inc. All Rights Reserved.
  * Proprietary and Confidential - This source code is not for redistribution
  */
 
@@ -11,13 +11,13 @@
 
 @synthesize adbMediaState = _adbMediaState;
 
--(TiOmnitureMediaState*)initWithMediaState:(ADBMediaState*)mediaState
+- (TiOmnitureMediaState *)initWithMediaState:(ADBMediaState *)mediaState
 {
-    self = [super init];
-    if (self) {
-        _adbMediaState = [mediaState retain];
-    }
-    return self;
+  self = [super init];
+  if (self) {
+    _adbMediaState = mediaState;
+  }
+  return self;
 }
 
 MAKE_BOOL_GETTER_SETTER(ad, setAd, self.adbMediaState.ad);

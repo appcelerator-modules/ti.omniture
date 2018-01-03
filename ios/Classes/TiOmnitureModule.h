@@ -1,18 +1,17 @@
 /**
  * Appcelerator Titanium Mobile Modules
- * Copyright (c) 2010-2015 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2010-present by Appcelerator, Inc. All Rights Reserved.
  * Proprietary and Confidential - This source code is not for redistribution
  */
 
-#import "TiModule.h"
 #import "ADBMobile.h"
-#import <CoreLocation/CoreLocation.h>
+#import "TiModule.h"
 #import "TiOmnitureMediaSettings.h"
 #import "TiOmnitureMediaState.h"
 #import "TiOmnitureTargetLocationRequest.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface TiOmnitureModule : TiModule 
-{
+@interface TiOmnitureModule : TiModule {
 }
 
 @end

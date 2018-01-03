@@ -62,7 +62,6 @@
 		8F5E8A161A806BE900D31697 /* TiOmnitureTargetLocationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiOmnitureTargetLocationRequest.m; path = Classes/TiOmnitureTargetLocationRequest.m; sourceTree = "<group>"; };
 		8F5E8A191A85B63F00D31697 /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Classes/Utils.h; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* TiOmniture_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiOmniture_Prefix.pch; sourceTree = SOURCE_ROOT; };
-		CEE85D10174E6F1300230B61 /* admsAppLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = admsAppLibrary.a; sourceTree = "<group>"; };
 		D2AAC07E0554694100DB518D /* libTiOmniture.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTiOmniture.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -101,7 +100,6 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CEE85D10174E6F1300230B61 /* admsAppLibrary.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -109,17 +107,11 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				8F5E8A101A805EFE00D31697 /* TiOmnitureMediaSettings.h */,
-				8F5E8A0E1A805EE500D31697 /* TiOmnitureMediaSettings.m */,
-				8F5E8A111A8064D100D31697 /* TiOmnitureMediaState.h */,
-				8F5E8A121A8064D100D31697 /* TiOmnitureMediaState.m */,
-				8F5E8A151A806BE900D31697 /* TiOmnitureTargetLocationRequest.h */,
-				8F5E8A161A806BE900D31697 /* TiOmnitureTargetLocationRequest.m */,
-				24DD6CF71134B3F500162E58 /* TiOmnitureModule.h */,
-				24DD6CF81134B3F500162E58 /* TiOmnitureModule.m */,
-				24DE9E0F11C5FE74003F90F6 /* TiOmnitureModuleAssets.h */,
-				24DE9E1011C5FE74003F90F6 /* TiOmnitureModuleAssets.m */,
-				8F5E8A191A85B63F00D31697 /* Utils.h */,
+				DB1DC6781FFCFCCC00BFB6A5 /* Media Settings */,
+				DB1DC6791FFCFCD300BFB6A5 /* Media State */,
+				DB1DC67B1FFCFCE100BFB6A5 /* Module */,
+				DB1DC67A1FFCFCDA00BFB6A5 /* Target Location Request */,
+				DB1DC67C1FFCFCF600BFB6A5 /* Utilities */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -140,6 +132,52 @@
 				8F5E8A091A80381300D31697 /* ADBMobile.h */,
 			);
 			name = AdobeMobileLibrary;
+			sourceTree = "<group>";
+		};
+		DB1DC6781FFCFCCC00BFB6A5 /* Media Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8F5E8A101A805EFE00D31697 /* TiOmnitureMediaSettings.h */,
+				8F5E8A0E1A805EE500D31697 /* TiOmnitureMediaSettings.m */,
+			);
+			name = "Media Settings";
+			sourceTree = "<group>";
+		};
+		DB1DC6791FFCFCD300BFB6A5 /* Media State */ = {
+			isa = PBXGroup;
+			children = (
+				8F5E8A111A8064D100D31697 /* TiOmnitureMediaState.h */,
+				8F5E8A121A8064D100D31697 /* TiOmnitureMediaState.m */,
+			);
+			name = "Media State";
+			sourceTree = "<group>";
+		};
+		DB1DC67A1FFCFCDA00BFB6A5 /* Target Location Request */ = {
+			isa = PBXGroup;
+			children = (
+				8F5E8A151A806BE900D31697 /* TiOmnitureTargetLocationRequest.h */,
+				8F5E8A161A806BE900D31697 /* TiOmnitureTargetLocationRequest.m */,
+			);
+			name = "Target Location Request";
+			sourceTree = "<group>";
+		};
+		DB1DC67B1FFCFCE100BFB6A5 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				24DD6CF71134B3F500162E58 /* TiOmnitureModule.h */,
+				24DD6CF81134B3F500162E58 /* TiOmnitureModule.m */,
+				24DE9E0F11C5FE74003F90F6 /* TiOmnitureModuleAssets.h */,
+				24DE9E1011C5FE74003F90F6 /* TiOmnitureModuleAssets.m */,
+			);
+			name = Module;
+			sourceTree = "<group>";
+		};
+		DB1DC67C1FFCFCF600BFB6A5 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				8F5E8A191A85B63F00D31697 /* Utils.h */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,6 +291,7 @@
 			buildSettings = {
 				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD)";
 				"ARCHS[sdk=iphonesimulator*]" = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DSTROOT = /tmp/TiOmniture.dst;
@@ -305,6 +344,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD)";
 				"ARCHS[sdk=iphonesimulator*]" = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
 				DSTROOT = /tmp/TiOmniture.dst;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_MODEL_TUNING = G5;
@@ -369,7 +410,7 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-DDEBUG",
@@ -409,7 +450,7 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = TiOmniture;

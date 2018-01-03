@@ -1,6 +1,8 @@
 # Change Log
 <pre>
-v3.0.2	Improved documentation. [MOD-2127]
+v3.1.0  Update iOS SDK to 4.14.1.
+
+v3.0.2  Improved documentation. [MOD-2127]
 
 v3.0.1  Improved documentation. [MOD-2108]
 

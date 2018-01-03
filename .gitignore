@@ -18,3 +18,4 @@ android/yuidoc/*
 ios/omniture.xcodeproj/xcuserdata/*
 ios/omniture.xcodeproj/project.xcworkspace/xcuserdata/*
 android/build.properties
+/ios/metadata.json
