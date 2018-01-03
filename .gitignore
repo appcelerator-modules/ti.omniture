@@ -19,3 +19,4 @@ ios/omniture.xcodeproj/xcuserdata/*
 ios/omniture.xcodeproj/project.xcworkspace/xcuserdata/*
 android/build.properties
 /ios/metadata.json
+/android/java-sources.txt

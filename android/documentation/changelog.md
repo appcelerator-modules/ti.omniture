@@ -1,6 +1,12 @@
 # Change Log
 <pre>
-v4.0.2	Added userIdentifier property. [MOD-2127]
+v6.1.0 Update Omniture Android SDK to 4.14.0
+
+v6.0.0 Recompile for Titanium SDK 7.0.0+
+
+v5.0.0 Recompile for Titanium SDK 6.0.0+
+
+v4.0.2  Added userIdentifier property. [MOD-2127]
 
 v4.0.1  Improved documentation. [MOD-2108]
 
@@ -17,4 +23,4 @@ v2.0	Upgraded to module api version 2 for 1.8.0.1
 		BREAKING CHANGE: Android now returns a Ti.Omniture.Session object from createSession, which has track and trackLink methods (for iOS parity)
 		Various Fixes for 1.8.0.1
 
-v1.0    Initial Release
+v1.0.0    Initial Release
