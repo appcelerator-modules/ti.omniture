@@ -60,7 +60,8 @@ public class OmnitureModule
 
 	@Kroll.method
 	public void collectLifecycleData(
-			@SuppressWarnings("rawtypes") HashMap contextData
+			@SuppressWarnings("rawtypes") 
+			@Kroll.argument(optional=true) HashMap contextData
 	) {
 		if (contextData == null) {
 			Config.collectLifecycleData(getActivity());
