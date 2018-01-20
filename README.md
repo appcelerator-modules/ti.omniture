@@ -2,6 +2,10 @@
 
 Use the Omniture SDK in Appcelerator Titanium.
 
+## Documentation
+
+- [iOS](./ios/documentation/index.md)
+- [Android](./android/documentation/index.md)
 
 ## Legal
 
