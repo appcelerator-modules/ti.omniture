@@ -11,25 +11,7 @@ Properties can be set on the _Ti.Omniture.MediaSettings_ object in two ways:
 2. Set properties by setting them on the _Ti.Omniture.MediaSettings_ object
 returned by the `createMediaSettings` method.
 
-## Properties
-
-### segmentByMilestones : Boolean
-
-Indicates if segment info should be automatically generated for milestones
-generated or not. Defaults to false.
-
-### segmentByOffsetMilestones : Boolean
-
-Indicates if segment info should be automatically generated for offset
-milestones or not, the default is false.
-
-### length : Number
-
-The length of the media item in seconds.
-
-### channel : String
-
-The name or ID of the channel.
+## Properties (required)
 
 ### name : String
 
@@ -42,6 +24,26 @@ The name of the media player.
 ### playerID : String
 
 The ID of the media player.
+
+### length : Number
+
+The length of the media item in seconds.
+
+## Properties (optional)
+
+### segmentByMilestones : Boolean
+
+Indicates if segment info should be automatically generated for milestones
+generated or not. Defaults to false.
+
+### segmentByOffsetMilestones : Boolean
+
+Indicates if segment info should be automatically generated for offset
+milestones or not, the default is false.
+
+### channel : String
+
+The name or ID of the channel.
 
 ### milestones : String
 
