@@ -4,11 +4,6 @@
 
 Provides access to the Omniture tracking and analytics service.
 
-## Dependencies
-
-This iOS module requires iOS 6.0 or later.
-This Android module Requires Android 2.3.3 or later.
-
 ## Omniture Resources
 
 * [Native Documentation for iOS][iOSNativeDocumentation]

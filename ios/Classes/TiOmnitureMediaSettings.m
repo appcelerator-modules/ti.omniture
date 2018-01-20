@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile Modules
- * Copyright (c) 2010-2015 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2010-present by Appcelerator, Inc. All Rights Reserved.
  * Proprietary and Confidential - This source code is not for redistribution
  */
 
@@ -11,13 +11,13 @@
 
 @synthesize adbMediaSettings = _adbMediaSettings;
 
--(TiOmnitureMediaSettings*)initWithMediaSettings:(ADBMediaSettings*)mediaSettings
+- (TiOmnitureMediaSettings *)initWithMediaSettings:(ADBMediaSettings *)mediaSettings
 {
-    self = [super init];
-    if (self) {
-        _adbMediaSettings = [mediaSettings retain];
-    }
-    return self;
+  self = [super init];
+  if (self) {
+    _adbMediaSettings = mediaSettings;
+  }
+  return self;
 }
 
 MAKE_BOOL_GETTER_SETTER(segmentByMilestones, setSegmentByMilestones, self.adbMediaSettings.segmentByMilestones);
